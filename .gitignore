@@ -123,4 +123,5 @@ dmypy.json
 .pyre/
 
 # matrices NPY de prueba
-.npy
+*.npy
+.vscode
