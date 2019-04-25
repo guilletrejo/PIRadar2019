@@ -62,12 +62,12 @@ for h in alturas:                                                          # Alt
 
     # Completa con el resto de los tiempos
     for t in range(time_init+1,time_init+times):
-        PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = h ).values          # Extrae el dato PH en la hora t
-        PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = h ).values        # Extrae el dato PHB en la hora t
-        zaux = (PH_numpy + PHB_numpy) / 9.81                                 # Obtiene altura geopotencial en la hora t
-        zaux_ex = np.expand_dims(zaux, axis = 0)                             # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
-        z_ex = np.concatenate((z_ex, zaux_ex), axis=0)                       # Concatena las matrices y queda (12x269x269)
-    np.save('z_altura{}_{}.npy'.format(h,dias[0]),z_ex) # Guarda 1 archivo por cada altura, con las primeras 12 horas.
+        PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = h ).values        # Extrae el dato PH en la hora t
+        PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = h ).values      # Extrae el dato PHB en la hora t
+        zaux = (PH_numpy + PHB_numpy) / 9.81                               # Obtiene altura geopotencial en la hora t
+        zaux_ex = np.expand_dims(zaux, axis = 0)                           # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
+        z_ex = np.concatenate((z_ex, zaux_ex), axis=0)                     # Concatena las matrices y queda (12x269x269)
+    np.save('./matrix/z_altura{}_{}.npy'.format(h,dias[0]),z_ex)                    # Guarda 1 archivo por cada altura, con las primeras 12 horas.
     print z.shape
 
 for dia in dias:                                                           # Lee el resto de los dias del dataset
@@ -77,7 +77,7 @@ for dia in dias:                                                           # Lee
 
         for h in alturas: 
             # Inicializacion con el tiempo 0
-            PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = h ).values
+            PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = h  ).values
             PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = h ).values
             z = (PH_numpy + PHB_numpy) / 9.81
             z_ex = np.expand_dims(z, axis = 0)
@@ -89,12 +89,12 @@ for dia in dias:                                                           # Lee
                 zaux = (PH_numpy + PHB_numpy) / 9.81
                 zaux_ex = np.expand_dims(zaux, axis = 0)
                 z_ex = np.concatenate((z_ex, zaux_ex), axis=0)
-            z_file = np.load('z_altura{}_{}.npy'.format(h,dias[0]))  # Abre la matriz .npy generada anteriormente
-            z_ex = np.concatenate((z_file, z_ex), axis=0)                                 # Concatena la nueva matriz con la anterior
-            np.save('z_altura{}_{}.npy'.format(h,dias[0]),z_ex)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
+            z_file = np.load('./matrix/z_altura{}_{}.npy'.format(h,dias[0]))  # Abre la matriz .npy generada anteriormente
+            z_ex = np.concatenate((z_file, z_ex), axis=0)            # Concatena la nueva matriz con la anterior
+            np.save('./matrix/z_altura{}_{}.npy'.format(h,dias[0]),z_ex)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
 
-zh0= np.load('z_altura{}_{}.npy'.format(alturas[0],dias[0]))
-zh1= np.load('z_altura{}_{}.npy'.format(alturas[1],dias[0]))
+zh0= np.load('./matrix/z_altura{}_{}.npy'.format(alturas[0],dias[0]))
+zh1= np.load('./matrix/z_altura{}_{}.npy'.format(alturas[1],dias[0]))
 print zh0.shape
 print zh1.shape
-# print zh0[24,:,:]
+print zh0[24,:,:]

@@ -1,0 +1,205 @@
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[nottoc]{tocbibind}
+\usepackage{pdflscape}
+\usepackage[figurename=Fig.]{caption}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{enumitem}
+\setkomafont{disposition}{\normalfont\bfseries}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{6}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+%opening
+\title
+{
+	\Huge UNIVERSIDAD NACIONAL DE CÓRDOBA \\
+	\vspace{1cm} \LARGE Facultad de Ciencias Exactas, Físicas y Naturales
+}       
+
+\subtitle
+{
+	\vspace{1cm} \large   Proyecto Integrador \\
+	Ingeniería en Computación \\~\\
+	Predicción automática del clima basada en redes neuronales convolucionales
+	\vspace{1cm}
+}
+
+\author
+{
+	\textbf{Autores}\\
+	\textbf{Ortmann, Nestor Javier - Trejo, Bruno Guillermo}\\
+}
+
+\setcounter{page}{0}
+
+\renewcommand*\contentsname{Indice}
+
+\date{Córdoba, Argentina \\ 2019}
+
+\begin{document}
+	\maketitle
+	\thispagestyle{empty}
+	 
+	\begin{figure}[t!]
+		\begin{center}
+			\includegraphics[width=8cm]{images/logoUNC.jpg}
+		\end{center}
+	\end{figure}
+	
+	\begin{center}
+	\large\textbf{Director\\PhD. Micolini, Orlando\\Codirector\\Ing. Luis O. Ventre}
+	\end{center}
+	\cleardoublepage
+	
+	\tableofcontents% indice de contenidos
+	\cleardoublepage
+	
+	\section{Introducción}
+		\begin{subsection}{Estado del Arte}
+			Aca iria estado del arte.     
+		\end{subsection}
+		
+		\begin{subsection}{Motivación}
+
+			\medskip El Machine Learning (ML o Aprendizaje Automático) es una de las tecnologías más trascendentes 
+			que han resurgido en los últimos 10 años impulsada principalmente por el crecimiento exponencial
+			de los datos producidos por las personas que hacen uso de muchas tecnologías relacionadas a internet.\cite{ortega}
+			Hoy en día disponemos de suficiente poder de cómputo a un precio accesible para extraer patrones de 
+			conjuntos masivos de datos (Big Data) y obtener valiosa información de los mismos, lo cual 
+			nos permite solucionar muchos problemas de ingeniería utilizando en ellos estos algoritmos de aprendizaje.
+			
+			\medskip A lo largo del ejercicio de su actividad, un ingeniero muchas veces se encuentra en la situación de tener
+			una gran variedad de herramientas, 
+			métodos o algoritmos que a priori podrían solucionar el problema que se le presenta. 
+			Sin embargo, cada una de estas herramientas tienen pros y contras 
+			en su desarrollo que llevan al profesional a tener que seleccionar la que a su criterio sea la mejor según
+			el objetivo que busque, los datos y recursos que posea.
+			Este escenario nos motiva y genera una necesidad de encontrar un panorama claro y a la vez amplio que le 
+			permita al lector, y a nosotros mismos, identificar las características que tiene el proyecto y de esta 
+			forma ayudarnos en el proceso de selección de un algoritmo adecuado.
+		\end{subsection}
+		
+		\cleardoublepage
+
+		\begin{subsection}{Objetivos}
+			Aca irian los objetivos.
+		\end{subsection}
+
+		\begin{subsection}{Requerimientos}
+			\begin{subsubsection}{Requerimientos Funcionales}
+				Requerimientos funcionales
+				\begin{table}[h]
+					\begin{tabular}{|l|l|}
+					\hline
+					ID  & Descripción \\ \hline \hline
+					RF1 & Debe leer los archivos wrf (modelo meteorológico) y obtener una matriz numpy con \\& las variables 
+						  de entrada.\\ \hline
+					RF1 & Debe leer los archivos de hoja de calculo de los datos medidos y obtener una matriz \\& numpy de 
+						  etiquetas (variables de salida).\\ \hline
+					RF2 & Debe construir una red neuronal utlizando las matrices de variables de entrada y las \\& etiquetas 
+						  para su entrenamiento\\ \hline
+					RF3 & proximamente...\\ \hline
+					\end{tabular}
+					\end{table}
+				\begin{paragraph}{Prueba de Requerimientos Funcionales}
+					Aca irian las pruebas.
+				\end{paragraph}				
+			\end{subsubsection}
+
+			\begin{subsubsection}{Requerimientos No Funcionales}
+				Requerimientos no funcionales
+				\begin{table}[h]
+					\begin{tabular}{|l|l|}
+					\hline
+					ID   & Descripción \\ \hline \hline
+					RNF1 & El tiempo que tarda en crear la matriz de valores de entrada debe ser menor a 1 \\& minuto.\\ \hline
+					RNF2 & proximamente...\\ \hline
+					\end{tabular}
+				\end{table}
+			\end{subsubsection}
+		\end{subsection}
+		\cleardoublepage
+		\begin{subsection}{Análisis de Riesgos}
+			Aca iria la explicacion teorica del metodo.
+			\begin{subsubsection}{Listado de riesgos}
+				\begin{table}[!h]
+					\begin{tabular}{|l|l|}
+					\hline
+					ID & Description\\  \hline \hline
+					R1 & encontrar el modelo (CNN) adecuado para encarar el problema\\  \hline
+					R2 & encontrar la herramienta (keras) para usar dicho modelo\\  \hline
+					R3 & obtener los datos (tanto de entrada como de salida)\\  \hline
+					R4 & requerimientos de hardware (computo, espacio en disco, memoria)\\  \hline
+					R5 & poder trabajar remotamente desde el laboratorio\\  \hline
+					R6 & proximamente....\\  \hline
+					\end{tabular}
+				\end{table}
+			\end{subsubsection}
+			\begin{subsubsection}{Estimación de probabilidad}
+				Estimar los riesgos.
+				\begin{table}[!h]
+					\begin{tabular}{|l|l|l|}
+					\hline
+					ID & Riesgo & Probabilidad \%\\  \hline \hline
+					R1 & encontrar el modelo (CNN) adecuado para encarar el problema & 30\\  \hline
+					R2 & encontrar la herramienta (keras) para usar dicho modelo& 5\\  \hline
+					R3 & obtener los datos (tanto de entrada como de salida)& 70\\  \hline
+					R4 & requerimientos de hardware (computo, espacio en disco, memoria)& 45\\  \hline
+					R5 & poder trabajar remotamente desde el laboratorio& 30\\  \hline
+					R6 & proximamente...& NaN\\  \hline
+					\end{tabular}
+				\end{table}
+			\end{subsubsection}
+			\begin{subsubsection}{Estimación de impacto}
+				Estimar el impacto.
+			\end{subsubsection}
+			\begin{subsubsection}{Exposición al riesgo}
+				Exposicion.
+			\end{subsubsection}
+		\end{subsection}
+
+		\begin{subsection}{Arquitectura preliminar de alto nivel}
+			Dibujo de arquitectura.
+		\end{subsection}
+	
+	\section{Marco Teórico}
+		Teoría.
+	
+		\begin{subsection}{Subseccion}
+			Aca iria una subseccion
+		\end{subsection}
+	
+	\section{Iteración 0}
+
+	\section{Iteración N: algo}
+	
+	\section{Conclusión}
+		En este trabajo se introdujeron los conceptos fundamentales relacionados al aprendizaje automático
+		de manera que el lector se familiarice con los mismos y pueda tener el marco teórico necesario 
+		para solucionar un problema utilizando las librerías existentes. Se realizó un análisis del 
+		estado del arte de las herramientas en el área de Machine Learning, investigando las distintas 
+		librerías, aplicaciones y alternativas más usadas en estos últimos años.
+		
+		\medskip De esta manera, se hace evidente lo útil que es tener un punto de partida y una guía que permita bajar
+		a tierra los conocimientos aprendidos. La gráfica desarrollada posibilita obtener esto, brindando una
+		clasificación de los distintos algoritmos a utilizar y un método de selección rápido y preciso.
+		
+		\medskip Con este panorama claro y general y con la ayuda visual para seleccionar la herramienta
+		adecuada en base a los requerimientos del proyecto, se puede avanzar en la resolución de cualquier
+		problema específico donde se quiera implementar Machine Learning. De todos modos, se pretende seguir
+		mejorando y actualizando la gráfica a medida que surjan nuevas herramientas, para mantenerse a la vanguardia de la 
+		tecnología.
+
+	\cleardoublepage
+
+	\bibliographystyle{unsrt}
+	\bibliography{bibliografia}	
+
+\end{document}
