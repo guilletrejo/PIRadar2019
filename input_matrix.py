@@ -14,13 +14,13 @@ import datetime
 Parametros
 '''
 time_init = 6                    # Se ignoran las primeras 6 horas de cada archivo.
-times = 12                       # Se toman 12 horas de cada archivo.
+times = 12                       # Se toman 12 horas de cada archivo. (SON 2 ARCHIVOS POR DIA)
 horas = ["06:00:00","18:00:00"]
 index_horas = 1                  # Se empieza desde las 18hs del primer dia, para coordinar con las iteraciones siguientes
-alturas = [10,11]           
+alturas = range(35)         
 base = datetime.date(2019,1,1)   # Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
                                  #                         A QUE SE EMPIEZA DESDE LAS 18hs. Y SE IGNORAN LAS PRIMERAS 6hs.)
-numdays = 3                      # Cant. total de dias del dataset
+numdays = 5                      # Cant. total de dias del dataset
 date_list = [base + datetime.timedelta(days=x) for x in range(1, numdays)]  # Genera una lista de fechas con intervalo de un dia
 
 # Se arma otro arreglo para obtener la lista de fechas en el formato del nombre del archivo del modelo (aaaa-mm-dd)
@@ -67,7 +67,7 @@ for h in alturas:                                                          # Alt
         zaux = (PH_numpy + PHB_numpy) / 9.81                               # Obtiene altura geopotencial en la hora t
         zaux_ex = np.expand_dims(zaux, axis = 0)                           # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
         z_ex = np.concatenate((z_ex, zaux_ex), axis=0)                     # Concatena las matrices y queda (12x269x269)
-    np.save('./matrix/z_altura{}_{}.npy'.format(h,dias[0]),z_ex)                    # Guarda 1 archivo por cada altura, con las primeras 12 horas.
+    np.save('./matrix/z_altura{}_{}.npy'.format(h,dias[0]),z_ex)           # Guarda 1 archivo por cada altura, con las primeras 12 horas.
     print z.shape
 
 for dia in dias:                                                           # Lee el resto de los dias del dataset
@@ -97,4 +97,4 @@ zh0= np.load('./matrix/z_altura{}_{}.npy'.format(alturas[0],dias[0]))
 zh1= np.load('./matrix/z_altura{}_{}.npy'.format(alturas[1],dias[0]))
 print zh0.shape
 print zh1.shape
-print zh0[24,:,:]
+#print zh0[24,:,:]
