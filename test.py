@@ -2,48 +2,45 @@ import numpy as np
 import pandas as pd 
 import requests
 import calendar
-
+import urllib as url
+import datetime
 
 '''
-    Se lee el archivo de informacion de las estaciones desde la web.
+    Se lee el archivo de informacion de las estaciones desde la web 
+    y se convierte a DataFrame de Pandas. Luego se descartan
+    las estaciones que no estan operativas.
 '''
-estaciones_path = "./est_info.txt"
-headers = 
-{
+headers = {
     'accept': 'application/json',
     'X-CSRFToken': 'CzTcXlGjNXe7ewKzdFGhjSvRfiRKYZDPmtFAPjhDh9XxnFtTL5rDupoTOZHmfIhe',
 }
 response = requests.get('https://ohmc.psi.unc.edu.ar/bdhm/metadatos/api/estacion/', headers=headers)
-file = open(estaciones_path, "w+")
-file.write(response.text)
-file.close()
-
-'''
-    Se lee el archivo json y se convierte a DataFrame de Pandas,
-    luego descarta las estaciones que no estan operativas.
-'''
-estaciones_info = pd.read_json(estaciones_path)
+estaciones_info = pd.read_json(response.text)
 estaciones_info = estaciones_info[estaciones_info.estado_operativo != False]
-estaciones_info['nombre']
 
 '''
     Una vez se tiene una matriz con los nombres de las estaciones, se puede
     hacer un GET a los datos de lluvia leyendo esa matriz
 '''
-headers = 
-{
+
+headers = {
     'accept': 'application/json',
     'X-CSRFToken': 'pYUNHfs6swbibmPTuYEMctRKf3Bvf4Fi9SGbzd3qWIUIkvyd2op8n0KMOKr7wNjH',
 }
 
 nombre = estaciones_info['nombre'][0]
-fin_date = '2019-01-31'
-ini_date = '2019-01-01'
-hour = '00:00'
-get_body = 'ohmc.psi.unc.edu.ar/bdhm/datos/api/mediciones/{}/{}/{}/{}/{}/'.format(nombre,fin_date,hour,ini_date,hour)
-get_body = url.quote(get_body)
-response = requests.get(get_body, headers=headers)
+anio = 2018
+data_rain = pd.DataFrame()
 
+for mes in range(1,13):
+    dia_fin = calendar.monthrange(anio,mes)[1]
+    fin_date = '{:4}-{:02}-{:02}'.format(anio, mes, dia_fin)
+    ini_date = '{:4}-{:02}-01'.format(anio, mes)
+    get_body = 'ohmc.psi.unc.edu.ar/bdhm/datos/api/mediciones/{}/{}/00:00/{}/00:00/'.format(nombre,ini_date,hour,fin_date,hour)
+    get_body = "https://" + url.quote(get_body)
+    response = requests.get(get_body, headers=headers)
+    data = pd.read_json(response.text)
+    data_rain.append(get_prec_p_hour(data))
 
 def get_prec_p_hour(data):
     '''
@@ -51,7 +48,6 @@ def get_prec_p_hour(data):
         y obtiene un acumulado por hora del total. Las horas se cuentan de manera continua desde el primer dato.
         Return values: DataFrame precipitations_per_hour ; -1 
     '''
-    data = pd.read_csv("/home/nestormann/Downloads/MAAySP CBA - Laboratorio de Hidraulica__2019-03-01__2019-03-31.csv") 
     if (not('Precipitacion [mm]' in data.columns)):
         print ("No existe la columna")
     else:

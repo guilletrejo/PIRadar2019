@@ -28,7 +28,7 @@ estaciones_path = "./est_info.txt" # directorio del archivo con la informacion d
 
 '''
     Abrir el dataset como una matriz NETCDF (tratar de usar esta, y no la xarray debido a que tiene 
-                                        en cuenta el formato definido de wrf)
+    en cuenta el formato definido de wrf)
 '''
 ds = netCDF4.Dataset(dataDIR)
 
@@ -45,32 +45,22 @@ ds = netCDF4.Dataset(dataDIR)
 (lat_id, lon_id) = wrf.xy_to_ll(ds, 269, 0)
 
 '''
-    Se lee el archivo de informacion de las estaciones desde la web.
+    Se lee el archivo de informacion de las estaciones desde la web 
+    y se convierte a DataFrame de Pandas. Luego se descartan
+    las estaciones que no estan operativas.
 '''
 headers = {
     'accept': 'application/json',
     'X-CSRFToken': 'CzTcXlGjNXe7ewKzdFGhjSvRfiRKYZDPmtFAPjhDh9XxnFtTL5rDupoTOZHmfIhe',
 }
 response = requests.get('https://ohmc.psi.unc.edu.ar/bdhm/metadatos/api/estacion/', headers=headers)
-file = open(estaciones_path, "w+")
-file.write(response.text)
-file.close()
-
-'''
-    Leemos el archivo json y lo convertimos a DataFrame de Pandas.
-'''
-estaciones_info = pd.read_json(estaciones_path)
-
-''' 
-    Descartamos aquellas estaciones que no estan operativas.
-'''
+estaciones_info = pd.read_json(response.text)
 estaciones_info = estaciones_info[estaciones_info.estado_operativo != False]
-print estaciones_info.shape
 
 '''
     Genero un arreglo con los (x,y) de todas las estaciones
 '''
-cant_estaciones = estaciones_info.size
+cant_estaciones = len(estaciones_info.index)
 estaciones_xy = np.zeros([cant_estaciones,2], dtype=int)
 for i, (lat, lon) in enumerate(zip(estaciones_info['latitud'], estaciones_info['longitud'])):
     (xi, yi) = wrf.ll_to_xy(ds, lat, lon)
