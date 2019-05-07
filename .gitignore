@@ -397,3 +397,5 @@ TSWLatexianTemp*
 *.jpg
 
 *.csv
+*.xls
+*.xlsx

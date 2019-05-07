@@ -1,0 +1,19 @@
+- Achicar el cuadrado para que solo contemple Cordoba (por ej puede quedar 100x100 o mas chico)
+
+----------MATRIZ Y----------
+
+- Crear una matriz ('y', labels) 13032x100x100 y llenarla con NaN
+
+- Fijarse en cada hora que valores hay de precipitacion para una estacion y reemplazar el NaN por True o False (llovio o no) 
+  donde reemplazamos el NaN? En el punto x,y de la estacion que esta definido en NombresEstaciones.csv
+
+- Si no hay dato para un punto, dejar NaN
+
+
+----------MATRIZ X----------
+
+- Modificar el script para que no tome los 269x269
+
+- Entrar a yaku, correr el script para obtener la matriz desde 31-10-2017 18:00hs hasta 27-04-2019 6:00hs (input_matrix.py)
+
+- Guardarlo como matrizX y junto con matrizY meterlo a la red.

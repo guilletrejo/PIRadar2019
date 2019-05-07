@@ -17,6 +17,7 @@ headers = {
 response = requests.get('https://ohmc.psi.unc.edu.ar/bdhm/metadatos/api/estacion/', headers=headers)
 estaciones_info = pd.read_json(response.text)
 estaciones_info = estaciones_info[estaciones_info.estado_operativo != False]
+estaciones_info = estaciones_info.reset_index(drop=True)
 
 '''
     Una vez se tiene una matriz con los nombres de las estaciones, se puede
@@ -42,17 +43,17 @@ for mes in range(1,13):
     data = pd.read_json(response.text)
     data_rain.append(get_prec_p_hour(data))
 
-def get_prec_p_hour(data):
+def get_prec_p_hour(data,days_p_month):
     '''
         Lee el DataFrame de las estaciones meteorologicas, selecciona la columna de Precipitaciones [mm]
         y obtiene un acumulado por hora del total. Las horas se cuentan de manera continua desde el primer dato.
         Return values: DataFrame precipitations_per_hour ; -1 
     '''
-    if (not('Precipitacion [mm]' in data.columns)):
+    if (not('Precipitacion' in data.columns)):
         print ("No existe la columna")
     else:
-        data_columns = data[['Precipitacion [mm]']]
-        if (data_columns.empty or data_columns.dropna().empty):
+        data_columns = data[['Precipitacion']]
+        if (data_columns.empty or data_columns.dropna().empty ):
             print("VACIO")
         else:
             values_horas=np.ndarray(shape=data_columns.size)

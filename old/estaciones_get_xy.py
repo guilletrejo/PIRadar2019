@@ -56,7 +56,8 @@ headers = {
 response = requests.get('https://ohmc.psi.unc.edu.ar/bdhm/metadatos/api/estacion/', headers=headers)
 estaciones_info = pd.read_json(response.text)
 estaciones_info = estaciones_info[estaciones_info.estado_operativo != False]
-
+estaciones_info = estaciones_info.reset_index(drop=True)
+print estaciones_info['nombre']
 '''
     Genero un arreglo con los (x,y) de todas las estaciones
 '''
@@ -66,5 +67,5 @@ for i, (lat, lon) in enumerate(zip(estaciones_info['latitud'], estaciones_info['
     (xi, yi) = wrf.ll_to_xy(ds, lat, lon)
     estaciones_xy[i] = (xi, yi)
 
-print estaciones_xy.shape
 print estaciones_xy
+print estaciones_xy.shape

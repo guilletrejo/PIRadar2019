@@ -23,7 +23,8 @@ file.close()
     luego descarta las estaciones que no estan operativas.
 '''
 estaciones_info = pd.read_json(estaciones_path)
-estaciones_info = estaciones_info[estaciones_info.estado_operativo != False]
+estaciones_info = e
+staciones_info[estaciones_info.estado_operativo != False]
 estaciones_info['nombre']
 
 '''
@@ -43,7 +44,6 @@ hour = '00:00'
 get_body = 'ohmc.psi.unc.edu.ar/bdhm/datos/api/mediciones/{}/{}/{}/{}/{}/'.format(nombre,fin_date,hour,ini_date,hour)
 get_body = url.quote(get_body)
 response = requests.get(get_body, headers=headers)
-
 
 def get_prec_p_hour(data):
     '''
