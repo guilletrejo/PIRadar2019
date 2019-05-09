@@ -17,3 +17,35 @@
 - Entrar a yaku, correr el script para obtener la matriz desde 31-10-2017 18:00hs hasta 27-04-2019 6:00hs (input_matrix.py)
 
 - Guardarlo como matrizX y junto con matrizY meterlo a la red.
+
+
+----------DATOS DEL MODELO QUE FALTAN DE YAKU----------
+2018-01-29 18hs
+2018-01-30 18hs
+2018-02-03 18hs 
+2018-03-06 18hs
+2018-04-23 18hs
+2018-05-04 18hs
+2018-05-05 06hs
+2018-05-28 06hs
+2018-06-07 06hs
+2018-06-20 06hs
+2018-06-29 18hs
+2018-06-30 06hs
+2018-07-06 18hs
+2018-07-14 18hs
+2018-08-13 06hs
+2018-08-18 18hs
+2018-08-19 06hs
+2018-08-19 18hs
+2018-08-20 06hs
+2018-10-05 18hs
+2018-10-14 18hs
+2018-10-21 06hs
+2018-10-21 18hs
+2018-10-26 18hs
+2018-10-27 06hs
+2018-12-04 18hs
+2019-03-12 18hs
+2019-04-27 06hs
+2019-04-27 18hs

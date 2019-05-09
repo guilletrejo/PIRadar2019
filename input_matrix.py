@@ -13,7 +13,7 @@ import datetime
 '''
 Parametros
 '''
-path_datos = "../Datos/MatricesX/"  # en YAKU, cambiar esto
+path_datos = "/home/datos/wrf/wrfout/"  # en YAKU, cambiar esto
 time_init = 6                    # Se ignoran las primeras 6 horas de cada archivo.
 times = 12                       # Se toman 12 horas de cada archivo. (SON 2 ARCHIVOS POR DIA)
 horas = ["06:00:00","18:00:00"]
@@ -32,7 +32,7 @@ for x in range (0,numdays-1):
 """
 Abrir el dataset como una matriz XARRAY, dando formato al nombre con la listas de fechas y las 2 posibles horas de inicio.
 """
-dataDIR = path_datos + "wrfout_A_d01_{}_{}".format(base.strftime("%Y-%m-%d"),horas[index_horas])
+dataDIR = path_datos + "{}/wrfout_A_d01_{}_{}".format(base.strftime("%Y-%m-%d"),horas[index_horas])
 DS = xarray.open_dataset(dataDIR)
 index_horas ^= 1                 # Se swapea para abrir el proximo archivo del mismo dia con la otra hora (6hs)
 

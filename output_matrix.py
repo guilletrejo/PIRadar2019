@@ -10,6 +10,7 @@ import sys
 import urllib as url
 import calendar
 import datetime as dt
+import progressbar
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
 
 ''' 
@@ -20,7 +21,7 @@ umbral_mm = 0.2
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
 fecha_inicial = "2017-11-01 00:00"
-fecha_final = "2019-04-28 12:00"
+fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
 
@@ -32,12 +33,12 @@ nombre_ubic = pd.read_csv("./NombresEstaciones.csv")
 nombre_ubic.set_index(['Nombre Estacion'])
 
 '''
-Lee el archivo Excel de cada año con las 131 estaciones, carga los nombres en una lista. 
+Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
 Despues esa lista la usa para recorrer un diccionario de DataFrames (parecido a un array 
 pero se puede indexar con una lista) llamado datos2017/8/9. Entonces se va leyendo hoja 
 por hoja el excel, y cada hoja se convierte en un DataFrame con 2 columnas (Fecha e Intensidad de Lluvia [mm]),
-y cada DataFrame se va guardando en el diccionario datos2017/8/9 (se dropea el año 2018 para el archivo 2017
-asi quedan solo de ese año, ya que la API de Omixom me hacia tomar minimo 3 meses para que me lo mande al excel, 
+y cada DataFrame se va guardando en el diccionario datos2017/8/9 (se dropea el anio 2018 para el archivo 2017
+asi quedan solo de ese anio, ya que la API de Omixom me hacia tomar minimo 3 meses para que me lo mande al excel, 
 entonces yo tome desde 1-11 de 2017 hasta 31-ene de 2018). 
 Despues se elimina la columna indices pasando a ser la Fecha el indice, y se completan los valores de fechas faltantes.
 
@@ -60,7 +61,7 @@ datos2017 = {}
 idx = pd.date_range(fecha_inicial, "2017-12-31 23:50", freq=freq).strftime("%Y-%m-%d %H:%M:%S")
 idx = pd.DatetimeIndex(idx)
 
-for nombre in lista_nombres:
+for nombre in progressbar.progressbar(lista_nombres):
     datos2017[nombre] = pd.read_excel(excel,sheet_name=nombre, header=3, parse_dates=[nombre_columna_fecha],dtype={nombre_columna_lluvia: np.float64},dayfirst=True) # lo parsea yyyy-dd-mm
     if datos2017[nombre].Fecha.dtype == '<M8[ns]': #OJO CON ESTO, EN OTRA MAQUINA PUEDE SER >M8[ns]
         datos2017[nombre] = datos2017[nombre][datos2017[nombre].Fecha.dt.year != 2018]
@@ -70,14 +71,14 @@ for nombre in lista_nombres:
 
 # Datos 2018
 
-excel = pd.ExcelFile("./ClimaReporte2018_131.xls")
+excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2018_131.xls")
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
 idx = pd.date_range("2018-01-01 00:00", "2018-12-31 23:50", freq=freq).strftime("%Y-%m-%d %H:%M:%S")
 idx = pd.DatetimeIndex(idx)
 
-for nombre in lista_nombres:
+for nombre in progressbar.progressbar(lista_nombres):
     datos2018[nombre] = pd.read_excel(excel,sheet_name=nombre, header=3, parse_dates=[nombre_columna_fecha],dtype={nombre_columna_lluvia: np.float64},dayfirst=True) # lo parsea yyyy-dd-mm
     datos2018[nombre] = datos2018[nombre].set_index([nombre_columna_fecha])
     datos2018[nombre] = datos2018[nombre][~datos2018[nombre].index.duplicated()]
@@ -85,14 +86,14 @@ for nombre in lista_nombres:
 
 # Datos 2019
 
-excel = pd.ExcelFile("./ClimaReporte2019_131.xls")
+excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2019_131.xls")
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
 idx = pd.date_range("2019-01-01 00:00", fecha_final, freq=freq).strftime("%Y-%m-%d %H:%M:%S")
 idx = pd.DatetimeIndex(idx)
 
-for nombre in lista_nombres:
+for nombre in progressbar.progressbar(lista_nombres):
     datos2019[nombre] = pd.read_excel(excel,sheet_name=nombre, header=3, parse_dates=[nombre_columna_fecha],dtype={nombre_columna_lluvia: np.float64},dayfirst=True) # lo parsea yyyy-dd-mm
     datos2019[nombre] = datos2019[nombre].set_index([nombre_columna_fecha])
     datos2019[nombre] = datos2019[nombre][~datos2019[nombre].index.duplicated()]
@@ -113,15 +114,16 @@ for nombre in lista_nombres:
 '''
 
 cant_estaciones = len(lista_nombres)
-cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
+# cant_horas e determina con la cantidad de datos totales dividido por la cantidad de datos por hora.
+cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos) 
 precip_p_estacion = np.ndarray(shape=(cant_estaciones,cant_horas))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
-for estacion in lista_nombres:
+for estacion in progressbar.progressbar(lista_nombres):
     temp_data = datos_total[estacion]
     data_columns = temp_data[['Intensidad de Lluvia [mm]']]
     if (data_columns.empty or data_columns.dropna().empty):
-        print("No hay datos en la estacion: ") + estacion
+        #print("No hay datos en la estacion: ") + str(estacion)
         no_data_count += 1
         precip_p_estacion[lista_nombres.index(estacion)].fill(np.nan)
     else:
@@ -132,6 +134,13 @@ for estacion in lista_nombres:
                 index += 1
             values_horas[i] = int(index)
         data_columns.insert(0, 'Horas', values_horas)
+        '''print estacion
+        print temp_data.shape
+        print "Cant horas: " + str(cant_horas)
+        print "Data columns: " + str(data_columns.shape)
+        print "Values horas: " + str(values_horas.shape)
+        print "Precip p estacion: " + str(precip_p_estacion.shape)'''
+        
         precipitations_per_hour = data_columns.groupby(['Horas']).sum(min_count = 1)
         precip_p_estacion[lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
 print "Cantidad de estaciones sin dato: " + str(no_data_count)
@@ -152,7 +161,7 @@ for estacion in lista_nombres:
     como promediar con las estaciones cercanas, etc...
 '''
 
-matrizY = np.zeros([cant_horas,86,135])
+matrizY = np.zeros([cant_horas,86,135]) #int8 porque usamos solo 0 y 1
 matrizY.fill(np.nan)
 
 for hora in range(cant_horas):
