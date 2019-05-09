@@ -10,7 +10,7 @@ import sys
 import urllib as url
 import calendar
 import datetime as dt
-import progressbar
+import progressbar as pb
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
 
 ''' 
@@ -61,7 +61,7 @@ datos2017 = {}
 idx = pd.date_range(fecha_inicial, "2017-12-31 23:50", freq=freq).strftime("%Y-%m-%d %H:%M:%S")
 idx = pd.DatetimeIndex(idx)
 
-for nombre in progressbar.progressbar(lista_nombres):
+for nombre in pb.progressbar(lista_nombres):
     datos2017[nombre] = pd.read_excel(excel,sheet_name=nombre, header=3, parse_dates=[nombre_columna_fecha],dtype={nombre_columna_lluvia: np.float64},dayfirst=True) # lo parsea yyyy-dd-mm
     if datos2017[nombre].Fecha.dtype == '<M8[ns]': #OJO CON ESTO, EN OTRA MAQUINA PUEDE SER >M8[ns]
         datos2017[nombre] = datos2017[nombre][datos2017[nombre].Fecha.dt.year != 2018]
@@ -78,7 +78,7 @@ datos2018 = {}
 idx = pd.date_range("2018-01-01 00:00", "2018-12-31 23:50", freq=freq).strftime("%Y-%m-%d %H:%M:%S")
 idx = pd.DatetimeIndex(idx)
 
-for nombre in progressbar.progressbar(lista_nombres):
+for nombre in pb.progressbar(lista_nombres):
     datos2018[nombre] = pd.read_excel(excel,sheet_name=nombre, header=3, parse_dates=[nombre_columna_fecha],dtype={nombre_columna_lluvia: np.float64},dayfirst=True) # lo parsea yyyy-dd-mm
     datos2018[nombre] = datos2018[nombre].set_index([nombre_columna_fecha])
     datos2018[nombre] = datos2018[nombre][~datos2018[nombre].index.duplicated()]
@@ -93,7 +93,7 @@ datos2019 = {}
 idx = pd.date_range("2019-01-01 00:00", fecha_final, freq=freq).strftime("%Y-%m-%d %H:%M:%S")
 idx = pd.DatetimeIndex(idx)
 
-for nombre in progressbar.progressbar(lista_nombres):
+for nombre in pb.progressbar(lista_nombres):
     datos2019[nombre] = pd.read_excel(excel,sheet_name=nombre, header=3, parse_dates=[nombre_columna_fecha],dtype={nombre_columna_lluvia: np.float64},dayfirst=True) # lo parsea yyyy-dd-mm
     datos2019[nombre] = datos2019[nombre].set_index([nombre_columna_fecha])
     datos2019[nombre] = datos2019[nombre][~datos2019[nombre].index.duplicated()]
@@ -119,7 +119,7 @@ cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)
 precip_p_estacion = np.ndarray(shape=(cant_estaciones,cant_horas))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
-for estacion in progressbar.progressbar(lista_nombres):
+for estacion in pb.progressbar(lista_nombres):
     temp_data = datos_total[estacion]
     data_columns = temp_data[['Intensidad de Lluvia [mm]']]
     if (data_columns.empty or data_columns.dropna().empty):
@@ -134,16 +134,9 @@ for estacion in progressbar.progressbar(lista_nombres):
                 index += 1
             values_horas[i] = int(index)
         data_columns.insert(0, 'Horas', values_horas)
-        '''print estacion
-        print temp_data.shape
-        print "Cant horas: " + str(cant_horas)
-        print "Data columns: " + str(data_columns.shape)
-        print "Values horas: " + str(values_horas.shape)
-        print "Precip p estacion: " + str(precip_p_estacion.shape)'''
-        
         precipitations_per_hour = data_columns.groupby(['Horas']).sum(min_count = 1)
         precip_p_estacion[lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
-print "Cantidad de estaciones sin dato: " + str(no_data_count)
+print ("Cantidad de estaciones sin dato: " + str(no_data_count))
 
 # Convierte a 1 si llovio o 0 si no llovio
 for estacion in lista_nombres:
@@ -152,6 +145,8 @@ for estacion in lista_nombres:
             precip_p_estacion[lista_nombres.index(estacion)][i] = 1
         if (precip_p_estacion[lista_nombres.index(estacion)][i] < umbral_mm):
             precip_p_estacion[lista_nombres.index(estacion)][i] = 0
+        if (np.isnan(precip_p_estacion[lista_nombres.index(estacion)][i])):
+            precip_p_estacion[lista_nombres.index(estacion)][i] = -1
 
 '''
     Llenar la matriz Y mapeando las estaciones en su ubicacion correspondiente, cada hora. 
@@ -161,8 +156,8 @@ for estacion in lista_nombres:
     como promediar con las estaciones cercanas, etc...
 '''
 
-matrizY = np.zeros([cant_horas,86,135]) #int8 porque usamos solo 0 y 1
-matrizY.fill(np.nan)
+matrizY = np.zeros([cant_horas,86,135], dtype=np.int8) #int8 porque usamos solo 0 y 1
+matrizY.fill(-1)
 
 for hora in range(cant_horas):
     for estacion in lista_nombres:
