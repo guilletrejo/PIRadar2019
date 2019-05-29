@@ -57,15 +57,15 @@ La cantidad de horas obtenidas es (numdays*24horas)-12horas
 
 for h in alturas:                                                          # Alturas en las que se van a generar los archivos (SOLO PARA EL PRIMER DIA)
     # Inicializacion con el tiempo 0 (se toma el primer dato solamente)
-    PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = h ).values[70:156,73:208]    # Extrae el dato PH en la 1 hora
-    PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = h ).values[70:156,73:208]  # Extrae el dato PHB en la 1 hora
+    PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = h ).values[65:161,69:213]    # Extrae el dato PH en la 1 hora
+    PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = h ).values[65:161,69:213]  # Extrae el dato PHB en la 1 hora
     z = (PH_numpy + PHB_numpy) / 9.81                                      # Obtiene altura geopotencial (matriz 269x269)
     z_ex = np.expand_dims(z, axis = 0)                                     # Agrega una dimension para agregar las otras horas
 
     # Completa con el resto de los tiempos
     for t in range(time_init+1,time_init+times):
-        PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = h ).values[70:156,73:208]        # Extrae el dato PH en la hora t
-        PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = h ).values[70:156,73:208]      # Extrae el dato PHB en la hora t
+        PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = h ).values[65:161,69:213]        # Extrae el dato PH en la hora t
+        PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = h ).values[65:161,69:213]      # Extrae el dato PHB en la hora t
         zaux = (PH_numpy + PHB_numpy) / 9.81                               # Obtiene altura geopotencial en la hora t
         zaux_ex = np.expand_dims(zaux, axis = 0)                           # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
         z_ex = np.concatenate((z_ex, zaux_ex), axis=0)                     # Concatena las matrices y queda (12x269x269)
@@ -89,19 +89,19 @@ for dia in pb.progressbar(dias):                                                
 
         for h in alturas: 
             if(data_found == 0):
-                z_ex = np.zeros(shape=(12,86,135))
+                z_ex = np.zeros(shape=(12,96,144))
                 z_ex.fill(np.nan)
             elif (data_found == 1):
                 # Inicializacion con el tiempo 0
-                PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = h  ).values[70:156,73:208]
-                PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = h ).values[70:156,73:208]
+                PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = h  ).values[65:161,69:213]
+                PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = h ).values[65:161,69:213]
                 z = (PH_numpy + PHB_numpy) / 9.81
                 z_ex = np.expand_dims(z, axis = 0)
 
               # Completa con el resto de los tiempos
                 for t in range(time_init+1,time_init+times):
-                    PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = h ).values[70:156,73:208]
-                    PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = h ).values[70:156,73:208]
+                    PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = h ).values[65:161,69:213]
+                    PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = h ).values[65:161,69:213]
                     zaux = (PH_numpy + PHB_numpy) / 9.81
                     zaux_ex = np.expand_dims(zaux, axis = 0)
                     z_ex = np.concatenate((z_ex, zaux_ex), axis=0)
