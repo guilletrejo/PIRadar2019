@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import xarray
 import netCDF4
-import wrf 
+#import wrf 
 import sys
 import urllib as url
 import calendar
@@ -54,7 +54,7 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
-excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2017_131.xls")
+excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2017_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -71,7 +71,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
-excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2018_131.xls")
+excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2018_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -86,7 +86,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
-excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2019_131.xls")
+excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2019_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -114,8 +114,7 @@ for nombre in lista_nombres:
 '''
 
 cant_estaciones = len(lista_nombres)
-# cant_horas e determina con la cantidad de datos totales dividido por la cantidad de datos por hora.
-cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos) 
+cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
 precip_p_estacion = np.ndarray(shape=(cant_estaciones,cant_horas))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
@@ -123,7 +122,7 @@ for estacion in pb.progressbar(lista_nombres):
     temp_data = datos_total[estacion]
     data_columns = temp_data[['Intensidad de Lluvia [mm]']]
     if (data_columns.empty or data_columns.dropna().empty):
-        #print("No hay datos en la estacion: ") + str(estacion)
+#        print("No hay datos en la estacion: ") + estacion
         no_data_count += 1
         precip_p_estacion[lista_nombres.index(estacion)].fill(np.nan)
     else:
@@ -136,7 +135,7 @@ for estacion in pb.progressbar(lista_nombres):
         data_columns.insert(0, 'Horas', values_horas)
         precipitations_per_hour = data_columns.groupby(['Horas']).sum(min_count = 1)
         precip_p_estacion[lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
-print ("Cantidad de estaciones sin dato: " + str(no_data_count))
+print "Cantidad de estaciones sin dato: " + str(no_data_count)
 
 # Convierte a 1 si llovio o 0 si no llovio
 for estacion in lista_nombres:
@@ -145,8 +144,6 @@ for estacion in lista_nombres:
             precip_p_estacion[lista_nombres.index(estacion)][i] = 1
         if (precip_p_estacion[lista_nombres.index(estacion)][i] < umbral_mm):
             precip_p_estacion[lista_nombres.index(estacion)][i] = 0
-        if (np.isnan(precip_p_estacion[lista_nombres.index(estacion)][i])):
-            precip_p_estacion[lista_nombres.index(estacion)][i] = -1
 
 '''
     Llenar la matriz Y mapeando las estaciones en su ubicacion correspondiente, cada hora. 
@@ -156,8 +153,8 @@ for estacion in lista_nombres:
     como promediar con las estaciones cercanas, etc...
 '''
 
-matrizY = np.zeros([cant_horas,86,135], dtype=np.int8) #int8 porque usamos solo 0 y 1
-matrizY.fill(-1)
+matrizY = np.zeros([cant_horas,96,144], dtype=np.float64)
+matrizY.fill(np.nan)
 
 for hora in range(cant_horas):
     for estacion in lista_nombres:
@@ -166,4 +163,4 @@ for hora in range(cant_horas):
         y = nombre_ubic.at[index_estacion,'y'] - 73
         matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
 
-np.save('./datos_lluvia/precipitacion.npy', matrizY)
+np.save('../datos_lluvia/precipitacion.npy', matrizY)
