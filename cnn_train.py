@@ -12,9 +12,9 @@ import pickle
 '''
 muestras_train = 150
 muestras_test = 50
-shape = (96,144,1) # grilla de 96x144 con 1 canal (z) ¿si agregamos otras variables de entrada, sera agregar canales?
-X_data_dir = "../Datos/z_altura8_2017-11-01.npy"
-Y_data_dir = "../Datos/precipitacion_big.npy"
+shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
+X_data_dir = "/home/awf/guille/datos_modelo/z_altura10_2017-11-01.npy"
+Y_data_dir = "/home/awf/datos_lluvia/precipitacion_mm.npy"
 model_dir = "../modelo1.h5"
 cant_epocas = 2
 '''
