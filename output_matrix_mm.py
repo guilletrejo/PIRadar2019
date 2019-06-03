@@ -13,6 +13,22 @@ import datetime as dt
 import progressbar as pb
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
 
+def get_submatrix(matrix,row,col):
+    matrix_aux = np.zeros(shape=(3,3),dtype=float)
+    matrix_aux[0,0] = (matrix[row-1,col-1] if row-1>=0 and col-1>=0 else matrix[row,col] )
+    matrix_aux[0,1] = (matrix[row-1,col]   if row-1>=0 else matrix[row,col] )
+    matrix_aux[0,2] = (matrix[row-1,col+1] if row-1>=0 and col+1<matrix.shape[1] else matrix[row,col] )
+    
+    matrix_aux[1,0] = (matrix[row,col-1]   if col-1>=0 else matrix[row,col] )
+    matrix_aux[1,1] =  matrix[row,col]
+    matrix_aux[1,2] = (matrix[row,col+1]   if col+1<matrix.shape[1] else matrix[row,col] )
+    
+    matrix_aux[2,0] = (matrix[row+1,col-1] if row+1<matrix.shape[0] and col-1>=0 else matrix[row,col] )
+    matrix_aux[2,1] = (matrix[row+1,col]   if row+1<matrix.shape[0] else matrix[row,col] )
+    matrix_aux[2,2] = (matrix[row+1,col+1] if row+1<matrix.shape[0] and col+1<matrix.shape[1] else matrix[row,col] )
+    
+    return matrix_aux
+
 ''' 
     Parametros
 '''
@@ -147,11 +163,18 @@ print "Cantidad de estaciones sin dato: " + str(no_data_count)
 matrizY = np.zeros([cant_horas,96,144], dtype=np.float64)
 matrizY.fill(np.nan)
 
-for hora in range(cant_horas):
+for hora in pb.progressbar(range(cant_horas)):
     for estacion in lista_nombres:
         index_estacion = lista_nombres.index(estacion)
-        x = nombre_ubic.at[index_estacion,'x'] - 70
-        y = nombre_ubic.at[index_estacion,'y'] - 73
+        x = nombre_ubic.at[index_estacion,'x'] - 65
+        y = nombre_ubic.at[index_estacion,'y'] - 69
         matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
 
+for hora in pb.progressbar(range(cant_horas)):
+    while(np.isnan(matrizY[hora]).any()):
+        for cur_pos,cur_val in np.ndenumerate(matrizY[hora]):
+            if(np.isnan(cur_val)):
+                matrizY[hora][cur_pos] = np.nanmean(get_submatrix(matrizY[hora],cur_pos[0],cur_pos[1]))
+
 np.save('../datos_lluvia/precipitacion_mm.npy', matrizY)
+
