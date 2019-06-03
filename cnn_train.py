@@ -10,15 +10,15 @@ import pickle
 '''
     Parametros
 '''
-muestras_train = 150
-muestras_test = 50
+muestras_train = 15
+muestras_test = 5
+cant_epocas = 1
 shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
 X_data_dir = "/home/awf/guille/datos_modelo/z_altura10_2017-11-01.npy"
 Y_data_dir = "/home/awf/datos_lluvia/precipitacion_mm.npy"
 model_dir = "../modelo1.h5"
-cant_epocas = 2
 '''
-    Carga de datos; ¿Las demas alturas seran un apend?
+    Carga de datos; .Las demas alturas seran un apend?
 '''
 X = np.load(X_data_dir)
 Y = np.expand_dims(np.load(Y_data_dir), axis=3)

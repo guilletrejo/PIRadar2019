@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=cnn_train
-#SBATCH --ntask=4
+#SBATCH --ntasks=1
 #SBATCH --output=cnn_train-%j-salida.txt
 #SBATCH --output=cnn_train-%j-error.txt
 
