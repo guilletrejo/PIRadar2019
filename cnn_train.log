@@ -1,0 +1,1915 @@
+2019-05-31 16:03:04.472533: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2019-05-31 16:03:04.472587: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-05-31 16:03:04.472597: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2019-05-31 16:03:04.472604: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-05-31 16:03:04.472611: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX512F instructions, but these are available on your machine and could speed up CPU computations.
+2019-05-31 16:03:04.472618: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization_1 (Batch (None, 96, 144, 1)        4         
+_________________________________________________________________
+block1_conv1 (Conv2D)        (None, 96, 144, 64)       640       
+_________________________________________________________________
+batch_normalization_2 (Batch (None, 96, 144, 64)       256       
+_________________________________________________________________
+block1_conv2 (Conv2D)        (None, 96, 144, 64)       36928     
+_________________________________________________________________
+block1_pool (MaxPooling2D)   (None, 48, 72, 64)        0         
+_________________________________________________________________
+batch_normalization_3 (Batch (None, 48, 72, 64)        256       
+_________________________________________________________________
+block2_conv1 (Conv2D)        (None, 48, 72, 128)       73856     
+_________________________________________________________________
+batch_normalization_4 (Batch (None, 48, 72, 128)       512       
+_________________________________________________________________
+block2_conv2 (Conv2D)        (None, 48, 72, 128)       147584    
+_________________________________________________________________
+block2_pool (MaxPooling2D)   (None, 24, 36, 128)       0         
+_________________________________________________________________
+batch_normalization_5 (Batch (None, 24, 36, 128)       512       
+_________________________________________________________________
+block3_conv1 (Conv2D)        (None, 24, 36, 256)       295168    
+_________________________________________________________________
+batch_normalization_6 (Batch (None, 24, 36, 256)       1024      
+_________________________________________________________________
+block3_conv2 (Conv2D)        (None, 24, 36, 256)       590080    
+_________________________________________________________________
+block3_pool (MaxPooling2D)   (None, 12, 18, 256)       0         
+_________________________________________________________________
+batch_normalization_7 (Batch (None, 12, 18, 256)       1024      
+_________________________________________________________________
+block4_conv1 (Conv2D)        (None, 12, 18, 512)       1180160   
+_________________________________________________________________
+batch_normalization_8 (Batch (None, 12, 18, 512)       2048      
+_________________________________________________________________
+block4_conv2 (Conv2D)        (None, 12, 18, 512)       2359808   
+_________________________________________________________________
+block4_pool (MaxPooling2D)   (None, 6, 6, 512)         0         
+_________________________________________________________________
+batch_normalization_9 (Batch (None, 6, 6, 512)         2048      
+_________________________________________________________________
+block5_conv1 (Conv2D)        (None, 6, 6, 512)         2359808   
+_________________________________________________________________
+batch_normalization_10 (Batc (None, 6, 6, 512)         2048      
+_________________________________________________________________
+block5_conv2 (Conv2D)        (None, 6, 6, 512)         2359808   
+_________________________________________________________________
+block6_upsampl (UpSampling2D (None, 12, 18, 512)       0         
+_________________________________________________________________
+batch_normalization_11 (Batc (None, 12, 18, 512)       2048      
+_________________________________________________________________
+block6_conv1 (Conv2D)        (None, 12, 18, 512)       2359808   
+_________________________________________________________________
+batch_normalization_12 (Batc (None, 12, 18, 512)       2048      
+_________________________________________________________________
+block6_conv2 (Conv2D)        (None, 12, 18, 512)       2359808   
+_________________________________________________________________
+block7_upsampl (UpSampling2D (None, 24, 36, 512)       0         
+_________________________________________________________________
+batch_normalization_13 (Batc (None, 24, 36, 512)       2048      
+_________________________________________________________________
+block7_conv1 (Conv2D)        (None, 24, 36, 256)       1179904   
+_________________________________________________________________
+batch_normalization_14 (Batc (None, 24, 36, 256)       1024      
+_________________________________________________________________
+block7_conv2 (Conv2D)        (None, 24, 36, 256)       590080    
+_________________________________________________________________
+block8_upsampl (UpSampling2D (None, 48, 72, 256)       0         
+_________________________________________________________________
+batch_normalization_15 (Batc (None, 48, 72, 256)       1024      
+_________________________________________________________________
+block8_conv1 (Conv2D)        (None, 48, 72, 128)       295040    
+_________________________________________________________________
+batch_normalization_16 (Batc (None, 48, 72, 128)       512       
+_________________________________________________________________
+block8_conv2 (Conv2D)        (None, 48, 72, 128)       147584    
+_________________________________________________________________
+block9_upsampl (UpSampling2D (None, 96, 144, 128)      0         
+_________________________________________________________________
+batch_normalization_17 (Batc (None, 96, 144, 128)      512       
+_________________________________________________________________
+block9_conv1 (Conv2D)        (None, 96, 144, 64)       73792     
+_________________________________________________________________
+batch_normalization_18 (Batc (None, 96, 144, 64)       256       
+_________________________________________________________________
+block9_conv2 (Conv2D)        (None, 96, 144, 64)       36928     
+_________________________________________________________________
+batch_normalization_19 (Batc (None, 96, 144, 64)       256       
+_________________________________________________________________
+block10_conv1 (Conv2D)       (None, 96, 144, 1)        65        
+=================================================================
+Total params: 16,466,309
+Trainable params: 16,456,579
+Non-trainable params: 9,730
+_________________________________________________________________
+None
+Train on 11084 samples, validate on 1956 samples
+Epoch 1/50
+
+  326/11084 [..............................] - ETA: 1:25:16 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:54 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:59 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:29 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:53 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:13 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:36 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:57 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:26 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:50 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:22 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:48 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:11 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:36 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:59 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:23 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:48 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:13 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:37 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:02 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:28 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5435s 490ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 2/50
+
+  326/11084 [..............................] - ETA: 1:24:18 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:01 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:17 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:16:51 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:22 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:54 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:18 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:57 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:19 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:41 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:04 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:30 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:57 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:25 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:50 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:15 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:43 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:09 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:34 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:15 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:41 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:07 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:33 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:59 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:24 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:50 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:16 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5432s 490ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 3/50
+
+  326/11084 [..............................] - ETA: 1:24:34 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:21:57 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:58 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:13 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:37 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:02 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:23 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:45 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:12 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:37 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:02 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:29 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:56 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:22 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:48 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:14 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:39 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:05 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:31 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:57 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:23 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:49 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:14 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:40 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:06 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:31 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:58 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:24 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:50 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:15 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:41 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:33 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5428s 490ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 4/50
+
+  326/11084 [..............................] - ETA: 1:25:26 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:35 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:45 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:08 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:31 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:55 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:18 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:43 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:07 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:30 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 58:56 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:27 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:54 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:20 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:49 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:14 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:40 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:06 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:32 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:58 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:23 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:49 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:14 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:40 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:06 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:32 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:58 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:24 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:50 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:16 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5432s 490ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 5/50
+
+  326/11084 [..............................] - ETA: 1:26:00 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:36 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:01 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:27 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:50 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:11 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:32 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:54 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:17 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:41 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:08 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:33 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:57 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:22 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:46 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:12 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:37 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:03 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:29 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:55 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:21 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:47 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:13 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:39 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:05 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:31 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:57 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:23 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:49 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:15 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5429s 490ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 6/50
+
+  326/11084 [..............................] - ETA: 1:24:33 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:04 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:46 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:18 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:38 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:59 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:31 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:55 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:19 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:43 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:07 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:34 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:02 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:28 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:54 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:44 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:09 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:34 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:00 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:27 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:52 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5441s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 7/50
+
+  326/11084 [..............................] - ETA: 1:26:44 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:23:03 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:04 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:27 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:48 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:14 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:47 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:11 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:32 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:53 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:16 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:41 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:04 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:30 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:54 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:46 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:10 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:36 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:02 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:27 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:52 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5442s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 8/50
+
+  326/11084 [..............................] - ETA: 1:24:42 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:22 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:35 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:10 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:31 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:01 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:44 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:06 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:28 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:50 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:16 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:38 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:03 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:29 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:54 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:18 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:44 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:08 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:34 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:52 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5444s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 9/50
+
+  326/11084 [..............................] - ETA: 1:24:37 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:07 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:37 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:01 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:27 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:46 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:11 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:47 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:13 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:37 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:05 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:31 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:58 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:22 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:49 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:14 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:40 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:05 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:31 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:57 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:23 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:51 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:16 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:59 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5440s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 10/50
+
+  326/11084 [..............................] - ETA: 1:24:45 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:20 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:01 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:35 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:53 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:15 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:34 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:03 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:29 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:53 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:16 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:39 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:04 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:32 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:57 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:22 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:48 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:12 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:37 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:02 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:27 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5438s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 11/50
+
+  326/11084 [..............................] - ETA: 1:24:55 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:18 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:09 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:26 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:42 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:07 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:31 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:57 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:22 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:47 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:12 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:42 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:04 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:30 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:54 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:44 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:10 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:35 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:00 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:26 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:51 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5439s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 12/50
+
+  326/11084 [..............................] - ETA: 1:25:59 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:40 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:59 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:41 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:15:08 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:27 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:48 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:08 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:28 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:54 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:29 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:52 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:16 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:39 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 49:03 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:27 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:52 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:17 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:41 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:08 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:32 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:57 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:24 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:49 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:14 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:39 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:03 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:29 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:19 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:44 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5455s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 13/50
+
+  326/11084 [..............................] - ETA: 1:25:03 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:44 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:46 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:50 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:15:04 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:24 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:44 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:17 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:42 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:02:04 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:26 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:49 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:16 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:41 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 49:05 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:29 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:54 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:19 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:43 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:08 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:33 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:57 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:22 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:47 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:12 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:37 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5454s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 14/50
+
+  326/11084 [..............................] - ETA: 1:24:50 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:15 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:01 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:13 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:41 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:06 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:31 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:05 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:29 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:53 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:16 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:40 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:05 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:31 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:55 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:46 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:11 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:37 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:02 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:28 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5441s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 15/50
+
+  326/11084 [..............................] - ETA: 1:25:24 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:34 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:50 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:09 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:37 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:07 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:32 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:58 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:21 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:49 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:12 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:39 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:03 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:29 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:53 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:45 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:11 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:38 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:03 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:28 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5440s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 16/50
+
+  326/11084 [..............................] - ETA: 1:25:19 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:39 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:07 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:33 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:54 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:14 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:37 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:59 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:36 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:02:01 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:25 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:48 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:13 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:36 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:59 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:24 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:49 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:14 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:38 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:46 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:36 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 2019-06-01 16:03:05.593950: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-01 16:03:05.594016: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-01 16:03:05.594035: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-01 16:03:05.594042: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-01 16:03:05.594049: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX512F instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-01 16:03:05.594057: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+/home/lac/cnn_train.sh: línea 3: 67239 Abortado                /home/lac/miniconda2/envs/pi_radar/bin/python /home/lac/PIRadar2019/cnn_train.py
+
+10432/11084 [===========================>..] - ETA: 5:15 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:37 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5554s 501ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 17/50
+
+  326/11084 [..............................] - ETA: 1:26:07 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:23:13 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:30 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:45 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:15:07 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:34 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:10:03 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:29 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:56 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:02:22 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:47 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 57:09 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:33 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:57 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 49:19 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:43 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 44:07 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:31 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:55 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:19 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:42 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 31:06 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:31 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:55 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:19 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:44 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:08 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:32 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:57 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:21 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:46 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:11 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:35 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5478s 494ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 18/50
+
+  326/11084 [..............................] - ETA: 1:25:50 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:23:00 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:19 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:32 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:59 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:22 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:44 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:03 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:26 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:54 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:18 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:43 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:10 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:34 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:59 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:25 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:49 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:15 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:40 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:05 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:20 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:45 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:36 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5448s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 19/50
+
+  326/11084 [..............................] - ETA: 1:25:32 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:41 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:11 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:31 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:52 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:13 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:38 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:05 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:32 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:58 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:22 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:47 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:11 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:35 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:59 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:24 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:50 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:14 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:39 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:46 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:12 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:37 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5449s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 20/50
+
+  326/11084 [..............................] - ETA: 1:24:54 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:24 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:36 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:16:59 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:26 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:56 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:19 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:46 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:12 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:40 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:07 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:31 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:59 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:26 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:51 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:17 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:42 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:08 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:35 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:01 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:26 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:51 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5442s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 21/50
+
+  326/11084 [..............................] - ETA: 1:24:34 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:19 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:41 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:00 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:28 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:48 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:15 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:39 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:08 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:34 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:02 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:28 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:55 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:23 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:49 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:15 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:41 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:07 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:32 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:16 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:59 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5439s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 22/50
+
+  326/11084 [..............................] - ETA: 1:24:43 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:21:58 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:45 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:16 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:45 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:14 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:39 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:02 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:27 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:52 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:14 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:40 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:07 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:33 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:58 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:23 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:48 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:14 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:38 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:46 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:36 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5449s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 23/50
+
+  326/11084 [..............................] - ETA: 1:24:54 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:31 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:50 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:29 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:42 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:08 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:31 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:59 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:24 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:50 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:15 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:39 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:03 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:28 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:54 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:44 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:10 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:36 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:01 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:26 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:51 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5444s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 24/50
+
+  326/11084 [..............................] - ETA: 1:24:48 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:15 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:31 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:04 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:35 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:58 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:22 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:46 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:14 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:38 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:05 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:30 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:55 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:21 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:46 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:12 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:38 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:04 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:31 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:57 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:23 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:16 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:59 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5440s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 25/50
+
+  326/11084 [..............................] - ETA: 1:25:46 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:51 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:02 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:15 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:44 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:07 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:33 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:58 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:24 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:48 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:12 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:39 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:03 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:31 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:56 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:21 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:45 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:10 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:36 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:01 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:28 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:19 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5442s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 26/50
+
+  326/11084 [..............................] - ETA: 1:25:05 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:28 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:38 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:08 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:29 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:59 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:32 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:52 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:17 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:40 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:03 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:29 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:55 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:23 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:48 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:15 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:41 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:06 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:33 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:16 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:33 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:59 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:24 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:50 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:16 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5436s 490ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 27/50
+
+  326/11084 [..............................] - ETA: 1:25:08 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:37 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:52 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:19 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:46 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:19 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:38 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:03 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:31 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:56 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:21 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:47 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:12 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:36 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 49:02 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:27 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:52 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:16 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:41 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:06 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:31 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:57 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:22 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:47 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:12 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:38 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:03 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:28 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:19 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:44 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5456s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 28/50
+
+  326/11084 [..............................] - ETA: 1:24:35 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:21:47 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:30 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:00 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:25 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:58 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:25 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:51 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:15 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:39 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:06 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:32 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:59 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:27 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:51 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:17 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:42 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:07 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:33 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:26 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:52 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5442s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 29/50
+
+  326/11084 [..............................] - ETA: 1:24:26 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:20 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:59 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:23 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:45 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:11 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:36 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:06 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:30 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:54 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:18 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:43 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:05 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:30 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:55 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:21 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:46 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:13 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:38 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:29 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:20 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:45 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5446s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 30/50
+
+  326/11084 [..............................] - ETA: 1:25:01 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:14 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:35 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:16:55 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:24 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:58 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:27 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:52 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:21 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:45 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:12 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:37 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:05 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:30 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:55 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:46 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:10 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:35 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:01 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:27 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5445s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 31/50
+
+  326/11084 [..............................] - ETA: 1:24:39 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:18 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:27 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:12 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:28 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:59 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:30 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:58 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:30 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:53 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:17 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:42 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:07 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:32 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:58 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:23 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:48 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:12 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:38 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:28 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:54 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:20 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:45 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:36 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5447s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 32/50
+
+  326/11084 [..............................] - ETA: 1:24:52 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:09 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:31 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:16:54 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:28 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:59 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:20 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:49 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:13 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:40 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:05 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:31 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:57 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:23 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:50 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:16 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:42 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:07 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:33 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan2019-06-02 16:03:56.966198: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-02 16:03:56.966481: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-02 16:03:56.966495: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-02 16:03:56.966506: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-02 16:03:56.966518: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX512F instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-02 16:03:56.966529: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan/home/lac/cnn_train.sh: línea 3: 77838 Terminado (killed)      /home/lac/miniconda2/envs/pi_radar/bin/python /home/lac/PIRadar2019/cnn_train.py
+
+ 8802/11084 [======================>.......] - ETA: 18:25 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:47 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 13:08 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:30 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:52 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:14 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:37 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5541s 500ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 33/50
+
+  326/11084 [..............................] - ETA: 1:24:54 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:19 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:42 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:08 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:41 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:05 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:34 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:58 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:21 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:46 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:09 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:34 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:59 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:24 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:50 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:15 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:42 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:08 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:33 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:00 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5443s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 34/50
+
+  326/11084 [..............................] - ETA: 1:24:53 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:12 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:43 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:03 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:31 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:53 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:20 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:44 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:12 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:40 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:08 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:35 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:01 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:28 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:54 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:46 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:14 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:39 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:20 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:45 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:36 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:44 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5454s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 35/50
+
+  326/11084 [..............................] - ETA: 1:25:31 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:52 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:57 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:14 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:35 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:01 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:27 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:51 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:18 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:42 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:09 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:35 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:00 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:27 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:52 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:17 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:43 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:08 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:34 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:58 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:51 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:17 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5445s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 36/50
+
+  326/11084 [..............................] - ETA: 1:25:26 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:45 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:14 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:25 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:54 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:12 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:35 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:01 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:25 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:49 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:13 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:38 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:04 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:29 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:53 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:44 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:09 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:34 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:01 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:26 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:52 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:43 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:09 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:34 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:00 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5444s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 37/50
+
+  326/11084 [..............................] - ETA: 1:25:54 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:41 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:00 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:21 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:50 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:15 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:40 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:01 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:25 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:48 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:13 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:38 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:06 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:31 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:58 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:25 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:51 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:15 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:40 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:06 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:31 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:56 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:47 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:12 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:37 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:28 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5452s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 38/50
+
+  326/11084 [..............................] - ETA: 1:24:17 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:08 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:43 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:14 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:42 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:07 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:34 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:59 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:26 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:53 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:17 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:40 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:05 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:30 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:55 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:47 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:12 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:37 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:03 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:29 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:54 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:19 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5450s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 39/50
+
+  326/11084 [..............................] - ETA: 1:25:14 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:33 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:47 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:07 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:37 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:01 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:22 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:48 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:17 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:45 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:09 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:34 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:00 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:27 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:52 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:45 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:11 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:38 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:03 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:29 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:20 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:45 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5447s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 40/50
+
+  326/11084 [..............................] - ETA: 1:24:53 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:21 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:44 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:17 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:34 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:04 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:24 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:51 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:17 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:42 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:08 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:33 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:00 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:24 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:52 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:17 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:43 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:08 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:34 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 35:59 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:24 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:50 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:16 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:42 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:08 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:33 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 17:59 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:25 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:51 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:42 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5441s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 41/50
+
+  326/11084 [..............................] - ETA: 1:24:52 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:19 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:45 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:10 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:30 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:11:54 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:17 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:49 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:13 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:41 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:09 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:32 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 53:58 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:26 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:52 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:46 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:13 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:37 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:02 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:27 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:19 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:45 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5445s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 42/50
+
+  326/11084 [..............................] - ETA: 1:25:55 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:30 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:51 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:17 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:44 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:08 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:31 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:59 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:21 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:46 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:12 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:38 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:02 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:27 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:53 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:19 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:45 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:10 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:36 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:02 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:27 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:19 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5449s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 43/50
+
+  326/11084 [..............................] - ETA: 1:25:26 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:37 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:53 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:21 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:49 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:10 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:30 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:06:56 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:20 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:46 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:14 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:39 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:04 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:29 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:55 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:20 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:45 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:11 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:37 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:03 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:28 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:53 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:18 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:44 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:10 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:35 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:01 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:26 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:17 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:08 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5445s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 44/50
+
+  326/11084 [..............................] - ETA: 1:25:07 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:25 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:45 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:22 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:50 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:19 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:42 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:05 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:30 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:54 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:19 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:44 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:07 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:33 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:59 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:24 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:49 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:15 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:39 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:04 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:29 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:20 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:46 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:37 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:52 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5447s 491ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 45/50
+
+  326/11084 [..............................] - ETA: 1:25:31 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:43 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:08 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:24 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:47 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:09 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:35 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:01 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:25 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:50 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:16 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:42 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:06 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:32 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:58 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:24 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:49 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:14 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:40 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:05 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:55 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:46 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:37 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:28 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:43 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5448s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 46/50
+
+  326/11084 [..............................] - ETA: 1:25:14 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:26 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:50 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:23 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:48 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:16 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:38 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:05 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:26 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:52 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:17 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:44 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:08 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:33 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:57 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:21 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:47 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:12 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:39 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:05 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:31 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:56 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:47 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:12 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:36 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:28 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:44 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5453s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 47/50
+
+  326/11084 [..............................] - ETA: 1:25:17 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:20 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:46 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:20 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:45 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:13 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:37 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:00 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:22 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:50 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:14 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:38 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:04 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:31 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:56 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:21 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:49 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:14 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:39 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:05 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:30 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 30:56 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:21 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:46 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:11 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:37 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:02 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:27 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:53 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:18 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:44 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:09 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:34 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5456s 492ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 48/50
+
+  326/11084 [..............................] - ETA: 1:24:45 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:12 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:42 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:17 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:39 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:07 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:34 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:04 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:33 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:58 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:22 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:45 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:11 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:36 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 49:02 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:27 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:52 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:18 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:42 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:08 - loss: nan - mean_squared_error: nan2019-06-03 16:03:54.568352: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-03 16:03:54.568410: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-03 16:03:54.568419: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-03 16:03:54.568426: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-03 16:03:54.568433: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX512F instructions, but these are available on your machine and could speed up CPU computations.
+2019-06-03 16:03:54.568440: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+/home/lac/cnn_train.sh: línea 3: 105680 Abortado                /home/lac/miniconda2/envs/pi_radar/bin/python /home/lac/PIRadar2019/cnn_train.py
+
+ 6846/11084 [=================>............] - ETA: 34:25 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 31:46 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 29:06 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 26:26 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:47 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 21:07 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:28 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:50 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 13:11 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:32 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:54 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:16 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:38 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5570s 503ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 49/50
+
+  326/11084 [..............................] - ETA: 1:25:37 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:55 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:20:09 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:37 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:15:02 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:25 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:47 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:11 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:37 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:02:03 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:29 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:53 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:17 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:41 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 49:07 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:32 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:58 - loss: nan - mean_squared_error: nan
+ 5868/11084 [==============>...............] - ETA: 41:24 - loss: nan - mean_squared_error: nan
+ 6194/11084 [===============>..............] - ETA: 38:48 - loss: nan - mean_squared_error: nan
+ 6520/11084 [================>.............] - ETA: 36:14 - loss: nan - mean_squared_error: nan
+ 6846/11084 [=================>............] - ETA: 33:38 - loss: nan - mean_squared_error: nan
+ 7172/11084 [==================>...........] - ETA: 31:03 - loss: nan - mean_squared_error: nan
+ 7498/11084 [===================>..........] - ETA: 28:28 - loss: nan - mean_squared_error: nan
+ 7824/11084 [====================>.........] - ETA: 25:53 - loss: nan - mean_squared_error: nan
+ 8150/11084 [=====================>........] - ETA: 23:19 - loss: nan - mean_squared_error: nan
+ 8476/11084 [=====================>........] - ETA: 20:43 - loss: nan - mean_squared_error: nan
+ 8802/11084 [======================>.......] - ETA: 18:08 - loss: nan - mean_squared_error: nan
+ 9128/11084 [=======================>......] - ETA: 15:32 - loss: nan - mean_squared_error: nan
+ 9454/11084 [========================>.....] - ETA: 12:57 - loss: nan - mean_squared_error: nan
+ 9780/11084 [=========================>....] - ETA: 10:21 - loss: nan - mean_squared_error: nan
+10106/11084 [==========================>...] - ETA: 7:46 - loss: nan - mean_squared_error: nan 
+10432/11084 [===========================>..] - ETA: 5:10 - loss: nan - mean_squared_error: nan
+10758/11084 [============================>.] - ETA: 2:35 - loss: nan - mean_squared_error: nan
+11084/11084 [==============================] - 5474s 494ms/step - loss: nan - mean_squared_error: nan - val_loss: nan - val_mean_squared_error: nan
+Epoch 50/50
+
+  326/11084 [..............................] - ETA: 1:25:02 - loss: nan - mean_squared_error: nan
+  652/11084 [>.............................] - ETA: 1:22:27 - loss: nan - mean_squared_error: nan
+  978/11084 [=>............................] - ETA: 1:19:47 - loss: nan - mean_squared_error: nan
+ 1304/11084 [==>...........................] - ETA: 1:17:21 - loss: nan - mean_squared_error: nan
+ 1630/11084 [===>..........................] - ETA: 1:14:42 - loss: nan - mean_squared_error: nan
+ 1956/11084 [====>.........................] - ETA: 1:12:09 - loss: nan - mean_squared_error: nan
+ 2282/11084 [=====>........................] - ETA: 1:09:34 - loss: nan - mean_squared_error: nan
+ 2608/11084 [======>.......................] - ETA: 1:07:00 - loss: nan - mean_squared_error: nan
+ 2934/11084 [======>.......................] - ETA: 1:04:29 - loss: nan - mean_squared_error: nan
+ 3260/11084 [=======>......................] - ETA: 1:01:54 - loss: nan - mean_squared_error: nan
+ 3586/11084 [========>.....................] - ETA: 59:18 - loss: nan - mean_squared_error: nan  
+ 3912/11084 [=========>....................] - ETA: 56:43 - loss: nan - mean_squared_error: nan
+ 4238/11084 [==========>...................] - ETA: 54:09 - loss: nan - mean_squared_error: nan
+ 4564/11084 [===========>..................] - ETA: 51:34 - loss: nan - mean_squared_error: nan
+ 4890/11084 [============>.................] - ETA: 48:59 - loss: nan - mean_squared_error: nan
+ 5216/11084 [=============>................] - ETA: 46:24 - loss: nan - mean_squared_error: nan
+ 5542/11084 [==============>...............] - ETA: 43:49 - loss: nan - mean_squared_error: nan

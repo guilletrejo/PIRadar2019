@@ -9,14 +9,14 @@ import wrf
 import sys
 import datetime
 import progressbar as pb
-from joblib import Parallel, delayed
+#from joblib import Parallel, delayed
 
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
 
 '''
 Parametros
 '''
-path_datos = "/home/datos/wrf/wrfout/"  # en YAKU, cambiar esto
+path_datos = "/mnt/datos/wrf/wrfout/"  # en YAKU, cambiar esto
 time_init = 6                    # Se ignoran las primeras 6 horas de cada archivo.
 times = 12                       # Se toman 12 horas de cada archivo. (SON 2 ARCHIVOS POR DIA)
 horas = ["06:00:00","18:00:00"]
@@ -70,7 +70,7 @@ for t in range(time_init+1,time_init+times):
     zaux = (PH_numpy + PHB_numpy) / 9.81                               # Obtiene altura geopotencial en la hora t
     zaux_ex = np.expand_dims(zaux, axis = 0)                           # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
     z_expanded = np.concatenate((z_expanded, zaux_ex), axis=0)                     # Concatena las matrices y queda (12x269x269)
-#np.save('./datos_modelo/z_altura{}_{}.npy'.format(altura,dias[0]),z_ex)           # Guarda 1 archivo por cada altura, con las primeras 12 horas.
+#np.save('./z_altura{}_{}.npy'.format(altura,dias[0]),z_ex)           # Guarda 1 archivo por cada altura, con las primeras 12 horas.
     
 DS.close() # Se cierra el dataset abierto para ahorrar memoria
 
@@ -105,9 +105,9 @@ for dia in pb.progressbar(dias):                                                
                 zaux = (PH_numpy + PHB_numpy) / 9.81
                 zaux_ex = np.expand_dims(zaux, axis = 0)
                 z_ex = np.concatenate((z_ex, zaux_ex), axis=0)
-        #z_file = np.load('./datos_modelo/z_altura{}_{}.npy'.format(altura,dias[0]))  # Abre la matriz .npy generada anteriormente
+        #z_file = np.load('./z_altura{}_{}.npy'.format(altura,dias[0]))  # Abre la matriz .npy generada anteriormente
         z_expanded = np.concatenate((z_expanded, z_ex), axis=0)            # Concatena la nueva matriz con la anterior
         DS.close()
-np.save('./datos_modelo/z_altura{}_{}.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
+np.save('./z_altura{}_{}.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
 
 

@@ -10,6 +10,7 @@ import pickle
 '''
     Parametros
 '''
+<<<<<<< HEAD
 muestras_train = 15
 muestras_test = 5
 cant_epocas = 1
@@ -17,6 +18,15 @@ shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variab
 X_data_dir = "/home/awf/guille/datos_modelo/z_altura10_2017-11-01.npy"
 Y_data_dir = "/home/awf/datos_lluvia/precipitacion_mm.npy"
 model_dir = "../modelo1.h5"
+=======
+muestras_train = 11084
+muestras_test = 1956
+shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
+X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01.npy"
+Y_data_dir = "/home/lac/datos_lluvia/precipitacion_mm.npy"
+model_dir = "/home/lac/PIRadar2019/modelo1.h5"
+cant_epocas = 50
+>>>>>>> 3d7da1503f565f2d653ed842e5832cddc32638fc
 '''
     Carga de datos; .Las demas alturas seran un apend?
 '''
@@ -121,7 +131,7 @@ def get_vgg16():
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss='mae', optimizer=sgd, metrics=['mse'])
     #model.compile(loss='mae', optimizer=Adam(lr=0.001), metrics=['mse'])
-    print model.summary()
+    print(model.summary())
 
     return model
 
@@ -130,6 +140,6 @@ def get_vgg16():
 '''
 model = get_vgg16()
 
-model.fit(x_train, y_train, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
+model.fit(x_train, y_train, batch_size=326, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
 
 model.save(model_dir)
