@@ -10,16 +10,15 @@ import pickle
 '''
     Parametros
 '''
-muestras_train = 11084
-muestras_test = 1956
+muestras_train = 30
+muestras_test = 15
 shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
-X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01_nonan.npy"
-Y_data_dir = "/home/lac/datos_lluvia/precipitacion_mm_menos1.npy"
-model_dir = "/home/lac/PIRadar2019/modelo3_ymenos1_xmedian.h5"
-cant_epocas = 30
-tam_batch = 326 # intentar que sea multiplo de la cantidad de muestras
+X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01.npy"
+Y_data_dir = "/home/lac/datos_lluvia/precipitacion_mm.npy"
+model_dir = "/home/lac/PIRadar2019/modelo_test.h5"
+cant_epocas = 1
 '''
-    Carga de datos; .Las demas alturas seran un apend?
+    Carga de datos; ¿Las demas alturas seran un apend?
 '''
 X = np.load(X_data_dir)
 Y = np.expand_dims(np.load(Y_data_dir), axis=3)
@@ -27,8 +26,14 @@ Y = np.expand_dims(np.load(Y_data_dir), axis=3)
 '''
     Split y preprocesamiento del dataset
 '''
-#CUIDADO, VER SI HAY Q DESCOMENTAR ABAJO
-#X = np.expand_dims(X, axis=3) #NO se expande porque la altura q se carga ya esta expandida, CUIDADO
+X = np.expand_dims(X, axis=3)
+
+idxs = np.arange(X.shape[0])
+np.random.seed(0)
+np.random.shuffle(idxs)
+
+x = X[idxs, :, :, :]
+y = Y[idxs, :]
 
 y_train = Y[:muestras_train, :]
 y_test = Y[muestras_train:muestras_train+muestras_test, :]
@@ -114,7 +119,7 @@ def get_vgg16():
     model.add(Conv2D(1, (1, 1), padding='same', activation='relu', bias_regularizer=regularizers.l1(0.01), name='block10_conv1'))
 
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(loss='mae', optimizer=sgd, metrics=['mse','acc'])
+    model.compile(loss='mae', optimizer=sgd, metrics=['mse'])
     #model.compile(loss='mae', optimizer=Adam(lr=0.001), metrics=['mse'])
     print(model.summary())
 
@@ -125,6 +130,6 @@ def get_vgg16():
 '''
 model = get_vgg16()
 
-model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
+model.fit(x_train, y_train, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
 
 model.save(model_dir)

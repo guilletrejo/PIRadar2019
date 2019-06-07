@@ -44,7 +44,7 @@ nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
   Leer los nombres y la ubicacion (x,y) de cada estacion y
   se asigna el Nombre como el indice del DataFrame
 '''
-nombre_ubic = pd.read_csv("./NombresEstaciones.csv")
+nombre_ubic = pd.read_csv("/home/lac/datos_lluvia/NombresEstaciones.csv")
 nombre_ubic.set_index(['Nombre Estacion'])
 
 '''
@@ -69,7 +69,7 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2017_131.xlsx")
+excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2017_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -86,7 +86,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2018_131.xlsx")
+excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2018_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -101,7 +101,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2019_131.xlsx")
+excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2019_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -150,7 +150,7 @@ for estacion in pb.progressbar(lista_nombres):
         data_columns.insert(0, 'Horas', values_horas)
         precipitations_per_hour = data_columns.groupby(['Horas']).sum(min_count = 1)
         precip_p_estacion[lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
-print "Cantidad de estaciones sin dato: " + str(no_data_count)
+print ("Cantidad de estaciones sin dato: " + str(no_data_count))
 
 '''
     Llenar la matriz Y mapeando las estaciones en su ubicacion correspondiente, cada hora. 
@@ -176,5 +176,5 @@ for hora in pb.progressbar(range(cant_horas)):
             if(np.isnan(cur_val)):
                 matrizY[hora][cur_pos] = np.nanmean(get_submatrix(matrizY[hora],cur_pos[0],cur_pos[1]))
 
-np.save('../datos_lluvia/precipitacion_mm.npy', matrizY)
+np.save('/home/lac/datos_lluvia/precipitacion_mm_av.npy', matrizY)
 
