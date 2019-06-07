@@ -13,6 +13,22 @@ import datetime as dt
 import progressbar as pb
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
 
+def get_submatrix(matrix,row,col):
+    matrix_aux = np.zeros(shape=(3,3),dtype=float)
+    matrix_aux[0,0] = (matrix[row-1,col-1] if row-1>=0 and col-1>=0 else matrix[row,col] )
+    matrix_aux[0,1] = (matrix[row-1,col]   if row-1>=0 else matrix[row,col] )
+    matrix_aux[0,2] = (matrix[row-1,col+1] if row-1>=0 and col+1<matrix.shape[1] else matrix[row,col] )
+    
+    matrix_aux[1,0] = (matrix[row,col-1]   if col-1>=0 else matrix[row,col] )
+    matrix_aux[1,1] =  matrix[row,col]
+    matrix_aux[1,2] = (matrix[row,col+1]   if col+1<matrix.shape[1] else matrix[row,col] )
+    
+    matrix_aux[2,0] = (matrix[row+1,col-1] if row+1<matrix.shape[0] and col-1>=0 else matrix[row,col] )
+    matrix_aux[2,1] = (matrix[row+1,col]   if row+1<matrix.shape[0] else matrix[row,col] )
+    matrix_aux[2,2] = (matrix[row+1,col+1] if row+1<matrix.shape[0] and col+1<matrix.shape[1] else matrix[row,col] )
+    
+    return matrix_aux
+
 ''' 
     Parametros
 '''
@@ -29,7 +45,7 @@ datos_dir = "./datos_lluvia/"
   Leer los nombres y la ubicacion (x,y) de cada estacion y
   se asigna el Nombre como el indice del DataFrame
 '''
-nombre_ubic = pd.read_csv("./NombresEstaciones.csv")
+nombre_ubic = pd.read_csv("/home/lac/datos_lluvia/NombresEstaciones.csv")
 nombre_ubic.set_index(['Nombre Estacion'])
 
 '''
@@ -54,7 +70,11 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
+<<<<<<< HEAD
 excel = pd.ExcelFile(datos_dir+"ClimaReporte2017_131.xlsx")
+=======
+excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2017_131.xlsx")
+>>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -71,7 +91,11 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
+<<<<<<< HEAD
 excel = pd.ExcelFile(datos_dir+"ClimaReporte2018_131.xlsx")
+=======
+excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2018_131.xlsx")
+>>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -86,7 +110,11 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
+<<<<<<< HEAD
 excel = pd.ExcelFile(datos_dir+"ClimaReporte2019_131.xlsx")
+=======
+excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2019_131.xlsx")
+>>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -135,7 +163,7 @@ for estacion in pb.progressbar(lista_nombres):
         data_columns.insert(0, 'Horas', values_horas)
         precipitations_per_hour = data_columns.groupby(['Horas']).sum(min_count = 1)
         precip_p_estacion[lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
-print "Cantidad de estaciones sin dato: " + str(no_data_count)
+print ("Cantidad de estaciones sin dato: " + str(no_data_count))
 
 # Convierte a -1 si no habia datos
 for estacion in lista_nombres:
@@ -154,11 +182,22 @@ for estacion in lista_nombres:
 matrizY = np.zeros([cant_horas,96,144], dtype=np.float64)
 matrizY.fill(-1.0)
 
-for hora in range(cant_horas):
+for hora in pb.progressbar(range(cant_horas)):
     for estacion in lista_nombres:
         index_estacion = lista_nombres.index(estacion)
         x = nombre_ubic.at[index_estacion,'x'] - 65
         y = nombre_ubic.at[index_estacion,'y'] - 69
         matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
 
+<<<<<<< HEAD
 np.save(precip_dir, matrizY)
+=======
+for hora in pb.progressbar(range(cant_horas)):
+    while(np.isnan(matrizY[hora]).any()):
+        for cur_pos,cur_val in np.ndenumerate(matrizY[hora]):
+            if(np.isnan(cur_val)):
+                matrizY[hora][cur_pos] = np.nanmean(get_submatrix(matrizY[hora],cur_pos[0],cur_pos[1]))
+
+np.save('/home/lac/datos_lluvia/precipitacion_mm_av.npy', matrizY)
+
+>>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
