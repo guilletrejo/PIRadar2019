@@ -70,11 +70,7 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
-<<<<<<< HEAD
-excel = pd.ExcelFile(datos_dir+"ClimaReporte2017_131.xlsx")
-=======
 excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2017_131.xlsx")
->>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -91,11 +87,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
-<<<<<<< HEAD
-excel = pd.ExcelFile(datos_dir+"ClimaReporte2018_131.xlsx")
-=======
 excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2018_131.xlsx")
->>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -110,11 +102,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
-<<<<<<< HEAD
-excel = pd.ExcelFile(datos_dir+"ClimaReporte2019_131.xlsx")
-=======
 excel = pd.ExcelFile("/home/lac/datos_lluvia/ClimaReporte2019_131.xlsx")
->>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -189,9 +177,6 @@ for hora in pb.progressbar(range(cant_horas)):
         y = nombre_ubic.at[index_estacion,'y'] - 69
         matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
 
-<<<<<<< HEAD
-np.save(precip_dir, matrizY)
-=======
 for hora in pb.progressbar(range(cant_horas)):
     while(np.isnan(matrizY[hora]).any()):
         for cur_pos,cur_val in np.ndenumerate(matrizY[hora]):
@@ -200,4 +185,3 @@ for hora in pb.progressbar(range(cant_horas)):
 
 np.save('/home/lac/datos_lluvia/precipitacion_mm_av.npy', matrizY)
 
->>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
