@@ -113,9 +113,9 @@ def get_vgg16():
     model.add(BatchNormalization(axis=3))
     model.add(Conv2D(1, (1, 1), padding='same', activation='relu', bias_regularizer=regularizers.l1(0.01), name='block10_conv1'))
 
-    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(loss='mae', optimizer=sgd, metrics=['mse','acc'])
-    #model.compile(loss='mae', optimizer=Adam(lr=0.001), metrics=['mse'])
+    #sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+    #model.compile(loss='mae', optimizer=sgd, metrics=['mse','acc'])
+    model.compile(loss='mae', optimizer=Adam(lr=0.001), metrics=['mse'])
     print(model.summary())
 
     return model
