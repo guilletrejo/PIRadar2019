@@ -23,7 +23,8 @@ fecha_inicial = "2017-11-01 00:00"
 fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
-
+precip_dir = './datos_lluvia/precipitacion_mm_menos1.npy'
+datos_dir = "./datos_lluvia/"
 '''
   Leer los nombres y la ubicacion (x,y) de cada estacion y
   se asigna el Nombre como el indice del DataFrame
@@ -53,7 +54,7 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2017_131.xlsx")
+excel = pd.ExcelFile(datos_dir+"ClimaReporte2017_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -70,7 +71,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2018_131.xlsx")
+excel = pd.ExcelFile(datos_dir+"ClimaReporte2018_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -85,7 +86,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2019_131.xlsx")
+excel = pd.ExcelFile(datos_dir+"ClimaReporte2019_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -114,7 +115,7 @@ for nombre in lista_nombres:
 
 cant_estaciones = len(lista_nombres)
 cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
-precip_p_estacion = np.ndarray(shape=(cant_estaciones,cant_horas))
+precip_p_estacion = np.ndarray(shape=(cant_estaciones,int(cant_horas)))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
 for estacion in pb.progressbar(lista_nombres):
@@ -123,7 +124,7 @@ for estacion in pb.progressbar(lista_nombres):
     if (data_columns.empty or data_columns.dropna().empty):
 #        print("No hay datos en la estacion: ") + estacion
         no_data_count += 1
-        precip_p_estacion[lista_nombres.index(estacion)].fill(np.nan)
+        precip_p_estacion[lista_nombres.index(estacion)].fill(-1.0)
     else:
         values_horas = np.ndarray(shape=data_columns.size)
         index = -1
@@ -136,6 +137,12 @@ for estacion in pb.progressbar(lista_nombres):
         precip_p_estacion[lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
 print "Cantidad de estaciones sin dato: " + str(no_data_count)
 
+# Convierte a -1 si no habia datos
+for estacion in lista_nombres:
+    for i in range(len(precip_p_estacion[0])):
+        if (np.isnan(precip_p_estacion[lista_nombres.index(estacion)][i])):
+            precip_p_estacion[lista_nombres.index(estacion)][i] = -1.0
+
 '''
     Llenar la matriz Y mapeando las estaciones en su ubicacion correspondiente, cada hora. 
     Como la grilla se achico a 86x135 (estaciones en CBA), se hace el desplazamiento para que los valores (x,y) coincidan
@@ -145,13 +152,13 @@ print "Cantidad de estaciones sin dato: " + str(no_data_count)
 '''
 
 matrizY = np.zeros([cant_horas,96,144], dtype=np.float64)
-matrizY.fill(np.nan)
+matrizY.fill(-1.0)
 
 for hora in range(cant_horas):
     for estacion in lista_nombres:
         index_estacion = lista_nombres.index(estacion)
-        x = nombre_ubic.at[index_estacion,'x'] - 70
-        y = nombre_ubic.at[index_estacion,'y'] - 73
+        x = nombre_ubic.at[index_estacion,'x'] - 65
+        y = nombre_ubic.at[index_estacion,'y'] - 69
         matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
 
-np.save('../datos_lluvia/precipitacion_mm.npy', matrizY)
+np.save(precip_dir, matrizY)

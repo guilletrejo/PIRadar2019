@@ -54,7 +54,7 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2017_131.xlsx")
+excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2017_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -71,7 +71,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2018_131.xlsx")
+excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2018_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -86,7 +86,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
-excel = pd.ExcelFile("../datos_lluvia/ClimaReporte2019_131.xlsx")
+excel = pd.ExcelFile("./datos_lluvia/ClimaReporte2019_131.xlsx")
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -124,7 +124,7 @@ for estacion in pb.progressbar(lista_nombres):
     if (data_columns.empty or data_columns.dropna().empty):
 #        print("No hay datos en la estacion: ") + estacion
         no_data_count += 1
-        precip_p_estacion[lista_nombres.index(estacion)].fill(np.nan)
+        precip_p_estacion[lista_nombres.index(estacion)].fill(-1)
     else:
         values_horas = np.ndarray(shape=data_columns.size)
         index = -1
@@ -144,6 +144,8 @@ for estacion in lista_nombres:
             precip_p_estacion[lista_nombres.index(estacion)][i] = 1
         if (precip_p_estacion[lista_nombres.index(estacion)][i] < umbral_mm):
             precip_p_estacion[lista_nombres.index(estacion)][i] = 0
+        if (np.isnan(precip_p_estacion[lista_nombres.index(estacion)][i])):
+            precip_p_estacion[lista_nombres.index(estacion)][i] = -1
 
 '''
     Llenar la matriz Y mapeando las estaciones en su ubicacion correspondiente, cada hora. 
@@ -153,14 +155,14 @@ for estacion in lista_nombres:
     como promediar con las estaciones cercanas, etc...
 '''
 
-matrizY = np.zeros([cant_horas,96,144], dtype=np.float64)
-matrizY.fill(np.nan)
+matrizY = np.zeros([cant_horas,96,144], dtype=np.int8)
+matrizY.fill(-1)
 
 for hora in range(cant_horas):
     for estacion in lista_nombres:
         index_estacion = lista_nombres.index(estacion)
-        x = nombre_ubic.at[index_estacion,'x'] - 70
-        y = nombre_ubic.at[index_estacion,'y'] - 73
+        x = nombre_ubic.at[index_estacion,'x'] - 65
+        y = nombre_ubic.at[index_estacion,'y'] - 69
         matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
 
-np.save('../datos_lluvia/precipitacion.npy', matrizY)
+np.save('./datos_lluvia/precipitacion.npy', matrizY)

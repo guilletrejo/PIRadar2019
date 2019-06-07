@@ -73,7 +73,7 @@ for h in alturas:                                                          # Alt
 DS.close() # Se cierra el dataset abierto para ahorrar memoria
 
 for dia in pb.progressbar(dias):                                                           # Lee el resto de los dias del dataset
-    print dia
+    print(dia)
     for hora in horas:                                                     # Lee ambas horas de cada dia (6hs y 18hs)
         data_found = 0
         for nombre in nombres:
