@@ -13,18 +13,11 @@ import pickle
 muestras_train = 11084
 muestras_test = 1956
 shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
-<<<<<<< HEAD
-X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01.npy"
-Y_data_dir = "/home/lac/datos_lluvia/precipitacion_mm.npy"
-model_dir = "/home/lac/PIRadar2019/modelo1.h5"
-cant_epocas = 50
-=======
 X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01_nonan.npy"
 Y_data_dir = "/home/lac/datos_lluvia/precipitacion_mm_menos1.npy"
 model_dir = "/home/lac/PIRadar2019/modelo3_ymenos1_xmedian.h5"
 cant_epocas = 30
 tam_batch = 326 # intentar que sea multiplo de la cantidad de muestras
->>>>>>> fc5eb1de43730d2bdc0c4b031ac0f79fedaa4a01
 '''
     Carga de datos; .Las demas alturas seran un apend?
 '''
