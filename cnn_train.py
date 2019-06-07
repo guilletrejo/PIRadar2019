@@ -115,7 +115,7 @@ def get_vgg16():
 
     #sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     #model.compile(loss='mae', optimizer=sgd, metrics=['mse','acc'])
-    model.compile(loss='mae', optimizer=Adam(lr=0.001), metrics=['mse'])
+    model.compile(loss='mae', optimizer=Adam(lr=0.001), metrics=['mse','acc'])
     print(model.summary())
 
     return model
