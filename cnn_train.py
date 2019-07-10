@@ -15,7 +15,7 @@ muestras_test = 1956
 shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
 X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01_nonan.npy"
 Y_data_dir = "/home/lac/datos_lluvia/precipitacion_mm_menos1.npy"
-model_dir = "/home/lac/PIRadar2019/modelo3_ymenos1_xmedian.h5"
+model_dir = "/home/lac/PIRadar2019/modelo3_ymenos1_xmedian_ADAM.h5"
 cant_epocas = 30
 tam_batch = 326 # intentar que sea multiplo de la cantidad de muestras
 '''
