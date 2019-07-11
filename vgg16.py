@@ -4,19 +4,18 @@ from keras.layers import BatchNormalization, Conv2D, UpSampling2D, MaxPooling2D,
 from keras.optimizers import Adam, SGD
 from keras import regularizers
 from keras.callbacks import LearningRateScheduler
-from sklearn.impute import SimpleImputer
 import numpy as np
 
 '''
     Parametros
 '''
-muestras_train = 11084
-muestras_test = 1956
+muestras_train = 3260
+muestras_test = 652
 shape = (96,144,1) # grilla de 96x144 con 1 canal (z). si agregamos otras variables de entrada, sera agregar canales?
 X_data_dir = "/home/lac/datos_modelo/z_altura15_2017-11-01_nonan.npy"
 Y_data_dir = "/home/lac/datos_lluvia/precipitacion.npy"
 model_dir = "/home/lac/PIRadar2019/modeloVGG.h5"
-cant_epocas = 30
+cant_epocas = 2
 tam_batch = 326 # intentar que sea multiplo de la cantidad de muestras
 '''
     Carga de datos; .Las demas alturas seran un apend?
