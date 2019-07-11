@@ -4,7 +4,6 @@ Importamos las librerias necesarias para procesar los datos.
 import numpy as np
 import pandas as pd
 import xarray
-import netCDF4
 #import wrf 
 import sys
 import urllib as url
@@ -134,7 +133,7 @@ for estacion in pb.progressbar(lista_nombres):
         data_columns.insert(0, 'Horas', values_horas)
         precipitations_per_hour = data_columns.groupby(['Horas']).sum(min_count = 1)
         precip_p_estacion[:,lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
-print "Cantidad de estaciones sin dato: " + str(no_data_count)
+print("Cantidad de estaciones sin dato: " + str(no_data_count))
 
 # Convierte a 1 si llovio o 0 si no llovio
 for estacion in lista_nombres:
