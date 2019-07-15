@@ -96,6 +96,11 @@ for dia in pb.progressbar(dias):                                                
                 z_ex = np.concatenate((z_ex, zaux_ex), axis=0)
         z_expanded = np.concatenate((z_expanded, z_ex), axis=0)            # Concatena la nueva matriz con la anterior
         DS.close()
-np.save('./rainc{}_{}.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
+
+imp_mean = SimpleImputer(missing_values=np.nan, strategy='median', copy=False)
+for i in range(96):
+        imp_mean.fit_transform(z_expanded[:,i,:])
+        
+np.save('./rainc_{}.npy'.format(dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
 
 
