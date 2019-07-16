@@ -1,12 +1,13 @@
-import numpy as np
 
+import numpy as np
+import progressbar as pb
 '''
 	Parametros
 '''
-X_data_dir = "/home/lac/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
-Y_data_dir = "/home/lac/datos_lluvia/precipitacion.npy"
+X_data_dir = "/home/awf/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
+Y_data_dir = "/home/awf/datos_lluvia/precipitacion.npy"
 estacion = 53
-
+alturas=[3,4,8,9,18,20]
 '''
 	Carga de datos
 '''
@@ -17,10 +18,10 @@ missing = np.where(y[:,estacion]==-1)
 '''
 y1 = np.delete(y,missing,0)
 y = y1[:,53]
-#Y = np.expand_dims(Y,axis=1) ## Ver si hace falta hacer esta expansion
+y = np.expand_dims(y,axis=1) ## Ver si hace falta hacer esta expansion
 
-x = np.ndarray(shape=(13044,96,144,1))
-for h in range(3,5):
+x = np.ndarray(shape=(13000,96,144,1))
+for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
 	'''
@@ -52,5 +53,5 @@ np.random.shuffle(idxs)
 X = X[idxs, :, :, :]
 Y = Y[idxs]
 
-np.save("/home/awf/datos_modelo/X_9alt_scaled.npy", X)
-np.save("/home/awf/datos_lluvia/Y_9alt_scaled.npy", Y)
+np.save("/home/awf/datos_modelo/X_6alt_iter_scaled.npy", X)
+np.save("/home/awf/datos_lluvia/Y_6alt_iter_scaled.npy", Y)
