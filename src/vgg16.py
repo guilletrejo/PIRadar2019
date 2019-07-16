@@ -11,14 +11,14 @@ import numpy as np
 '''
     Parametros
 '''
-muestras_train = 1600
-muestras_test = 400
+muestras_train = 19600
+muestras_test = 4900
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = "/home/lac/datos_modelo/X_9alt_scaled.npy"
-Y_data_dir = "/home/lac/datos_lluvia/Y_9alt_scaled.npy"
-model_dir = "/home/lac/modelos/modeloVgg9Alt.h5"
-cant_epocas = 30
-tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
+X_data_dir = "/home/lac/datos_modelo/X_3alt_iter_scaled_smote.npy"
+Y_data_dir = "/home/lac/datos_lluvia/Y_3alt_iter_scaled_smote.npy"
+model_dir = "/home/lac/modelos/modeloVgg3AltSMOTE.h5"
+cant_epocas = 20
+tam_batch = 56 # intentar que sea multiplo de la cantidad de muestras
 '''
     Carga de datos
 '''
