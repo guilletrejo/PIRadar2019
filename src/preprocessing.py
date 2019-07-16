@@ -32,14 +32,6 @@ for h in pb.progressbar(alturas):
 	X = np.delete(np.load(X_data_dir.format(h)),missing,0)
 	
 	'''
-	Oversampling
-	'''
-	# Flatten
-	X = np.reshape(X,(X.shape[0],13824))
-	sm = SMOTE(sampling_strategy='minority', random_state=7)
-	X_us, Y_us = sm.fit_sample(X,Y)
-	X = np.reshape(X_us,(X_us.shape[0],96,144))
-	'''
 	Normalizacion y estandarizacion del input
 	'''
 	u = np.mean(X)
@@ -51,6 +43,16 @@ for h in pb.progressbar(alturas):
 	x = np.concatenate((x,X), axis = 3)
 
 '''
+	Oversampling
+'''
+# Flatten
+x = np.reshape(x,(x.shape[0],41472))
+sm = SMOTE(sampling_strategy='minority', random_state=7)
+X_us, Y_us = sm.fit_sample(x,Y)
+X = np.reshape(X_us,(X_us.shape[0],96,144,3))
+Y = Y_us
+
+'''
 	Quedarse con solo 2000 datos para tener 40% de lluvias
 
 indices_lluvias = np.where(y==1)[0]
@@ -59,7 +61,7 @@ Y = np.concatenate((y[indices_lluvias], y[indices_nolluvias]))
 X = np.concatenate((x[indices_lluvias], x[indices_nolluvias]))
 '''
 
-idxs = np.arange(x.shape[0])
+idxs = np.arange(X.shape[0])
 np.random.seed(0)
 np.random.shuffle(idxs)
 
@@ -80,7 +82,7 @@ print("Porcentaje de datos utiles: " + str(total_real/total))
 print("Porcentaje de datos lluvia: " + str(lluvias/(total_real)))
 print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 
-X = x[idxs, :, :, :]
+X = X[idxs, :, :, :]
 Y = Y[idxs]
 
 np.save("/home/awf/datos_modelo/X_6alt_iter_scaled_smote.npy", X)
