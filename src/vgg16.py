@@ -11,20 +11,20 @@ import numpy as np
 '''
     Parametros
 '''
-muestras_train = 1600
-muestras_test = 400
+muestras_train = 10400
+muestras_test = 2600
 shape = (96,144,3) # grilla de 96x144 con 3 canales
 X_data_dir = "/home/lac/datos_modelo/X_9alt_scaled.npy"
-Y_data_dir = "/home/lac/datos_lluvia/Y_9alt_scaled.npy"
-model_dir = "/home/lac/modelos/modeloVgg9Alt.h5"
-cant_epocas = 30
+Y_data_dir = "/home/lac/datos_lluvia/precipitacion.npy"
+model_dir = "/home/lac/modelos/modeloVgg122est3alt.h5"
+mask_dir = "/home/lac/datos_lluvia/mask_precipitacion.npy"
+cant_epocas = 20
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
 '''
     Carga de datos
 '''
 X = np.load(X_data_dir)
 Y = np.load(Y_data_dir)
-Y = np.expand_dims(Y,axis=1)
 print(X.shape)
 print(Y.shape)
 y_train = Y[:muestras_train]
@@ -33,8 +33,12 @@ x_train = X[:muestras_train]
 x_test = X[muestras_train:muestras_train+muestras_test]
 
 '''
-    Definicion del modelo y custom metric
+    Definicion del modelo y custom loss function
 '''
+
+def masked_binary_crossentropy(y_true, y_pred):
+    M = np.load(mask_dir)
+    return M*K.mean(K.binary_crossentropy(y_true, y_pred), axis=-1)
 
 def get_vgg16():
     # we initialize the model
@@ -91,7 +95,7 @@ def get_vgg16():
 
     #adam = Adam(lr=0.001)
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
+    model.compile(loss=masked_binary_crossentropy, optimizer=sgd, metrics=[metrics.binary_accuracy])
 #    print(model.summary())
 
     return model
