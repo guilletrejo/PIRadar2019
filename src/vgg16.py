@@ -11,14 +11,14 @@ import numpy as np
 '''
     Parametros
 '''
-muestras_train = 1600
-muestras_test = 400
+muestras_train = 19600
+muestras_test = 4900
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = "/home/lac/datos_modelo/X_9alt_scaled.npy"
-Y_data_dir = "/home/lac/datos_lluvia/Y_9alt_scaled.npy"
-model_dir = "/home/lac/modelos/modeloVgg9Alt.h5"
-cant_epocas = 30
-tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
+X_data_dir = "/home/lac/datos_modelo/X_3alt_iter_scaled_smote.npy"
+Y_data_dir = "/home/lac/datos_lluvia/Y_3alt_iter_scaled_smote.npy"
+model_dir = "/home/lac/modelos/modeloVgg3AltSMOTE.h5"
+cant_epocas = 20
+tam_batch = 56 # intentar que sea multiplo de la cantidad de muestras
 '''
     Carga de datos
 '''
@@ -106,7 +106,8 @@ model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1,
 P = model.predict(X)
 P[P>=0.5] = 1
 P[P<0.5] = 0
-score_total = np.count_nonzero(P==Y)/float(P.size)
+non_valid = np.count_nonzero(Y==-1)
+score_total = np.count_nonzero(P==Y)/float(P.size-non_valid)
 print("Score total: {}".format(score_total))
 score_ones = np.count_nonzero(P[Y==1])/float(P[Y==1].size)
 print("Score de horas de lluvia: {}".format(score_ones))
