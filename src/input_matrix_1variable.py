@@ -9,14 +9,14 @@ import wrf
 import sys
 import datetime
 import progressbar as pb
-#from joblib import Parallel, delayed
+from sklearn.impute import SimpleImputer
 
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
 
 '''
 Parametros
 '''
-path_datos = "/mnt/datos/wrf/wrfout/"  # en YAKU, cambiar esto
+path_datos = "/home/datos/wrf/wrfout/"  # en YAKU, cambiar esto
 time_init = 6                    # Se ignoran las primeras 6 horas de cada archivo.
 times = 12                       # Se toman 12 horas de cada archivo. (SON 2 ARCHIVOS POR DIA)
 horas = ["06:00:00","18:00:00"]
@@ -56,12 +56,12 @@ La cantidad de horas obtenidas es (numdays*24horas)-12horas
 """
 
 # Inicializacion con el tiempo 0 (se toma el primer dato solamente)
-z = DS.RAINC.sel(Time = time_init).values[65:161,69:213]    # Extrae el dato PH en la 1 hora
+z = DS.T2.sel(Time = time_init).values[65:161,69:213]    # Extrae el dato PH en la 1 hora
 z_expanded = np.expand_dims(z, axis = 0)                                     # Agrega una dimension para agregar las otras horas
 
 # Completa con el resto de los tiempos
 for t in range(time_init+1,time_init+times):
-    zaux = DS.RAINC.sel(Time = time_init).values[65:161,69:213]                               # Obtiene altura geopotencial en la hora t
+    zaux = DS.T2.sel(Time = time_init).values[65:161,69:213]                               # Obtiene altura geopotencial en la hora t
     zaux_ex = np.expand_dims(zaux, axis = 0)                           # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
     z_expanded = np.concatenate((z_expanded, zaux_ex), axis=0)                     # Concatena las matrices y queda (12x269x269)
     
@@ -86,12 +86,12 @@ for dia in pb.progressbar(dias):                                                
             z_ex.fill(np.nan)
         elif (data_found == 1):
             # Inicializacion con el tiempo 0
-            z = DS.RAINC.sel(Time = time_init).values[65:161,69:213]
+            z = DS.T2.sel(Time = time_init).values[65:161,69:213]
             z_ex = np.expand_dims(z, axis = 0)
 
             # Completa con el resto de los tiempos
             for t in range(time_init+1,time_init+times):
-                zaux = DS.RAINC.sel(Time = time_init).values[65:161,69:213]
+                zaux = DS.T2.sel(Time = time_init).values[65:161,69:213]
                 zaux_ex = np.expand_dims(zaux, axis = 0)
                 z_ex = np.concatenate((z_ex, zaux_ex), axis=0)
         z_expanded = np.concatenate((z_expanded, z_ex), axis=0)            # Concatena la nueva matriz con la anterior
@@ -101,6 +101,6 @@ imp_mean = SimpleImputer(missing_values=np.nan, strategy='median', copy=False)
 for i in range(96):
         imp_mean.fit_transform(z_expanded[:,i,:])
         
-np.save('./rainc_{}.npy'.format(dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
+np.save('/home/awf/datos_modelo/t2_{}.npy'.format(dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
 
 
