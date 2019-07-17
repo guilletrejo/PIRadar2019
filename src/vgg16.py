@@ -106,7 +106,8 @@ model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1,
 P = model.predict(X)
 P[P>=0.5] = 1
 P[P<0.5] = 0
-score_total = np.count_nonzero(P==Y)/float(P.size)
+non_valid = np.count_nonzero(Y==-1)
+score_total = np.count_nonzero(P==Y)/float(P.size-non_valid)
 print("Score total: {}".format(score_total))
 score_ones = np.count_nonzero(P[Y==1])/float(P[Y==1].size)
 print("Score de horas de lluvia: {}".format(score_ones))
