@@ -9,6 +9,12 @@ from keras.callbacks import LearningRateScheduler
 import numpy as np
 
 '''
+    Con este se obtuvo un alto accuracy (mas del 90% para la estacion Cerro Obero oversampleada).
+    Para correrlo, asegurarse que X_data_dir corresponde a una X con 3 alturas y con los -1 eliminados de X y de Y, 
+    ademas de oversampleada con imb_lear (usar preprocessing_1est.py) 
+'''
+
+'''
     Parametros
 '''
 muestras_train = 19600
