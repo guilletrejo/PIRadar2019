@@ -48,5 +48,35 @@ print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 X = X[idxs, :, :, :]
 Y = Y[idxs]
 
+
+'''
+Oversampling
+X -> n_samples, 96, 144, canales
+x -> n_samples, 96*144*canales
+Y -> n_samples, n_estaciones
+Y_ind -> n_samples, 1
+Yp-> n_estaciones -> representa porcentaje de UNOs en cada estacion
+'''
+def get_Yp(Y):
+    Yp = np.zeros(shape=Y.shape[1])
+    for est in range(Y.shape[1]):
+        Yp[est] = np.where(Y[:,est]==1)[0].size/Y.shape[0]
+    return Yp
+
+sm = SMOTE(sampling_strategy='minority', random_state=7)
+for i in range(122) #Mientras que Yp[i]>=50% para todo i
+    # Flatten
+    Y_ind = Y[:,i]                                   # Y_ind es el correspondiente a la estacion particular
+    x = np.reshape(x,(X.shape[0],96*144*3))          # Hago el flatten de X
+    X_os, Y_ind_os = sm.fit_sample(x,Y_ind)          # OverSampled X e Y_ind
+    X = np.reshape(X_os,(X_os.shape[0],96,144,3))    # X vuelve a ser una grilla pero con oversampling
+    Y_os = zeros(shape=(Y_ind_os.size,Y.shape[1]))   # Y_os es una nueva matriz con shape n_oversamples, n_estaciones
+    Y_os.fill(-1)                                    # Relleno Y_os con -1
+    Y_os[0:Y.size,:] = Y                             # Y_os va a ser igual a Y hasta la cantidad de muestras de Y
+    Y_os[Y.size+1:Y_ind_os.size , i] = Y_ind_os        # El resto de Y_os es -1 excepto en la estacion actual
+    Y = Y_os                                         # Reemplazo Y 
+
+
+
 np.save("/home/awf/datos_modelo/X_6alt_iter_scaled_smote.npy", X)
 np.save("/home/awf/datos_lluvia/Y_6alt_iter_scaled_smote.npy", Y)
