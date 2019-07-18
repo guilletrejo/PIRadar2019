@@ -49,7 +49,7 @@ def get_Yp(Y):
         Yp[est] = np.where(Y[:,est]==1)[0].size/Y.shape[0]
     return Yp
 
-for i in range(122) #Mientras que Yp[i]>=50% para todo i
+for i in pb.progressbar(range(122)): #Mientras que Yp[i]>=50% para todo i
     # Flatten
     Y_ind = Y[:,i]                                   # Y_ind es el correspondiente a la estacion particular
     X = np.reshape(X,(X.shape[0],96*144*3))          # Hago el flatten de X
@@ -62,11 +62,12 @@ for i in range(122) #Mientras que Yp[i]>=50% para todo i
 
     X_os, Y_ind_os = sm.fit_sample(X,Y_ind)          # OverSampled X e Y_ind
     X = np.reshape(X_os,(X_os.shape[0],96,144,3))    # X vuelve a ser una grilla pero con oversampling
-    Y_os = zeros(shape=(Y_ind_os.size,Y.shape[1]))   # Y_os es una nueva matriz con shape n_oversamples, n_estaciones
+    Y_os = np.zeros(shape=(Y_ind_os.shape[0],Y.shape[1]))   # Y_os es una nueva matriz con shape n_oversamples, n_estaciones
     Y_os.fill(-1)                                    # Relleno Y_os con -1
-    Y_os[:Y.size,:] = Y                             # Y_os va a ser igual a Y hasta la cantidad de muestras de Y
-    Y_os[Y.size+1: , i] = Y_ind_os        # El resto de Y_os es -1 excepto en la estacion actual
+    Y_os[:Y.shape[0],:] = Y                             # Y_os va a ser igual a Y hasta la cantidad de muestras de Y
+    Y_os[Y.shape[0]+1:, i] = Y_ind_os[Y.shape[0]+1:]        # El resto de Y_os es -1 excepto en la estacion actual
     Y = Y_os                                         # Reemplazo Y 
+    print("Cant. de muestras= "+str(Y.shape[0]))
 
 print(get_Yp(Y))
 
@@ -78,6 +79,7 @@ np.random.seed(0)
 np.random.shuffle(idxs)
 X = X[idxs]
 Y = Y[idxs]
-
+print(Y.shape)
+print(X.shape)
 np.save("/home/awf/datos_modelo/X_os_all.npy", X)
 np.save("/home/awf/datos_lluvia/Y_os_all.npy", Y)
