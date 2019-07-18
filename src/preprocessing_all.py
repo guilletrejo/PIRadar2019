@@ -63,11 +63,17 @@ def get_Yp(Y):
         Yp[est] = np.where(Y[:,est]==1)[0].size/Y.shape[0]
     return Yp
 
-sm = SMOTE(sampling_strategy='minority', random_state=7)
 for i in range(122) #Mientras que Yp[i]>=50% para todo i
     # Flatten
     Y_ind = Y[:,i]                                   # Y_ind es el correspondiente a la estacion particular
     x = np.reshape(x,(X.shape[0],96*144*3))          # Hago el flatten de X
+
+    nodata = int(np.equal(Y[:,i],-1).sum())
+    data0 = int(np.equal(Y[:,i],0).sum())
+    data1 = int((np.equal(Y[:,i],1).sum() + data0 + nodata)*0.2)
+    sample_ratio = {-1: nodata, 0: data0, 1: data1}
+    sm = SMOTE(sampling_strategy=sample_ratio, random_state=7)
+
     X_os, Y_ind_os = sm.fit_sample(x,Y_ind)          # OverSampled X e Y_ind
     X = np.reshape(X_os,(X_os.shape[0],96,144,3))    # X vuelve a ser una grilla pero con oversampling
     Y_os = zeros(shape=(Y_ind_os.size,Y.shape[1]))   # Y_os es una nueva matriz con shape n_oversamples, n_estaciones
