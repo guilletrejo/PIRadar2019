@@ -42,6 +42,8 @@ for h in pb.progressbar(alturas):
 
 	x = np.concatenate((x,X), axis = 3)
 
+np.save("Y_presmote.npy", Y)
+np.save("X_presmote.npy", x)
 '''
 	Oversampling
 '''
