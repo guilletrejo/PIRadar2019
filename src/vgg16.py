@@ -16,9 +16,9 @@ import numpy as np
 muestras_train = 10400
 muestras_test = 2600
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = "/home/lac/datos_modelo/Xallest.npy"
-Y_data_dir = "/home/lac/datos_lluvia/Yallest.npy"
-model_dir = "/home/lac/modelos/modeloVgg122est3alt.h5"
+X_data_dir = "/home/lac/datos_modelo/X_os_all.npy"
+Y_data_dir = "/home/lac/datos_lluvia/Y_os_all.npy"
+model_dir = "/home/lac/modelos/modeloVgg122est3alt_SMOTE.h5"
 mask_dir = "/home/lac/datos_lluvia/mask_precipitacion.npy"
 cant_epocas = 20
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
