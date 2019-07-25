@@ -5,8 +5,8 @@ from imblearn.over_sampling import SMOTE
 '''
 	Parametros
 '''
-X_data_dir = "/home/lac/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
-Y_data_dir = "/home/lac/datos_lluvia/precipitacion.npy"
+X_data_dir = "/home/lac/datos_modelo/X_os_all.npy" #3,8,18,4,9,19,5,10,20
+Y_data_dir = "/home/lac/datos_lluvia/Y_os_all.npy"
 estacion = int(sys.argv[1])
 alturas=[3,8,18]
 
@@ -14,28 +14,8 @@ alturas=[3,8,18]
 	Carga de datos
 '''
 Y = np.load(Y_data_dir).astype(int)
+X = np.load(X_data_dir)
 
-'''
-	Concatena varias alturas
-'''
-x = np.ndarray(shape=(13044,96,144,0))
-for h in pb.progressbar(alturas):
-	'''
-	Carga de datos
-	'''
-	X = np.load(X_data_dir.format(h))
-	
-	'''
-	Normalizacion y estandarizacion del input
-	'''
-	u = np.mean(X)
-	s = np.std(X)
-	X_scaled = (X - u) / s
-
-	X = np.expand_dims(X_scaled, axis=3)
-
-	x = np.concatenate((x,X), axis = 3)
-X=x
 '''
 Oversampling
 X -> n_samples, 96, 144, canales
@@ -68,7 +48,7 @@ Y_os[Y.shape[0]+1:, estacion] = Y_ind_os[Y.shape[0]+1:]        # El resto de Y_o
 Y = Y_os                                         # Reemplazo Y 
 print("Cant. de muestras= "+str(Y.shape[0]))
 
-print(get_Yp(Y))
+print(get_Yp(Y)*100)
 
 '''
 Shuffle
