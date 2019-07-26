@@ -48,7 +48,7 @@ def get_vgg16():
 
     # Conv Block 1
     #model.add(BatchNormalization(axis=3, input_shape=shape))
-    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=shape))
     #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
@@ -98,7 +98,7 @@ def get_vgg16():
     #adam = Adam(lr=0.001)
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
-#    print(model.summary())
+    print(model.summary())
 
     return model
 
