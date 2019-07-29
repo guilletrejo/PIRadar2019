@@ -1,12 +1,14 @@
 
 import numpy as np
+import os
 import progressbar as pb
 from imblearn.over_sampling import SMOTE
 '''
 	Parametros
 '''
-X_data_dir = "/home/awf/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
-Y_data_dir = "/home/awf/datos_lluvia/precipitacion.npy"
+home = os.environ['HOME']
+X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
+Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
 estacion = 53 # Cerro Obero
 alturas=[3,8,18]
 '''
@@ -87,5 +89,5 @@ print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 X = X[idxs, :, :, :]
 Y = Y[idxs]
 
-np.save("/home/awf/datos_modelo/X_0Smote.npy", X)
-np.save("/home/awf/datos_lluvia/Y_0Smote.npy", Y)
+np.save(home + "/datos_modelo/X_0Smote.npy", X)
+np.save(home + "/datos_lluvia/Y_0Smote.npy", Y)
