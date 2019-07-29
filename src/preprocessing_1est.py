@@ -1,6 +1,7 @@
 
 import numpy as np
 import os
+import sys
 import progressbar as pb
 from imblearn.over_sampling import SMOTE
 '''
@@ -10,6 +11,7 @@ home = os.environ['HOME']
 X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
 estacion = 53 # Cerro Obero
+balance_ratio = 1.8
 alturas=[3,8,18]
 '''
 	Carga de datos
@@ -47,9 +49,13 @@ for h in pb.progressbar(alturas):
 '''
 	Oversampling
 '''
+# Calculo del porcentaje para llevar a un desbalance con mayoria de 1s
+data0 = int(np.equal(Y,0).sum())
+data1 = int( data0 * balance_ratio )
+sample_ratio = {0: data0, 1: data1}
 # Flatten
 x = np.reshape(x,(x.shape[0],96*144*3))
-sm = SMOTE(sampling_strategy=0.1, random_state=7)
+sm = SMOTE(sampling_strategy=sample_ratio, random_state=7)
 X_us, Y_us = sm.fit_sample(x,Y)
 X = np.reshape(X_us,(X_us.shape[0],96,144,3))
 Y = Y_us
@@ -65,6 +71,7 @@ np.random.shuffle(idxs)
 lluvias = np.where(Y==1)[0].size
 nolluvias = np.where(Y==0)[0].size
 missing = np.where(Y==-1)[0].size
+print("RATIO = " + str(balance_ratio*100) + "%")
 print("Cant. de datos lluvia: " + str(lluvias))
 print("Cant. de datos no lluvia: " + str(nolluvias))
 print("Cant. de datos faltantes: " + str(missing))
@@ -80,5 +87,5 @@ print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 X = X[idxs, :, :, :]
 Y = Y[idxs]
 
-np.save(home + "/datos_modelo/X_010Smote.npy", X)
-np.save(home + "/datos_lluvia/Y_010Smote.npy", Y)
+np.save(home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy", X)
+np.save(home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy", Y)
