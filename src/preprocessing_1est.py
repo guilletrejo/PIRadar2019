@@ -42,18 +42,16 @@ for h in pb.progressbar(alturas):
 
 	x = np.concatenate((x,X), axis = 3)
 
-np.save("Y_presmote.npy", Y)
-np.save("X_presmote.npy", x)
 '''
 	Oversampling
-'''
+
 # Flatten
 x = np.reshape(x,(x.shape[0],41472))
 sm = SMOTE(sampling_strategy='minority', random_state=7)
 X_us, Y_us = sm.fit_sample(x,Y)
 X = np.reshape(X_us,(X_us.shape[0],96,144,3))
 Y = Y_us
-
+'''
 '''
 	Quedarse con solo 2000 datos para tener 40% de lluvias
 
@@ -89,5 +87,5 @@ print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 X = X[idxs, :, :, :]
 Y = Y[idxs]
 
-np.save("/home/awf/datos_modelo/X_6alt_iter_scaled_smote.npy", X)
-np.save("/home/awf/datos_lluvia/Y_6alt_iter_scaled_smote.npy", Y)
+np.save("/home/awf/datos_modelo/X_0Smote.npy", X)
+np.save("/home/awf/datos_lluvia/Y_0Smote.npy", Y)
