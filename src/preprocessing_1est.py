@@ -26,7 +26,7 @@ Y = y1[:,estacion]
 '''
 	Concatena varias alturas
 '''
-x = np.ndarray(shape=(13000,96,144,1))
+x = np.ndarray(shape=(13000,96,144,0))
 for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
@@ -46,24 +46,15 @@ for h in pb.progressbar(alturas):
 
 '''
 	Oversampling
-
+'''
 # Flatten
-x = np.reshape(x,(x.shape[0],41472))
-sm = SMOTE(sampling_strategy='minority', random_state=7)
+x = np.reshape(x,(x.shape[0],96*144*3))
+sm = SMOTE(sampling_strategy=0.1, random_state=7)
 X_us, Y_us = sm.fit_sample(x,Y)
 X = np.reshape(X_us,(X_us.shape[0],96,144,3))
 Y = Y_us
-'''
-'''
-	Quedarse con solo 2000 datos para tener 40% de lluvias
 
-indices_lluvias = np.where(y==1)[0]
-indices_nolluvias = np.where(y==0)[0][0:1250]
-Y = np.concatenate((y[indices_lluvias], y[indices_nolluvias]))
-Y2 = np.concatenate((y2[indices_lluvias], y2[indices_lluvias]))
-X = np.concatenate((x[indices_lluvias], x[indices_nolluvias]))
-'''
-
+# Shuffle
 idxs = np.arange(X.shape[0])
 np.random.seed(0)
 np.random.shuffle(idxs)
@@ -89,5 +80,5 @@ print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 X = X[idxs, :, :, :]
 Y = Y[idxs]
 
-np.save(home + "/datos_modelo/X_0Smote.npy", X)
-np.save(home + "/datos_lluvia/Y_0Smote.npy", Y)
+np.save(home + "/datos_modelo/X_010Smote.npy", X)
+np.save(home + "/datos_lluvia/Y_010Smote.npy", Y)
