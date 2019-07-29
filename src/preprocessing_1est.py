@@ -1,6 +1,7 @@
 
 import numpy as np
 import os
+import sys
 import progressbar as pb
 from imblearn.over_sampling import SMOTE
 '''
@@ -10,6 +11,7 @@ home = os.environ['HOME']
 X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
 estacion = 53 # Cerro Obero
+balance_ratio = 1.8
 alturas=[3,8,18]
 '''
 	Carga de datos
@@ -26,7 +28,7 @@ Y = y1[:,estacion]
 '''
 	Concatena varias alturas
 '''
-x = np.ndarray(shape=(13000,96,144,1))
+x = np.ndarray(shape=(13000,96,144,0))
 for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
@@ -46,24 +48,19 @@ for h in pb.progressbar(alturas):
 
 '''
 	Oversampling
-
+'''
+# Calculo del porcentaje para llevar a un desbalance con mayoria de 1s
+data0 = int(np.equal(Y,0).sum())
+data1 = int( data0 * balance_ratio )
+sample_ratio = {0: data0, 1: data1}
 # Flatten
-x = np.reshape(x,(x.shape[0],41472))
-sm = SMOTE(sampling_strategy='minority', random_state=7)
+x = np.reshape(x,(x.shape[0],96*144*3))
+sm = SMOTE(sampling_strategy=sample_ratio, random_state=7)
 X_us, Y_us = sm.fit_sample(x,Y)
 X = np.reshape(X_us,(X_us.shape[0],96,144,3))
 Y = Y_us
-'''
-'''
-	Quedarse con solo 2000 datos para tener 40% de lluvias
 
-indices_lluvias = np.where(y==1)[0]
-indices_nolluvias = np.where(y==0)[0][0:1250]
-Y = np.concatenate((y[indices_lluvias], y[indices_nolluvias]))
-Y2 = np.concatenate((y2[indices_lluvias], y2[indices_lluvias]))
-X = np.concatenate((x[indices_lluvias], x[indices_nolluvias]))
-'''
-
+# Shuffle
 idxs = np.arange(X.shape[0])
 np.random.seed(0)
 np.random.shuffle(idxs)
@@ -74,6 +71,7 @@ np.random.shuffle(idxs)
 lluvias = np.where(Y==1)[0].size
 nolluvias = np.where(Y==0)[0].size
 missing = np.where(Y==-1)[0].size
+print("RATIO = " + str(balance_ratio*100) + "%")
 print("Cant. de datos lluvia: " + str(lluvias))
 print("Cant. de datos no lluvia: " + str(nolluvias))
 print("Cant. de datos faltantes: " + str(missing))
@@ -86,8 +84,8 @@ print("Porcentaje de datos lluvia: " + str(lluvias/(total_real)))
 print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 
 
-X = X[idxs, :, :, :]
+X = x[idxs, :, :, :]
 Y = Y[idxs]
 
-np.save(home + "/datos_modelo/X_0Smote.npy", X)
-np.save(home + "/datos_lluvia/Y_0Smote.npy", Y)
+np.save(home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy", X)
+np.save(home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy", Y)
