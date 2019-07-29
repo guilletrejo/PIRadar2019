@@ -1,0 +1,180 @@
+RATIO = NO SMOTE!
+Cant. de datos lluvia: 750
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 13000
+Total de datos (sin faltantes): 13000
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.057692307692307696
+Porcentaje de datos no lluvia: 0.9423076923076923
+
+RATIO = 10%
+Cant. de datos lluvia: 1225
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 13475
+Total de datos (sin faltantes): 13475
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.09090909090909091
+Porcentaje de datos no lluvia: 0.9090909090909091
+
+RATIO = 20%
+Cant. de datos lluvia: 2450
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 14700
+Total de datos (sin faltantes): 14700
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.16666666666666666
+Porcentaje de datos no lluvia: 0.8333333333333334
+
+RATIO = 30%
+Cant. de datos lluvia: 3675
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 15925
+Total de datos (sin faltantes): 15925
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.23076923076923078
+Porcentaje de datos no lluvia: 0.7692307692307693
+
+RATIO = 40%
+Cant. de datos lluvia: 4900
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 17150
+Total de datos (sin faltantes): 17150
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.2857142857142857
+Porcentaje de datos no lluvia: 0.7142857142857143
+
+RATIO = 50%
+Cant. de datos lluvia: 6125
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 18375
+Total de datos (sin faltantes): 18375
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.3333333333333333
+Porcentaje de datos no lluvia: 0.6666666666666666
+
+RATIO = 60%
+Cant. de datos lluvia: 7350
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 19600
+Total de datos (sin faltantes): 19600
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.375
+Porcentaje de datos no lluvia: 0.625
+
+RATIO = 70%
+Cant. de datos lluvia: 8575
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 20825
+Total de datos (sin faltantes): 20825
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.4117647058823529
+Porcentaje de datos no lluvia: 0.5882352941176471
+
+RATIO = 80%
+Cant. de datos lluvia: 9800
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 22050
+Total de datos (sin faltantes): 22050
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.4444444444444444
+Porcentaje de datos no lluvia: 0.5555555555555556
+
+RATIO = 90%
+Cant. de datos lluvia: 11025
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 23275
+Total de datos (sin faltantes): 23275
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.47368421052631576
+Porcentaje de datos no lluvia: 0.5263157894736842
+
+RATIO = 100%
+Cant. de datos lluvia: 12250
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 24500
+Total de datos (sin faltantes): 24500
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.5
+Porcentaje de datos no lluvia: 0.5
+
+RATIO = 110%
+Cant. de datos lluvia: 13475
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 25725
+Total de datos (sin faltantes): 25725
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.5238095238095238
+Porcentaje de datos no lluvia: 0.47619047619047616
+
+RATIO = 120%
+Cant. de datos lluvia: 14700
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 26950
+Total de datos (sin faltantes): 26950
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.5454545454545454
+Porcentaje de datos no lluvia: 0.45454545454545453
+
+RATIO = 130%
+Cant. de datos lluvia: 15925
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 28175
+Total de datos (sin faltantes): 28175
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.5652173913043478
+Porcentaje de datos no lluvia: 0.43478260869565216
+
+RATIO = 140%
+Cant. de datos lluvia: 17150
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 29400
+Total de datos (sin faltantes): 29400
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.5833333333333334
+Porcentaje de datos no lluvia: 0.4166666666666667
+
+RATIO = 150.0%
+Cant. de datos lluvia: 18375
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 30625
+Total de datos (sin faltantes): 30625
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.6
+Porcentaje de datos no lluvia: 0.4
+
+RATIO = 160.0%
+Cant. de datos lluvia: 19600
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 31850
+Total de datos (sin faltantes): 31850
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.6153846153846154
+Porcentaje de datos no lluvia: 0.38461538461538464
+
+RATIO = 170.0%
+Cant. de datos lluvia: 20825
+Cant. de datos no lluvia: 12250
+Cant. de datos faltantes: 0
+Total de datos (con faltantes): 33075
+Total de datos (sin faltantes): 33075
+Porcentaje de datos utiles: 1.0
+Porcentaje de datos lluvia: 0.6296296296296297
+Porcentaje de datos no lluvia: 0.37037037037037035
+
