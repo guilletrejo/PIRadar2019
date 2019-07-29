@@ -84,7 +84,7 @@ print("Porcentaje de datos lluvia: " + str(lluvias/(total_real)))
 print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 
 
-X = X[idxs, :, :, :]
+X = x[idxs, :, :, :]
 Y = Y[idxs]
 
 np.save(home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy", X)
