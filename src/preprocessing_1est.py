@@ -26,7 +26,7 @@ Y = y1[:,estacion]
 '''
 	Concatena varias alturas
 '''
-x = np.ndarray(shape=(13000,96,144,1))
+x = np.ndarray(shape=(13000,96,144,0))
 for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
@@ -86,7 +86,7 @@ print("Porcentaje de datos lluvia: " + str(lluvias/(total_real)))
 print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 
 
-X = X[idxs, :, :, :]
+X = x[idxs, :, :, :]
 Y = Y[idxs]
 
 np.save(home + "/datos_modelo/X_0Smote.npy", X)
