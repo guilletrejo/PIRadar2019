@@ -1,12 +1,14 @@
 import numpy as np
 import sys
+import os
 import progressbar as pb
 from imblearn.over_sampling import SMOTE
 '''
 	Parametros
 '''
-X_data_dir = "/home/lac/datos_modelo/X_os_all.npy" #3,8,18,4,9,19,5,10,20
-Y_data_dir = "/home/lac/datos_lluvia/Y_os_all.npy"
+home = os.environ['HOME']
+X_data_dir = home + "/datos_modelo/X_os_all.npy" #3,8,18,4,9,19,5,10,20
+Y_data_dir = home + "/datos_lluvia/Y_os_all.npy"
 estacion = int(sys.argv[1])
 alturas=[3,8,18]
 
@@ -60,5 +62,5 @@ X = X[idxs]
 Y = Y[idxs]
 print(Y.shape)
 print(X.shape)
-np.save("/home/lac/datos_modelo/X_os_all.npy", X)
-np.save("/home/lac/datos_lluvia/Y_os_all.npy", Y)
+np.save(home + "/datos_modelo/X_os_all.npy", X)
+np.save(home + "/datos_lluvia/Y_os_all.npy", Y)
