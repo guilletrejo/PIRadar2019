@@ -177,4 +177,3 @@ Total de datos (sin faltantes): 33075
 Porcentaje de datos utiles: 1.0
 Porcentaje de datos lluvia: 0.6296296296296297
 Porcentaje de datos no lluvia: 0.37037037037037035
-
