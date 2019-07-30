@@ -8,6 +8,7 @@ from keras import regularizers
 from keras.callbacks import LearningRateScheduler
 import numpy as np
 import os
+import sys
 '''
     Con este se obtuvo un alto accuracy (mas del 90% para la estacion Cerro Obero oversampleada).
     Para correrlo, asegurarse que X_data_dir corresponde a una X con 3 alturas y con los -1 eliminados de X y de Y, 
@@ -17,24 +18,28 @@ import os
 '''
     Parametros
 '''
-balance_ratio = 0.4
+balance_ratio = float(sys.argv[1])
 home = os.environ['HOME']
 muestras_train = 0
 muestras_test = 0
 shape = (96,144,3) # grilla de 96x144 con 3 canales
 X_data_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy"
 Y_data_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy"
-model_dir = home + "/modelos/modeloVgg" + str(balance_ratio) + "Smote.h5"
-cant_epocas = 10
+model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "Smote.h5"
+cant_epocas = 20
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
 '''
     Carga de datos
 '''
 X = np.load(X_data_dir)
-muestras_train = X.shape[0]
+muestras_train = int(X.shape[0]*0.8)
 muestras_test = int(X.shape[0]*0.2)
 Y = np.load(Y_data_dir)
 Y = np.expand_dims(Y,axis=1)
+print("------CORRIENDO CON RATIO: " + str(balance_ratio) + "---------------")
+print("TOTAL MUESTRAS: " + str(X.shape[0]))
+print("Muestras train: " + str(muestras_train))
+print("Muestras test: " + str(muestras_test))
 print(X.shape)
 print(Y.shape)
 y_train = Y[:muestras_train]
