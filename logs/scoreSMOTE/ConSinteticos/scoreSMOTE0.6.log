@@ -1,0 +1,77 @@
+Using TensorFlow backend.
+WARNING:tensorflow:From /home/lac/miniconda2/envs/lac/lib/python3.7/site-packages/tensorflow/python/framework/op_def_library.py:263: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+2019-07-30 14:22:51.694407: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2019-07-30 14:22:51.907289: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2808000000 Hz
+2019-07-30 14:22:51.918704: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x55bd424ed590 executing computations on platform Host. Devices:
+2019-07-30 14:22:51.918798: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2019-07-30 14:22:52.410594: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-07-30 14:22:52.429825: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Tesla K40c major: 3 minor: 5 memoryClockRate(GHz): 0.745
+pciBusID: 0000:01:00.0
+totalMemory: 11.92GiB freeMemory: 11.77GiB
+2019-07-30 14:22:52.429851: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2019-07-30 14:22:52.431465: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-07-30 14:22:52.431486: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2019-07-30 14:22:52.431494: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2019-07-30 14:22:52.431581: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11446 MB memory) -> physical GPU (device: 0, name: Tesla K40c, pci bus id: 0000:01:00.0, compute capability: 3.5)
+2019-07-30 14:22:52.433692: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x55bd42a75330 executing computations on platform CUDA. Devices:
+2019-07-30 14:22:52.433714: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): Tesla K40c, Compute Capability 3.5
+2019-07-30 14:23:02.471576: W tensorflow/core/framework/allocator.cc:124] Allocation of 100663296 exceeds 10% of system memory.
+2019-07-30 14:23:02.492595: W tensorflow/core/framework/allocator.cc:124] Allocation of 67108864 exceeds 10% of system memory.
+WARNING:tensorflow:From /home/lac/miniconda2/envs/lac/lib/python3.7/site-packages/tensorflow/python/ops/math_ops.py:3066: to_int32 (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use tf.cast instead.
+2019-07-30 14:23:32.119578: W tensorflow/core/framework/allocator.cc:124] Allocation of 100663296 exceeds 10% of system memory.
+2019-07-30 14:23:41.928670: W tensorflow/core/framework/allocator.cc:124] Allocation of 67108864 exceeds 10% of system memory.
+2019-07-30 14:23:42.481848: W tensorflow/core/framework/allocator.cc:124] Allocation of 100663296 exceeds 10% of system memory.
+2019-07-30 14:23:46.003936: I tensorflow/stream_executor/dso_loader.cc:152] successfully opened CUDA library libcublas.so.10.0 locally
+------TESTEANDO CON RATIO: 0.6---------------
+TOTAL MUESTRAS: 19600
+(19600, 96, 144, 3)
+(19600, 1)
+
+  50/1960 [..............................] - ETA: 5:29
+ 100/1960 [>.............................] - ETA: 2:46
+ 150/1960 [=>............................] - ETA: 1:50
+ 200/1960 [==>...........................] - ETA: 1:21
+ 250/1960 [==>...........................] - ETA: 1:04
+ 300/1960 [===>..........................] - ETA: 53s 
+ 350/1960 [====>.........................] - ETA: 45s
+ 400/1960 [=====>........................] - ETA: 38s
+ 450/1960 [=====>........................] - ETA: 34s
+ 500/1960 [======>.......................] - ETA: 30s
+ 550/1960 [=======>......................] - ETA: 26s
+ 600/1960 [========>.....................] - ETA: 24s
+ 650/1960 [========>.....................] - ETA: 21s
+ 700/1960 [=========>....................] - ETA: 19s
+ 750/1960 [==========>...................] - ETA: 17s
+ 800/1960 [===========>..................] - ETA: 16s
+ 850/1960 [============>.................] - ETA: 14s
+ 900/1960 [============>.................] - ETA: 13s
+ 950/1960 [=============>................] - ETA: 12s
+1000/1960 [==============>...............] - ETA: 11s
+1050/1960 [===============>..............] - ETA: 10s
+1100/1960 [===============>..............] - ETA: 9s 
+1150/1960 [================>.............] - ETA: 8s
+1200/1960 [=================>............] - ETA: 7s
+1250/1960 [==================>...........] - ETA: 7s
+1300/1960 [==================>...........] - ETA: 6s
+1350/1960 [===================>..........] - ETA: 5s
+1400/1960 [====================>.........] - ETA: 5s
+1450/1960 [=====================>........] - ETA: 4s
+1500/1960 [=====================>........] - ETA: 4s
+1550/1960 [======================>.......] - ETA: 3s
+1600/1960 [=======================>......] - ETA: 3s
+1650/1960 [========================>.....] - ETA: 2s
+1700/1960 [=========================>....] - ETA: 2s
+1750/1960 [=========================>....] - ETA: 1s
+1800/1960 [==========================>...] - ETA: 1s
+1850/1960 [===========================>..] - ETA: 0s
+1900/1960 [============================>.] - ETA: 0s
+1950/1960 [============================>.] - ETA: 0s
+1960/1960 [==============================] - 16s 8ms/step
+[0.5515286712622156, 0.7005102111368763]
+Score total: 0.6977551020408164
+Score de horas de lluvia: 0.5447619047619048

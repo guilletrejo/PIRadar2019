@@ -16,12 +16,13 @@ import sys
 balance_ratio = float(sys.argv[1])
 home = os.environ['HOME']
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy"
-Y_data_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy"
+X_data_dir = home + "/datos_modelo/X_0.0Smote.npy"
+Y_data_dir = home + "/datos_lluvia/Y_0.0Smote.npy"
 model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "Smote.h5"
 '''
     Carga de datos
 '''
+model = load_model(model_dir)
 X = np.load(X_data_dir)
 Y = np.load(Y_data_dir)
 Y = np.expand_dims(Y,axis=1)
@@ -33,14 +34,15 @@ print(Y.shape)
 '''
     Carga del modelo y testing
 '''
-model = load_model(model_dir)
-
+#model = load_model(model_dir)
+'''
 # Loss y Binary Accuracy
 muestras_test = int(X.shape[0]*0.10)
 X_test = X[-muestras_test:]
 Y_test = Y[-muestras_test:]
 evaluate = model.evaluate(X_test, Y_test, batch_size = 50)
 print(evaluate)
+'''
 
 # Score de Clase Positiva
 P = model.predict(X)

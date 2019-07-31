@@ -31,21 +31,21 @@ tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
 '''
     Carga de datos
 '''
-X = np.load(X_data_dir)
-muestras_train = int(X.shape[0]*0.8)
-muestras_test = int(X.shape[0]*0.2)
-Y = np.load(Y_data_dir)
-Y = np.expand_dims(Y,axis=1)
-print("------CORRIENDO CON RATIO: " + str(balance_ratio) + "---------------")
-print("TOTAL MUESTRAS: " + str(X.shape[0]))
-print("Muestras train: " + str(muestras_train))
-print("Muestras test: " + str(muestras_test))
-print(X.shape)
-print(Y.shape)
-y_train = Y[:muestras_train]
-y_test = Y[muestras_train:muestras_train+muestras_test]
-x_train = X[:muestras_train]
-x_test = X[muestras_train:muestras_train+muestras_test]
+#X = np.load(X_data_dir)
+#muestras_train = int(X.shape[0]*0.8)
+#muestras_test = int(X.shape[0]*0.2)
+#Y = np.load(Y_data_dir)
+#Y = np.expand_dims(Y,axis=1)
+#print("------CORRIENDO CON RATIO: " + str(balance_ratio) + "---------------")
+#print("TOTAL MUESTRAS: " + str(X.shape[0]))
+#print("Muestras train: " + str(muestras_train))
+#print("Muestras test: " + str(muestras_test))
+#print(X.shape)
+#print(Y.shape)
+#y_train = Y[:muestras_train]
+#y_test = Y[muestras_train:muestras_train+muestras_test]
+#x_train = X[:muestras_train]
+#x_test = X[muestras_train:muestras_train+muestras_test]
 
 '''
     Definicion del modelo y custom metric
@@ -116,7 +116,27 @@ def get_vgg16():
 '''
 model = get_vgg16()
 
+'''
+    Carga de datos
+'''
+X = np.load(X_data_dir)
+muestras_train = int(X.shape[0]*0.8)
+muestras_test = int(X.shape[0]*0.2)
+Y = np.load(Y_data_dir)
+Y = np.expand_dims(Y,axis=1)
+print("------CORRIENDO CON RATIO: " + str(balance_ratio) + "---------------")
+print("TOTAL MUESTRAS: " + str(X.shape[0]))
+print("Muestras train: " + str(muestras_train))
+print("Muestras test: " + str(muestras_test))
+print(X.shape)
+print(Y.shape)
+y_train = Y[:muestras_train]
+y_test = Y[muestras_train:muestras_train+muestras_test]
+x_train = X[:muestras_train]
+x_test = X[muestras_train:muestras_train+muestras_test]
+
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
+model.save(model_dir)
 
 P = model.predict(X)
 P[P>=0.5] = 1
@@ -126,4 +146,3 @@ print("Score total: {}".format(score_total))
 score_ones = np.count_nonzero(P[Y==1])/float(P[Y==1].size)
 print("Score de horas de lluvia: {}".format(score_ones))
 
-model.save(model_dir)
