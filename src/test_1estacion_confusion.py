@@ -46,6 +46,8 @@ accuracy = (TP + TN) / (TP+TN+FP+FN)
 precision = (TP) / (TP+FP)
 recall = (TP) / (TP+FN)
 
+print("CUTOFF SELECCIONADO: {}".format(CUTOFF))
+print("--------------")
 print("True Positives: {}".format(TP))
 print("True Negatives: {}".format(TN))
 print("False Positives: {}".format(FP))
