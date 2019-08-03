@@ -68,7 +68,8 @@ for i in range(y_true.size):
             best_i, best_j = i, j
 
 cutoff = (x_true[best_i]+x_false[best_j])/2
-
+print("best_cutoff_true: {}".format(x_true[best_i]))
+print("best_cutoff_false: {}".format(x_false[best_j]))
 # Grafica las curvas
 plt_true = snb.distplot(Y_trues, bins=10, norm_hist=False, kde=True, color='blue')
 plt_false = snb.distplot(Y_falses, bins=10, norm_hist=False, kde=True, color='red',  axlabel="Prediccion de la red")
@@ -100,7 +101,6 @@ especificity = (TN) / (TN+FP)
 missclassific_rate = (FP + FN) / (TP+TN+FP+FN)
 negative_precision = (TN) + (TN+FN)
 
-print("CUTOFF SELECCIONADO: {}".format(cutoff))
 print("--------------")
 print("True Positives: {}".format(TP))
 print("True Negatives: {}".format(TN))
