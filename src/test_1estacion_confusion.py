@@ -62,7 +62,7 @@ for i in range(y_true.size):
     for j in range(y_false.size):
         dif = np.abs(y_true[i] - y_false[j])
         dif2 = np.abs(x_true[i] - x_false[j])
-        if(dif < min_dif and dif2 < min_dif2): 
+        if(dif < min_dif and dif2 < min_dif2 and x_true[i] > 0 and x_false[j] > 0): 
             min_dif = dif
             min_dif2 = dif2
             best_i, best_j = i, j
