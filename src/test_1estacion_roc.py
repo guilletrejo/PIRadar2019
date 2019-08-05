@@ -10,8 +10,6 @@ import sys
 '''
     Parametros
 '''
-balance_ratio = float(sys.argv[1])
-
 home = os.environ['HOME']
 shape = (96,144,3) # grilla de 96x144 con 3 canales
 X_data_dir = home + "/datos_modelo/X_" + str(0.0) + "Smote.npy"
@@ -24,7 +22,6 @@ colores = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'grey', 'pink', 'orange', 'palegre
 X = np.load(X_data_dir)
 Y = np.load(Y_data_dir)
 Y = np.expand_dims(Y,axis=1)
-print("------TESTEANDO CON RATIO: " + str(balance_ratio) + "---------------")
 print("TOTAL MUESTRAS: " + str(X.shape[0]))
 print(X.shape)
 print(Y.shape)
@@ -48,5 +45,5 @@ for i in range(len(modelos)):
     plt.plot([0, 1], [0, 1], color='navy', lw=1, linestyle='--')
     
 plt.legend(loc="lower right")
-plt.savefig("ROC_{}.png".format(balance_ratio))
+plt.savefig("ROC_all.png")
 
