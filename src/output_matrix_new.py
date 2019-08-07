@@ -60,7 +60,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 datos_total = {}
 for nombre in lista_nombres:
-    datos_total[nombre] = pd.concat(datos2019[nombre],sort=False)
+    datos_total[nombre] = pd.concat([datos2019[nombre]],sort=False)
     #datos_total[nombre] = pd.concat([datos2017[nombre],datos2018[nombre],datos2019[nombre]],sort=False)   
 
 ''' 
