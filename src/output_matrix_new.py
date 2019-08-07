@@ -20,7 +20,7 @@ fecha_inicial = "2019-04-29 00:00"
 fecha_final = "2019-07-31 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Registro de Lluvia [mm]'
-precipitation_path = "../../datos_lluvia/"
+precipitation_path = "../datos_lluvia/"
 
 '''
 Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
@@ -77,7 +77,7 @@ no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
 for estacion in pb.progressbar(lista_nombres):
     temp_data = datos_total[estacion]
-    data_columns = temp_data[['Intensidad de Lluvia [mm]']]
+    data_columns = temp_data[[nombre_columna_lluvia]]
     if (data_columns.empty or data_columns.dropna().empty):
         print("No hay datos en la estacion: ") + estacion
         no_data_count += 1
