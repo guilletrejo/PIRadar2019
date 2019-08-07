@@ -106,4 +106,4 @@ for estacion in lista_nombres:
 
 print (precip_p_estacion.shape)
 
-np.save(precipitation_path+'precipitacion_new.npy', precip_p_estacion)
+np.save(precipitation_path+'precipitacion_nuevos.npy', precip_p_estacion)
