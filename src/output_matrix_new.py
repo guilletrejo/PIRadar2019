@@ -70,8 +70,8 @@ for nombre in lista_nombres:
     y con un valor de 1 si ese dia llovio o 0 si no llovio.
 '''
 
-cant_estaciones = len(lista_nombres)
-cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
+cant_estaciones = int(len(lista_nombres))
+cant_horas = int(len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos))  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
 precip_p_estacion = np.ndarray(shape=(cant_horas,cant_estaciones))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
