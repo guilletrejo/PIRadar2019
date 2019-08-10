@@ -11,7 +11,12 @@ home = os.environ['HOME']
 X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
 balance_ratio = 0.0
-estacion = 37 # 53 Cerro Obero menos nulos. 37 la cumbrecita 871 nulos y mas lluvias (1092)
+'''
+53 Cerro Obero 44 nulos. 750 lluvias
+37 la cumbrecita 871 nulos. 1092 lluvias
+65 Lab Hidraulica 952 nulos.  586 lluvias
+'''
+estacion = 65
 alturas=[3,8,18]
 '''
 	Carga de datos
@@ -86,5 +91,5 @@ print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 X = x[idxs]
 Y = Y[idxs]
 
-np.save(home + "/datos_modelo/2X_" + str(balance_ratio) + "Smote.npy", X)
-np.save(home + "/datos_lluvia/2Y_" + str(balance_ratio) + "Smote.npy", Y)
+np.save(home + "/datos_modelo/3X_" + str(balance_ratio) + "Smote.npy", X)
+np.save(home + "/datos_lluvia/3Y_" + str(balance_ratio) + "Smote.npy", Y)
