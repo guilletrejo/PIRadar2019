@@ -23,7 +23,7 @@ muestras_test = 0
 shape = (96,144,3) # grilla de 96x144 con 3 canales
 X_data_dir = home + "/datos_modelo/2X_" + str(balance_ratio) + "Smote.npy"
 Y_data_dir = home + "/datos_lluvia/2Y_" + str(balance_ratio) + "Smote.npy"
-model_dir = home + "/modelos/CerroObero/2modeloVgg" + str(balance_ratio) + "Smote.h5"
+model_dir = home + "/modelos/LaCumbrecita/2modeloVgg" + str(balance_ratio) + "Smote.h5"
 cant_epocas = 30
 tam_batch = 128 # intentar que sea multiplo de la cantidad de muestras
 
