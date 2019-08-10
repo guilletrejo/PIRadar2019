@@ -10,7 +10,7 @@ from imblearn.over_sampling import SMOTE
 home = os.environ['HOME']
 X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
-estacion = 53 # Cerro Obero
+estacion = 53 # 53 Cerro Obero
 balance_ratio = 1.8
 alturas=[3,8,18]
 '''

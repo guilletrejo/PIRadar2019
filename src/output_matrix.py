@@ -20,13 +20,13 @@ fecha_inicial = "2017-11-01 00:00"
 fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
-precipitation_path = "../datos_lluvia/"
+precipitation_path = "/home/lac/datos_lluvia/"
 
 '''
   Leer los nombres y la ubicacion (x,y) de cada estacion y
   se asigna el Nombre como el indice del DataFrame
 '''
-nombre_ubic = pd.read_csv("./NombresEstaciones.csv")
+#nombre_ubic = pd.read_csv("./NombresEstaciones.csv")
 
 '''
 Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
@@ -109,7 +109,7 @@ for nombre in lista_nombres:
 '''
 
 cant_estaciones = len(lista_nombres)
-cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
+cant_horas = int(len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos))  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
 precip_p_estacion = np.ndarray(shape=(cant_horas,cant_estaciones))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
@@ -133,6 +133,8 @@ for estacion in pb.progressbar(lista_nombres):
 print("Cantidad de estaciones sin dato: " + str(no_data_count))
 
 # Convierte a 1 si llovio o 0 si no llovio
+list_df = pd.DataFrame(lista_nombres)
+list_df.to_csv("/home/lac/lista_nombres.csv", index=False, header=False)
 for estacion in lista_nombres:
     for i in range(cant_horas):
         if (precip_p_estacion[i][lista_nombres.index(estacion)] >= umbral_mm):
