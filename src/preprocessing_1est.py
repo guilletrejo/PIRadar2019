@@ -27,7 +27,7 @@ Y = y1[:,estacion]
 '''
 	Concatena varias alturas
 '''
-x = np.ndarray(shape=(Y.shape[0]-len(missing),96,144,0))
+x = np.ndarray(shape=(Y.shape[0],96,144,0))
 for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
