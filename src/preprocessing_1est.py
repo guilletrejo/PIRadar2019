@@ -11,7 +11,7 @@ home = os.environ['HOME']
 X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
 balance_ratio = 0.0
-estacion = 36 # 53 Cerro Obero
+estacion = 37 # 53 Cerro Obero menos nulos. 37 la cumbrecita 871 nulos y mas lluvias (1092)
 alturas=[3,8,18]
 '''
 	Carga de datos
