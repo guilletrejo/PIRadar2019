@@ -117,7 +117,7 @@ for estacion in pb.progressbar(lista_nombres):
     temp_data = datos_total[estacion]
     data_columns = temp_data[['Intensidad de Lluvia [mm]']]
     if (data_columns.empty or data_columns.dropna().empty):
-        print("No hay datos en la estacion: ") + estacion
+        print("No hay datos en la estacion: " + str(estacion))
         no_data_count += 1
         precip_p_estacion[:,lista_nombres.index(estacion)].fill(-1)
     else:
