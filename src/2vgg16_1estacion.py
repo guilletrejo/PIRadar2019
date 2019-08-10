@@ -114,8 +114,7 @@ y_test = Y[muestras_train:muestras_train+muestras_test]
 x_train = X[:muestras_train]
 x_test = X[muestras_train:muestras_train+muestras_test]
 
-class_weight = {0: 1.,
-                1: 10.} # 10% de 1s en total.
+class_weight = {0: 0.1, 1: 0.9}
 
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test), class_weight=class_weight)
 model.save(model_dir)
