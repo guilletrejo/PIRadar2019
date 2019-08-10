@@ -8,10 +8,10 @@ from imblearn.over_sampling import SMOTE
 	Parametros
 '''
 home = os.environ['HOME']
-X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
-Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
-estacion = 53 # Cerro Obero
-balance_ratio = 1.8
+X_data_dir = home + "/datos_modelo/z_altura{}_2019-04-29_nuevos.npy" #3,8,18,4,9,19,5,10,20
+Y_data_dir = home + "/datos_lluvia/precipitacion_nuevos.npy"
+estacion = 61 # Cerro Obero 53(13000) 61(2244)
+balance_ratio = 0.0
 alturas=[3,8,18]
 '''
 	Carga de datos
@@ -23,12 +23,11 @@ missing = np.where(y[:,estacion]==-1)
 '''
 y1 = np.delete(y,missing,0)
 Y = y1[:,estacion]
-#y = np.expand_dims(y,axis=1) ## Ver si hace falta hacer esta expansion
 
 '''
 	Concatena varias alturas
 '''
-x = np.ndarray(shape=(13000,96,144,0))
+x = np.ndarray(shape=(1661,96,144,0))
 for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
@@ -51,7 +50,7 @@ for h in pb.progressbar(alturas):
 '''
 # Calculo del porcentaje para llevar a un desbalance con mayoria de 1s
 data0 = int(np.equal(Y,0).sum())
-data1 = int( data0 * balance_ratio )
+data1 = int( np.equal(Y,1).sum() ) #* balance_ratio )
 sample_ratio = {0: data0, 1: data1}
 # Flatten
 x = np.reshape(x,(x.shape[0],96*144*3))
@@ -84,8 +83,8 @@ print("Porcentaje de datos lluvia: " + str(lluvias/(total_real)))
 print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 
 
-X = x[idxs, :, :, :]
+X = X[idxs]
 Y = Y[idxs]
 
-np.save(home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy", X)
-np.save(home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy", Y)
+np.save(home + "/datos_modelo/X_" + str(balance_ratio) + "Smote_nuevos.npy", X)
+np.save(home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote_nuevos.npy", Y)
