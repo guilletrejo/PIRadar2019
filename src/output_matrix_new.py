@@ -20,7 +20,7 @@ fecha_inicial = "2019-04-29 00:00"
 fecha_final = "2019-07-31 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Registro de Lluvia [mm]'
-precipitation_path = "../../datos_lluvia/"
+precipitation_path = "../datos_lluvia/"
 
 '''
 Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
@@ -60,7 +60,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 datos_total = {}
 for nombre in lista_nombres:
-    datos_total[nombre] = pd.concat(datos2019[nombre],sort=False)
+    datos_total[nombre] = pd.concat([datos2019[nombre]],sort=False)
     #datos_total[nombre] = pd.concat([datos2017[nombre],datos2018[nombre],datos2019[nombre]],sort=False)   
 
 ''' 
@@ -70,14 +70,14 @@ for nombre in lista_nombres:
     y con un valor de 1 si ese dia llovio o 0 si no llovio.
 '''
 
-cant_estaciones = len(lista_nombres)
-cant_horas = len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos)  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
+cant_estaciones = int(len(lista_nombres))
+cant_horas = int(len(datos_total[lista_nombres[0]]) / (60 / intervalo_minutos))  # Se determina con la cantidad de datos totales dividido por la cantidad de datos por hora
 precip_p_estacion = np.ndarray(shape=(cant_horas,cant_estaciones))
 no_data_count = 0
 # El siguiente bucle recorre la matriz y va sumando el acumulado de 1 hora cada 10 minutos
 for estacion in pb.progressbar(lista_nombres):
     temp_data = datos_total[estacion]
-    data_columns = temp_data[['Intensidad de Lluvia [mm]']]
+    data_columns = temp_data[[nombre_columna_lluvia]]
     if (data_columns.empty or data_columns.dropna().empty):
         print("No hay datos en la estacion: ") + estacion
         no_data_count += 1
@@ -106,4 +106,4 @@ for estacion in lista_nombres:
 
 print (precip_p_estacion.shape)
 
-np.save(precipitation_path+'precipitacion_new.npy', precip_p_estacion)
+np.save(precipitation_path+'precipitacion_nuevos.npy', precip_p_estacion)
