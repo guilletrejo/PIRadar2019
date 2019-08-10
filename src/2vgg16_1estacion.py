@@ -16,7 +16,7 @@ import sys
 '''
     Parametros
 '''
-balance_ratio = float(sys.argv[1])
+balance_ratio = 0.0
 home = os.environ['HOME']
 muestras_train = 0
 muestras_test = 0
@@ -115,7 +115,7 @@ x_train = X[:muestras_train]
 x_test = X[muestras_train:muestras_train+muestras_test]
 
 class_weight = {0: 1.,
-                1: 50.}
+                1: 10.} # 10% de 1s en total.
 
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test), class_weight=class_weight)
 model.save(model_dir)
