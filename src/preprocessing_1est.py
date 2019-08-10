@@ -10,8 +10,8 @@ from imblearn.over_sampling import SMOTE
 home = os.environ['HOME']
 X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
-estacion = 53 # 53 Cerro Obero
-balance_ratio = 1.8
+balance_ratio = 0.0
+estacion = 36 # 53 Cerro Obero
 alturas=[3,8,18]
 '''
 	Carga de datos
@@ -23,12 +23,11 @@ missing = np.where(y[:,estacion]==-1)
 '''
 y1 = np.delete(y,missing,0)
 Y = y1[:,estacion]
-#y = np.expand_dims(y,axis=1) ## Ver si hace falta hacer esta expansion
 
 '''
 	Concatena varias alturas
 '''
-x = np.ndarray(shape=(13000,96,144,0))
+x = np.ndarray(shape=(Y.shape[0]-len(missing),96,144,0))
 for h in pb.progressbar(alturas):
 	'''
 	Carga de datos
@@ -48,7 +47,7 @@ for h in pb.progressbar(alturas):
 
 '''
 	Oversampling
-'''
+
 # Calculo del porcentaje para llevar a un desbalance con mayoria de 1s
 data0 = int(np.equal(Y,0).sum())
 data1 = int( data0 * balance_ratio )
@@ -59,14 +58,14 @@ sm = SMOTE(sampling_strategy=sample_ratio, random_state=7)
 X_us, Y_us = sm.fit_sample(x,Y)
 X = np.reshape(X_us,(X_us.shape[0],96,144,3))
 Y = Y_us
-
+'''
 # Shuffle
 idxs = np.arange(X.shape[0])
 np.random.seed(0)
 np.random.shuffle(idxs)
 
 '''
-    Contar cuantos 1 hay en total en todas las estaciones.
+    Contar cuantos 1 hay en total en la estacion.
 '''
 lluvias = np.where(Y==1)[0].size
 nolluvias = np.where(Y==0)[0].size
@@ -84,8 +83,8 @@ print("Porcentaje de datos lluvia: " + str(lluvias/(total_real)))
 print("Porcentaje de datos no lluvia: " + str(nolluvias/(total_real)))
 
 
-X = x[idxs, :, :, :]
+X = x[idxs]
 Y = Y[idxs]
 
-np.save(home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy", X)
-np.save(home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy", Y)
+np.save(home + "/datos_modelo/2X_" + str(balance_ratio) + "Smote.npy", X)
+np.save(home + "/datos_lluvia/2Y_" + str(balance_ratio) + "Smote.npy", Y)
