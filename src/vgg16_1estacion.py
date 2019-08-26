@@ -23,29 +23,11 @@ home = os.environ['HOME']
 muestras_train = 0
 muestras_test = 0
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Smote.npy"
-Y_data_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Smote.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "Smote.h5"
+X_data_dir = home + "/datos_modelo/4X_" + str(balance_ratio) + "Smote.npy"
+Y_data_dir = home + "/datos_lluvia/4Y_" + str(balance_ratio) + "Smote.npy"
+model_dir = home + "/modelos/CerroObero/4modeloVgg" + str(balance_ratio) + "Smote.h5"
 cant_epocas = 20
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
-'''
-    Carga de datos
-'''
-#X = np.load(X_data_dir)
-#muestras_train = int(X.shape[0]*0.8)
-#muestras_test = int(X.shape[0]*0.2)
-#Y = np.load(Y_data_dir)
-#Y = np.expand_dims(Y,axis=1)
-#print("------CORRIENDO CON RATIO: " + str(balance_ratio) + "---------------")
-#print("TOTAL MUESTRAS: " + str(X.shape[0]))
-#print("Muestras train: " + str(muestras_train))
-#print("Muestras test: " + str(muestras_test))
-#print(X.shape)
-#print(Y.shape)
-#y_train = Y[:muestras_train]
-#y_test = Y[muestras_train:muestras_train+muestras_test]
-#x_train = X[:muestras_train]
-#x_test = X[muestras_train:muestras_train+muestras_test]
 
 '''
     Definicion del modelo y custom metric
@@ -106,7 +88,7 @@ def get_vgg16():
 
     #adam = Adam(lr=0.001)
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
+    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.recall, metrics.binary_accuracy])
     print(model.summary())
 
     return model
@@ -138,11 +120,10 @@ x_test = X[muestras_train:muestras_train+muestras_test]
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
 model.save(model_dir)
 
-P = model.predict(X)
+'''P = model.predict(X)
 P[P>=0.5] = 1
 P[P<0.5] = 0
 score_total = np.count_nonzero(P==Y)/float(P.size)
 print("Score total: {}".format(score_total))
 score_ones = np.count_nonzero(P[Y==1])/float(P[Y==1].size)
-print("Score de horas de lluvia: {}".format(score_ones))
-
+print("Score de horas de lluvia: {}".format(score_ones))'''
