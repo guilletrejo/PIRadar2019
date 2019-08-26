@@ -93,7 +93,7 @@ def get_vgg16():
 
     #adam = Adam(lr=0.001)
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.recall, metrics.binary_accuracy])
+    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
     print(model.summary())
 
     return model
@@ -124,8 +124,8 @@ x_test = X[muestras_train:muestras_train+muestras_test]
 '''
 x_train = np.load(x_train_dir)
 x_test = np.load(x_test_dir)
-y_train =  np.load(y_train_dir)
-y_test = np.load(y_test_dir)
+y_train =  np.expand_dims(np.load(y_train_dir),axis=1)
+y_test = np.expand_dims(np.load(y_test_dir),axis=1)
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test))
 model.save(model_dir)
 
