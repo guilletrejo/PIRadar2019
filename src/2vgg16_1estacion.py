@@ -21,11 +21,11 @@ home = os.environ['HOME']
 muestras_train = 0
 muestras_test = 0
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = home + "/datos_modelo/2X_" + str(balance_ratio) + "Smote.npy"
-Y_data_dir = home + "/datos_lluvia/2Y_" + str(balance_ratio) + "Smote.npy"
-model_dir = home + "/modelos/LaCumbrecita/2modeloVgg" + str(balance_ratio) + "Smote.h5"
-cant_epocas = 30
-tam_batch = 128 # intentar que sea multiplo de la cantidad de muestras
+X_data_dir = home + "/datos_modelo/3X_" + str(balance_ratio) + "Smote.npy"
+Y_data_dir = home + "/datos_lluvia/3Y_" + str(balance_ratio) + "Smote.npy"
+model_dir = home + "/modelos/LaCumbrecita/LAB_HIDR_60EPOCHS_modeloVgg" + str(balance_ratio) + "Smote.h5"
+cant_epocas = 100
+tam_batch = 256 # intentar que sea multiplo de la cantidad de muestras
 
 '''
     Definicion del modelo y custom metric
@@ -36,21 +36,21 @@ def get_vgg16():
     model = Sequential()
 
     # Conv Block 1
-    #model.add(BatchNormalization(axis=3, input_shape=shape))
-    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=shape))
+    model.add(BatchNormalization(axis=3, input_shape=shape))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization(axis=3))
     model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 2
-    #model.add(BatchNormalization(axis=3))
+    model.add(BatchNormalization(axis=3))
     model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization(axis=3))
     model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 3
-    #model.add(BatchNormalization(axis=3))
+    model.add(BatchNormalization(axis=3))
     model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization(axis=3))
     model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
@@ -59,7 +59,7 @@ def get_vgg16():
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 4
-    #model.add(BatchNormalization(axis=3))
+    model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
@@ -68,19 +68,18 @@ def get_vgg16():
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 5
-    #model.add(BatchNormalization(axis=3))
-    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
     model.add(BatchNormalization(axis=3))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    model.add(BatchNormalization(axis=3))
+    model.add(Dropout(.2))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # FC layers
     model.add(Flatten())
-    #model.add(BatchNormalization(axis=3))
     model.add(Dense(4096, activation='relu'))
-    #model.add(BatchNormalization(axis=3))
     model.add(Dense(4096, activation='relu'))
     model.add(Dense(1, activation='sigmoid'))
 
@@ -114,7 +113,7 @@ y_test = Y[muestras_train:muestras_train+muestras_test]
 x_train = X[:muestras_train]
 x_test = X[muestras_train:muestras_train+muestras_test]
 
-class_weight = {0: 0.1, 1: 0.9}
+class_weight = {0: 0.3, 1: 0.7}
 
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, validation_data=(x_test, y_test), class_weight=class_weight)
 model.save(model_dir)
