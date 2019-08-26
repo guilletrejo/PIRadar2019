@@ -16,9 +16,9 @@ import sys
 balance_ratio = float(sys.argv[1])
 home = os.environ['HOME']
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-X_data_dir = home + "/datos_modelo/X_0.0Smote.npy"
-Y_data_dir = home + "/datos_lluvia/Y_0.0Smote.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "Smote.h5"
+X_data_dir = home + "/datos_modelo/LHX_0.0Smote_nuevos.npy"
+Y_data_dir = home + "/datos_lluvia/LHY_0.0Smote_nuevos.npy"
+model_dir = home + "/modelos/LHmodeloVgg" + str(balance_ratio) + "Smote.h5"
 '''
     Carga de datos
 '''
