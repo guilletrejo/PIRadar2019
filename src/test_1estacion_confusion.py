@@ -18,6 +18,7 @@ if(dataset_type != "cs" and dataset_type != "ss"):
 
 home = os.environ['HOME']
 shape = (96,144,3) # grilla de 96x144 con 3 canales
+cutoff = 0.5 # Si el modelo tiene buena separabilidad, 0.5 debería funcionar bien
 if(dataset_type=='ss'):
     X_data_dir = home + "/datos_modelo/X_" + str(0.0) + "Smote_nuevos.npy"
     Y_data_dir = home + "/datos_lluvia/Y_" + str(0.0) + "Smote_nuevos.npy"
@@ -42,58 +43,11 @@ Y_falses = y_pred[Y==0] # Se queda solo con las predicciones cuyo equivalente en
 Y_trues = y_pred[Y==1]
 
 '''
-    Grafico de las probabilidades y calculo del cutoff optimo
-'''
-snb.set(rc={'figure.figsize':(20,15)})
-
-# Realiza un histograma y lo ajusta con una curva KDE, y de ahi obtiene los valores x,y de la curva
-plt_true = snb.distplot(Y_trues, bins=10, norm_hist=False, kde=True, color='blue')
-x_true = plt_true.lines[0].get_xdata()
-y_true = plt_true.lines[0].get_ydata()
-plt_true.cla()
-plt_false = snb.distplot(Y_falses, bins=10, norm_hist=False, kde=True, color='red')
-x_false = plt_false.lines[0].get_xdata()
-y_false = plt_false.lines[0].get_ydata()
-plt_false.cla()
-
-
-# Calcula la menor diferencia para obtener la interseccion de las 2 curvas
-min_dif = 1
-min_dif2 = 1
-for i in range(y_true.size):
-    for j in range(y_false.size):
-        dif = np.abs(y_true[i] - y_false[j])
-        dif2 = np.abs(x_true[i] - x_false[j])
-        if(dif < min_dif and dif2 < min_dif2 and x_true[i] > 0 and x_false[j] > 0): 
-            min_dif = dif
-            min_dif2 = dif2
-            best_i, best_j = i, j
-
-cutoff = (x_true[best_i]+x_false[best_j])/2
-print("best_cutoff_true: {}".format(x_true[best_i]))
-print("best_cutoff_false: {}".format(x_false[best_j]))
-# Grafica las curvas
-plt_true = snb.distplot(Y_trues, bins=10, norm_hist=False, kde=True, color='blue')
-plt_false = snb.distplot(Y_falses, bins=10, norm_hist=False, kde=True, color='red',  axlabel="Prediccion de la red")
-
-# Grafica una linea en el cutoff optimo
-maxid_t = best_i
-plt.plot(x_true[maxid_t],y_true[maxid_t], '|', ms=2000)
-maxid_f = best_j # The id of the peak (maximum of y data)
-plt.plot(x_false[maxid_f],y_false[maxid_f], '|', ms=2000)
-plt.plot([], [], ' ', label="Balance ratio: {}".format(balance_ratio))
-plt.plot([], [], ' ', label="Cutoff óptimo: {0:.3f}".format(cutoff))
-plt.legend(loc=9, fontsize='xx-large')
-
-print("CUTOFF OPTIMO: {0:.3f}".format(cutoff))
-plt.savefig("Cutoff_{}_{}.png".format(balance_ratio, dataset_type))
-
-'''
     Testing (y_true = Y ; y_pred = y_pred)
 '''
 
-y_pred[y_pred>=0.5] = 1
-y_pred[y_pred<0.5] = 0
+y_pred[y_pred>=cutoff] = 1
+y_pred[y_pred<cutoff] = 0
 
 TN, FP, FN, TP = confusion_matrix(Y,y_pred).ravel()
 accuracy = (TP + TN) / (TP+TN+FP+FN)
@@ -103,18 +57,18 @@ especificity = (TN) / (TN+FP)
 missclassific_rate = (FP + FN) / (TP+TN+FP+FN)
 negative_precision = (TN) + (TN+FN)
 
-print("------	con cutoff hardcodeado a 0.5--------")
+print("---------------")
 print("True Positives: {}".format(TP))
 print("True Negatives: {}".format(TN))
 print("False Positives: {}".format(FP))
 print("False Negatives: {}".format(FN))
 print("---------------")
-print("Accuracy = {}".format(accuracy))
-print("Precision = {}".format(precision))
-print("Recall = {}".format(recall))
-print("Especificity = {}".format(especificity))
 print("Missclassification Rate = {}".format(missclassific_rate))
 print("Negative Precision = {}".format(negative_precision))
+print("Precision = {}".format(precision))
+print("Especificity = {}".format(especificity))
+print("Accuracy = {}".format(accuracy))
+print("Recall = {}".format(recall))
 
 '''
     CURVA ROC
