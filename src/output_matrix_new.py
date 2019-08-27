@@ -20,7 +20,7 @@ fecha_inicial = "2019-04-29 00:00"
 fecha_final = "2019-07-31 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Registro de Lluvia [mm]'
-precipitation_path = "../datos_lluvia/"
+precipitation_path = "../../datos_lluvia/"
 
 '''
 Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
