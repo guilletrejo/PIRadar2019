@@ -27,7 +27,8 @@ missing = np.where(y[:,estacion]==-1)
 '''
 y1 = np.delete(y,missing,0)
 Y = y1[:,estacion]
-Y = np.delete(Y,np.where(Y==0)[:200])
+no_rain = np.where(Y==0)[:200]
+Y = np.delete(Y,no_rain,0)
 '''
 	Concatena varias alturas
 '''
@@ -37,7 +38,7 @@ for h in pb.progressbar(alturas):
 	Carga de datos
 	'''
 	X = np.delete(np.load(X_data_dir.format(h)),missing,0)
-	
+	X = np.delete(X,no_rain,0)
 	'''
 	Normalizacion y estandarizacion del input
 	'''
