@@ -29,6 +29,18 @@ print("TOTAL MUESTRAS: " + str(X.shape[0]))
 print("Dimension matriz entrada: " + str(X.shape))
 print("Dimension matriz salida: " + str(Y.shape))
 
+'''
+    Contar cuantos 1 hay en total en la estacion.
+'''
+lluvias = np.where(Y==1)[0].size
+nolluvias = np.where(Y==0)[0].size
+print("Cant. de horas con lluvia: " + str(lluvias))
+print("Cant. de horas sin lluvia: " + str(nolluvias))
+total_real = lluvias+nolluvias
+print("Total de datos: " + str(total_real))
+print("Porcentaje de horas con lluvia: " + str(lluvias/(total_real)))
+print("Porcentaje de horas sin lluvia: " + str(nolluvias/(total_real)))
+
 y_pred = model.predict(X) # Obtiene las predicciones
 Y_falses = y_pred[Y==0] # Se queda solo con las predicciones cuyo equivalente en Y_test es 0
 Y_trues = y_pred[Y==1]
