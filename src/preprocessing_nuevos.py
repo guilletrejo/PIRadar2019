@@ -27,7 +27,7 @@ missing = np.where(y[:,estacion]==-1)
 '''
 y1 = np.delete(y,missing,0)
 Y = y1[:,estacion]
-
+Y = np.delete(Y,np.where(Y==0)[:200])
 '''
 	Concatena varias alturas
 '''
