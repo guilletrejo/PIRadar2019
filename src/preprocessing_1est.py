@@ -54,7 +54,7 @@ for h in pb.progressbar(alturas):
 	Eliminacion nulos de input tanto de X como de Y
 '''
 #Obtener los indices de los nulos de input
-missing_input = np.where(x[:,0,0,0]==np.nan)
+missing_input = np.argwhere(np.isnan(X[:,0,0]))[:,0]
 x = np.delete(x, missing_input, 0)
 Y = np.delete(Y, missing_input, 0)
 
