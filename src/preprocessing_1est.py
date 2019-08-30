@@ -8,7 +8,7 @@ from imblearn.over_sampling import SMOTE
 	Parametros
 '''
 home = os.environ['HOME']
-X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01.npy" #3,8,18,4,9,19,5,10,20
+X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01_wnan.npy" #3,8,18,4,9,19,5,10,20
 Y_data_dir = home + "/datos_lluvia/precipitacion.npy"
 balance_ratio = 1.0
 '''
@@ -54,7 +54,7 @@ for h in pb.progressbar(alturas):
 	Eliminacion nulos de input tanto de X como de Y
 '''
 #Obtener los indices de los nulos de input
-missing_input = np.argwhere(np.isnan(X[:,0,0]))[:,0]
+missing_input = np.argwhere(np.isnan(x[:,0,0,0]))[:,0]
 x = np.delete(x, missing_input, 0)
 Y = np.delete(Y, missing_input, 0)
 
