@@ -17,7 +17,7 @@ from joblib import Parallel, delayed
 '''
 Parametros
 '''
-path_datos = "/home/datos/wrf/wrfout/"  # en YAKU, cambiar esto
+path_datos = "/mnt/datos/wrf/wrfout/"  # en YAKU, cambiar esto
 time_init = 6                    # Se ignoran las primeras 6 horas de cada archivo.
 times = 12                       # Se toman 12 horas de cada archivo. (SON 2 ARCHIVOS POR DIA)
 horas = ["06:00:00","18:00:00"]
@@ -110,7 +110,7 @@ for dia in pb.progressbar(dias):                                                
         z_expanded = np.concatenate((z_expanded, z_ex), axis=0)            # Concatena la nueva matriz con la anterior
         DS.close()
 
-imp_mean = SimpleImputer(missing_values=np.nan, strategy='median', copy=False)
-for i in range(96):
-	imp_mean.fit_transform(z_expanded[:,i,:])
-np.save('/home/awf/datos_modelo/z_altura{}_{}.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
+#imp_mean = SimpleImputer(missing_values=np.nan, strategy='median', copy=False)
+#for i in range(96):
+#	imp_mean.fit_transform(z_expanded[:,i,:])
+np.save('/home/lac/datos_modelo/z_altura{}_{}_wnan.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
