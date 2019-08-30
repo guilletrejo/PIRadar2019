@@ -17,16 +17,16 @@ balance_ratio = 1.0
 65 Lab Hidraulica 952 nulos.  586 lluvias
 '''
 estacion = 53
-alturas=[3,8,18]
+alturas=[3,10,19]
 '''
 	Carga de datos
 '''
 y = np.load(Y_data_dir).astype(int)
-missing = np.where(y[:,estacion]==-1)
+missing_output = np.where(y[:,estacion]==-1)
 '''
-	Eliminacion de -1 y seleccion de una sola estacion
+	Eliminacion de -1 de output de Y y seleccion de una sola estacion
 '''
-y1 = np.delete(y,missing,0)
+y1 = np.delete(y,missing_output,0)
 Y = y1[:,estacion]
 
 '''
@@ -35,9 +35,9 @@ Y = y1[:,estacion]
 x = np.ndarray(shape=(Y.shape[0],96,144,0))
 for h in pb.progressbar(alturas):
 	'''
-	Carga de datos
+	Carga de datos y eliminacion de -1 de output de X
 	'''
-	X = np.delete(np.load(X_data_dir.format(h)),missing,0)
+	X = np.delete(np.load(X_data_dir.format(h)),missing_output,0)
 	
 	'''
 	Normalizacion y estandarizacion del input
@@ -49,6 +49,14 @@ for h in pb.progressbar(alturas):
 	X = np.expand_dims(X_scaled, axis=3)
 
 	x = np.concatenate((x,X), axis = 3)
+
+'''
+	Eliminacion nulos de input tanto de X como de Y
+'''
+#Obtener los indices de los nulos de input
+missing_input = np.where(x[:,0,0,0]==np.nan)
+x = np.delete(x, missing_input, 0)
+Y = np.delete(Y, missing_input, 0)
 
 '''
 	Division en entrenamiento y validacion
@@ -69,7 +77,7 @@ x_test = x[muestras_train:muestras_train+muestras_test]
 '''
 	Oversampling
 '''
-# Calculo del porcentaje para llevar a un desbalance con mayoria de 1s
+# Calculo del porcentaje para balancear las clases
 data0 = int(np.equal(y_train,0).sum())
 data1 = int( data0 * balance_ratio )
 sample_ratio = {0: data0, 1: data1}
@@ -77,6 +85,7 @@ sample_ratio = {0: data0, 1: data1}
 x_train = np.reshape(x_train,(x_train.shape[0],96*144*3))
 sm = SMOTE(sampling_strategy=sample_ratio, random_state=7)
 X_us, Y_us = sm.fit_sample(x_train,y_train)
+# DeFlatten
 x_train = np.reshape(X_us,(X_us.shape[0],96,144,3))
 y_train = Y_us
 
