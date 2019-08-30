@@ -14,9 +14,9 @@ balance_ratio = 1.0
 home = os.environ['HOME']
 shape = (96,144,3) # grilla de 96x144 con 3 canales
 cutoff = 0.5 # Si el modelo tiene buena separabilidad, 0.5 debería funcionar bien
-X_data_dir = home + "/datos_modelo/X_1.0Val.npy"
-Y_data_dir = home + "/datos_lluvia/Y_1.0Val.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV.h5"
+X_data_dir = home + "/datos_modelo/X_0.0Smote.npy"
+Y_data_dir = home + "/datos_lluvia/Y_0.0Smote.npy"
+model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "Smote.h5"
 '''
     Carga de datos y modelo
 '''
@@ -24,7 +24,7 @@ model = load_model(model_dir)
 X = np.load(X_data_dir)
 Y = np.load(Y_data_dir)
 Y = np.expand_dims(Y,axis=1)
-print("--------------TESTEANDO CON SET DE VALIDACION---------------")
+print("--------------TESTEANDO CON DATOS DE TRAIN+VAL---------------")
 print("TOTAL MUESTRAS: " + str(X.shape[0]))
 print("Dimension matriz entrada: " + str(X.shape))
 print("Dimension matriz salida: " + str(Y.shape))
@@ -38,8 +38,8 @@ print("Cant. de horas con lluvia: " + str(lluvias))
 print("Cant. de horas sin lluvia: " + str(nolluvias))
 total_real = lluvias+nolluvias
 print("Total de datos: " + str(total_real))
-print("Porcentaje de horas con lluvia: " + str(lluvias/(total_real)))
-print("Porcentaje de horas sin lluvia: " + str(nolluvias/(total_real)))
+print("Porcentaje de horas con lluvia: " + "{0:.2f}".format(lluvias/total_real))
+print("Porcentaje de horas sin lluvia: " + "{0:.2f}".format(nolluvias/total_real))
 
 y_pred = model.predict(X) # Obtiene las predicciones
 Y_falses = y_pred[Y==0] # Se queda solo con las predicciones cuyo equivalente en Y_test es 0
