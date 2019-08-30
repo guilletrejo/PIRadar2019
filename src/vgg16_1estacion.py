@@ -28,7 +28,7 @@ x_test_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Val.npy"
 y_train_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Train.npy"
 y_test_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Val.npy"
 model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV.h5"
-cant_epocas = 20
+cant_epocas = 30
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
 
 '''
@@ -75,7 +75,7 @@ def get_vgg16():
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
-    sgd = SGD(lr=0.01, decay=0.01, momentum=0.9, nesterov=True)
+    sgd = SGD(lr=0.01, decay=0.005, momentum=0.9, nesterov=True)
     model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
     print(model.summary())
 
