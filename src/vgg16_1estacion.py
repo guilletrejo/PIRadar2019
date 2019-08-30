@@ -18,16 +18,16 @@ import sys
 '''
     Parametros
 '''
-balance_ratio = float(sys.argv[1])
+balance_ratio = 1.0
 home = os.environ['HOME']
 muestras_train = 0
 muestras_test = 0
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-x_train_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Train.npy"
-x_test_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Val.npy"
-y_train_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Train.npy"
-y_test_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Val.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV.h5"
+x_train_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Train_noImp.npy"
+x_test_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Val_noImp.npy"
+y_train_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Train_noImp.npy"
+y_test_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Val_noImp.npy"
+model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV_noImp.h5"
 cant_epocas = 30
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
 
