@@ -14,9 +14,9 @@ balance_ratio = 1.0
 home = os.environ['HOME']
 shape = (96,144,3) # grilla de 96x144 con 3 canales
 cutoff = 0.5 # Si el modelo tiene buena separabilidad, 0.5 debería funcionar bien
-X_data_dir = home + "/datos_modelo/X_1.0Val_noImp_noNorm.npy"
-Y_data_dir = home + "/datos_lluvia/Y_1.0Val_noImp_noNorm.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV_noImp_noNorm_MasEpocas.h5"
+X_data_dir = home + "/datos_modelo/X_Test_noImp_noNorm.npy"
+Y_data_dir = home + "/datos_lluvia/Y_Test_noImp_noNorm.npy"
+model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV_noImp_noNorm125epoch.h5"
 '''
     Carga de datos y modelo
 '''

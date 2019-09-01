@@ -23,12 +23,12 @@ home = os.environ['HOME']
 muestras_train = 0
 muestras_test = 0
 shape = (96,144,3) # grilla de 96x144 con 3 canales
-x_train_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Train_noImp_noNorm.npy"
-x_test_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Val_noImp_noNorm.npy"
-y_train_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Train_noImp_noNorm.npy"
-y_test_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Val_noImp_noNorm.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV_noImp_noNorm_35Epocas_NoGlorot.h5"
-cant_epocas = 35
+x_train_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Train_noImp.npy"
+x_test_dir = home + "/datos_modelo/X_" + str(balance_ratio) + "Val_noImp.npy"
+y_train_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Train_noImp.npy"
+y_test_dir = home + "/datos_lluvia/Y_" + str(balance_ratio) + "Val_noImp.npy"
+model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV_noImp_6Epocas.h5"
+cant_epocas = 6
 tam_batch = 50 # intentar que sea multiplo de la cantidad de muestras
 
 '''
@@ -40,37 +40,40 @@ def get_vgg16():
     model = Sequential()
 
     # Conv Block 1
-    model.add(BatchNormalization(axis=3, input_shape=shape))
-    model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-    model.add(BatchNormalization(axis=3))
+    #model.add(BatchNormalization(axis=3, input_shape=shape))
+    model.add(Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=shape))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 2
-    model.add(BatchNormalization(axis=3))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-    model.add(BatchNormalization(axis=3))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 3
-    model.add(BatchNormalization(axis=3))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-    model.add(BatchNormalization(axis=3))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 4
-    model.add(BatchNormalization(axis=3))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
-    model.add(BatchNormalization(axis=3))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
     # Conv Block 5
-    model.add(BatchNormalization(axis=3))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
-    model.add(BatchNormalization(axis=3))
+    model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
+    #model.add(BatchNormalization(axis=3))
     model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
 
