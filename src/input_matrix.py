@@ -91,7 +91,7 @@ for dia in pb.progressbar(dias):                                                
                 print (e.filename)
 
         if(data_found == 0 or (dia=='2018-02-27')):
-            z_ex = np.zeros(shape=(12,144,96))
+            z_ex = np.zeros(shape=(12,68,54))
             z_ex.fill(np.nan)
         elif (data_found == 1):
             # Inicializacion con el tiempo 0
