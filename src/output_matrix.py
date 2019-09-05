@@ -21,7 +21,7 @@ fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
 precipitation_path = "/home/lac/datos_lluvia/"
-estacion = 53
+estacion_cerro = 53
 
 '''
     Leer los nombres y la ubicacion (x,y) de cada estacion y
@@ -51,7 +51,7 @@ el 1-11-2017 00:00hs y la final es 28-04-2019 12:00hs
 
 # Datos 2017
 
-excel = pd.ExcelFile(precipitation_path+"ClimaReporte2017_131.xlsx")
+excel = pd.ExcelFile(precipitation_path+"ClimaReporte2017_131.xls")
 lista_nombres = excel.sheet_names
 datos2017 = {}
 
@@ -68,7 +68,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2018
 
-excel = pd.ExcelFile(precipitation_path+"ClimaReporte2018_131.xlsx")
+excel = pd.ExcelFile(precipitation_path+"ClimaReporte2018_131.xls")
 lista_nombres = excel.sheet_names
 datos2018 = {}
 
@@ -83,7 +83,7 @@ for nombre in pb.progressbar(lista_nombres):
 
 # Datos 2019
 
-excel = pd.ExcelFile(precipitation_path+"ClimaReporte2019_131.xlsx")
+excel = pd.ExcelFile(precipitation_path+"ClimaReporte2019_131.xls")
 lista_nombres = excel.sheet_names
 datos2019 = {}
 
@@ -145,8 +145,8 @@ for estacion in lista_nombres:
         if (np.isnan(precip_p_estacion[i][lista_nombres.index(estacion)])):
             precip_p_estacion[i][lista_nombres.index(estacion)] = -1
 
-cantidad_unos = np.equal(precip_p_estacion[:,estacion],1).sum()
-cantitad_total = len(precip_p_estacion[:,estacion])
+cantidad_unos = np.equal(precip_p_estacion[:,estacion_cerro],1).sum()
+cantitad_total = len(precip_p_estacion[:,estacion_cerro])
 print(precip_p_estacion.shape)
 print("Para umbral "+ str(umbral_mm) + " existen " + str(cantidad_unos) + " unos sobre un total de " + str(cantitad_total) )
 np.save(precipitation_path+'precipitacion_umbral{}.npy'.format(umbral_mm), precip_p_estacion)

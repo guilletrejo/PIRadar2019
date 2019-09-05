@@ -18,8 +18,8 @@ home = os.environ['HOME']
 file = sys.argv[1]
 shape = (68,54,3) # grilla de 96x144 con 3 canales
 cutoff = 0.5 # Si el modelo tiene buena separabilidad, 0.5 debería funcionar bien
-X_data_dir = home + "/datos_modelo/X_Test.npy"
-Y_data_dir = home + "/datos_lluvia/Y_Test.npy"
+X_data_dir = home + "/datos_modelo/X_Comp.npy"
+Y_data_dir = home + "/datos_lluvia/Y_Comp.npy"
 model_dir = "{}".format(file)
 '''
     Carga de datos y modelo
@@ -80,7 +80,7 @@ print("Recall = {}".format(recall))
 
 '''
     CURVA ROC
-'''
+
 fpr, tpr, thresholds = roc_curve(Y, y_pred)
 roc_auc = auc(fpr, tpr)
 
@@ -94,3 +94,4 @@ plt.ylabel('True Positive Rate')
 plt.title('Curva ROC (Receiver Operating Characteristic)')
 plt.legend(loc="lower right")
 plt.savefig("ROC_TrainVal.png")
+'''
