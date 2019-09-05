@@ -74,7 +74,7 @@ class Metrics(Callback):
 
 metrics = Metrics()
 checkpoint = ModelCheckpoint(model_dir, monitor='val_loss', verbose=1, save_best_only=False)
-callbacks_list = [metrics]
+callbacks_list = [checkpoint, metrics]
 
 '''
     Definicion del modelo
