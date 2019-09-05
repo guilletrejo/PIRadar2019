@@ -7,7 +7,7 @@ from keras.layers import BatchNormalization, Conv2D, UpSampling2D, MaxPooling2D,
 from keras.optimizers import Adam, SGD
 from keras import regularizers
 from keras.callbacks import LearningRateScheduler
-from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, precision_recall_curve
 import numpy as np
 import os
 import sys
@@ -45,17 +45,31 @@ class Metrics(Callback):
         self.val_f1s = []
         self.val_recalls = []
         self.val_precisions = []
+        self.val_prec = []
+        self.val_rec = []
+        self.val_thre = []
 
     def on_epoch_end(self, epoch, logs={}):
-        val_predict = (np.asarray(self.model.predict(self.model.validation_data[0]))).round()
-        val_targ = self.model.validation_data[1]
+        val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
+        val_proba_predict = np.asarray(self.model.predict(self.validation_data[0]))
+        val_targ = self.validation_data[1]
+        precision, recall, thresholds = precision_recall_curve(val_targ,val_proba_predict)
         _val_f1 = f1_score(val_targ, val_predict)
         _val_recall = recall_score(val_targ, val_predict)
         _val_precision = precision_score(val_targ, val_predict)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
-        print("| val_f1: {%f} | val_precision: {%f} | val_recall {%f}").format(_val_f1, _val_precision, _val_recall)
+        self.val_prec.append(precision)
+        self.val_rec.append(recall)
+        self.val_thre.append(thresholds)
+        print("| val_f1: {} | val_precision: {} | val_recall {}".format(_val_f1, _val_precision, _val_recall))
+        print("Precisions:")
+        print(precision)
+        print("Recalls:")
+        print(recall)
+        print("Thresholds:")
+        print(thresholds)
         return
 
 metrics = Metrics()
@@ -118,7 +132,7 @@ def get_vgg16():
 
     #adam = Adam(lr=0.001)
     sgd = SGD(lr=0.01, decay=0, momentum=0, nesterov=False)
-    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
+    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
     #print(model.summary())
     return model
 
@@ -138,4 +152,4 @@ y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 '''
     Entrenamiento
 '''
-model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
+model.fit(x_train[:25], y_train[:25], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val[:5], y_val[:5]))
