@@ -25,11 +25,20 @@ nombres = ["wrfout_d01_{}_{}","wrfout_A_d01_{}_{}","wrfout_B_d01_{}_{}","wrfout_
 index_horas = 1                  # Se empieza desde las 18hs del primer dia, para coordinar con las iteraciones siguientes
 altura = int(sys.argv[1])                #altura con la que se creara el archivo
 print ("Ejecutando con altura: "+str(altura))
-base = datetime.date(2017,10,31)
-#base = datetime.date(2019,4,28)   # Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
-                                  #                         A QUE SE EMPIEZA DESDE LAS 18hs. Y SE IGNORAN LAS PRIMERAS 6hs.)
-#numdays = 94                      # Cant. total de dias del dataset
-numdays = 544
+
+'''
+# Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
+#                         A QUE SE EMPIEZA DESDE LAS 18hs. Y SE IGNORAN LAS PRIMERAS 6hs.)
+# numdays: cant. total de dias del dataset
+'''
+test = 1                            # "1" INPUT DE TEST; "0" INPUT DE TRAIN/VAL
+if test==1:
+    base = datetime.date(2019,4,28)
+    numdays = 94 
+else:
+    base = datetime.date(2017,10,31)
+    numdays = 544                             
+
 date_list = [base + datetime.timedelta(days=x) for x in range(1, numdays)]  # Genera una lista de fechas con intervalo de un dia
 
 # Se arma otro arreglo para obtener la lista de fechas en el formato del nombre del archivo del modelo (aaaa-mm-dd)

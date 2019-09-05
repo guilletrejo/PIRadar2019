@@ -21,10 +21,11 @@ fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
 precipitation_path = "/home/lac/datos_lluvia/"
+estacion = 53
 
 '''
-  Leer los nombres y la ubicacion (x,y) de cada estacion y
-  se asigna el Nombre como el indice del DataFrame
+    Leer los nombres y la ubicacion (x,y) de cada estacion y
+    se asigna el Nombre como el indice del DataFrame
 '''
 #nombre_ubic = pd.read_csv("./NombresEstaciones.csv")
 
@@ -144,24 +145,8 @@ for estacion in lista_nombres:
         if (np.isnan(precip_p_estacion[i][lista_nombres.index(estacion)])):
             precip_p_estacion[i][lista_nombres.index(estacion)] = -1
 
-print (precip_p_estacion.shape)
-
-'''
-    Llenar la matriz Y mapeando las estaciones en su ubicacion correspondiente, cada hora. 
-    Como la grilla se achico a 86x135 (estaciones en CBA), se hace el desplazamiento para que los valores (x,y) coincidan
-
-    EN LOS PUNTOS DONDE NO HAY DATOS DE LLUVIA, SE DEJA NaN. Despues ver otras alternativas
-    como promediar con las estaciones cercanas, etc...
-
-
-matrizY = np.zeros([cant_horas,96,144], dtype=np.int8)
-matrizY.fill(-1)
-
-for hora in range(cant_horas):
-    for estacion in lista_nombres:
-        index_estacion = lista_nombres.index(estacion)
-        x = nombre_ubic.at[index_estacion,'x'] - 65
-        y = nombre_ubic.at[index_estacion,'y'] - 69
-        matrizY[hora][x][y] = precip_p_estacion[index_estacion][hora]
-'''
-np.save(precipitation_path+'precipitacion.npy', precip_p_estacion)
+cantidad_unos = np.equal(precip_p_estacion[:,estacion],1).sum()
+cantitad_total = len(precip_p_estacion[:,estacion])
+print(precip_p_estacion.shape)
+print("Para umbral "+ str(umbral_mm) + " existen " + str(cantidad_unos) + " unos sobre un total de " + str(cantitad_total) )
+np.save(precipitation_path+'precipitacion_umbral{}.npy'.format(umbral_mm), precip_p_estacion)
