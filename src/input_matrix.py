@@ -25,11 +25,11 @@ nombres = ["wrfout_d01_{}_{}","wrfout_A_d01_{}_{}","wrfout_B_d01_{}_{}","wrfout_
 index_horas = 1                  # Se empieza desde las 18hs del primer dia, para coordinar con las iteraciones siguientes
 altura = int(sys.argv[1])                #altura con la que se creara el archivo
 print ("Ejecutando con altura: "+str(altura))
-#base = datetime.date(2017,10,31)
-base = datetime.date(2019,4,28)   # Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
+base = datetime.date(2017,10,31)
+#base = datetime.date(2019,4,28)   # Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
                                   #                         A QUE SE EMPIEZA DESDE LAS 18hs. Y SE IGNORAN LAS PRIMERAS 6hs.)
-numdays = 94                      # Cant. total de dias del dataset
-#numdays = 544
+#numdays = 94                      # Cant. total de dias del dataset
+numdays = 544
 date_list = [base + datetime.timedelta(days=x) for x in range(1, numdays)]  # Genera una lista de fechas con intervalo de un dia
 
 # Se arma otro arreglo para obtener la lista de fechas en el formato del nombre del archivo del modelo (aaaa-mm-dd)
@@ -39,7 +39,7 @@ for x in range (0,numdays-1):
 """
 Abrir el dataset como una matriz XARRAY, dando formato al nombre con la listas de fechas y las 2 posibles horas de inicio.
 """
-dataDIR = path_datos + "{}/wrfout_A_d01_{}_{}".format(base.strftime("%Y_%m"),base.strftime("%Y-%m-%d"),horas[index_horas])
+dataDIR = path_datos + "{}/wrfout_d01_{}_{}".format(base.strftime("%Y_%m"),base.strftime("%Y-%m-%d"),horas[index_horas])
 DS = xarray.open_dataset(dataDIR)
 index_horas ^= 1                 # Se swapea para abrir el proximo archivo del mismo dia con la otra hora (6hs)
 
