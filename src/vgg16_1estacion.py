@@ -111,9 +111,9 @@ def get_vgg16():
     # FC layers
     model.add(Flatten())
     model.add(Dense(4096, activation='relu'))
-    model.add(Dropout(0.5))
+    #model.add(Dropout(0.5))
     model.add(Dense(4096, activation='relu'))
-    model.add(Dropout(0.5))
+    #model.add(Dropout(0.5))
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
