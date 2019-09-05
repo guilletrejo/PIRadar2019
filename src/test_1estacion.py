@@ -6,17 +6,21 @@ import numpy as np
 import os
 import seaborn as snb
 import sys
+import logging
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # FATAL
+logging.getLogger('tensorflow').setLevel(logging.FATAL)
 '''
     Parametros
 '''
 balance_ratio = 1.0
 home = os.environ['HOME']
-shape = (96,144,3) # grilla de 96x144 con 3 canales
+file = sys.argv[1]
+shape = (68,54,3) # grilla de 96x144 con 3 canales
 cutoff = 0.5 # Si el modelo tiene buena separabilidad, 0.5 debería funcionar bien
-X_data_dir = home + "/datos_modelo/X_Test_noImp_noNorm.npy"
-Y_data_dir = home + "/datos_lluvia/Y_Test_noImp_noNorm.npy"
-model_dir = home + "/modelos/CerroObero/modeloVgg" + str(balance_ratio) + "TyV_noImp_noNorm125epoch.h5"
+X_data_dir = home + "/datos_modelo/X_Test.npy"
+Y_data_dir = home + "/datos_lluvia/Y_Test.npy"
+model_dir = "{}".format(file)
 '''
     Carga de datos y modelo
 '''
@@ -24,7 +28,7 @@ model = load_model(model_dir)
 X = np.load(X_data_dir)
 Y = np.load(Y_data_dir)
 Y = np.expand_dims(Y,axis=1)
-print("--------------TESTEANDO CON DATOS DE VAL---------------")
+print("--------------TESTEANDO CON DATOS DE COMPARACION---------------")
 print("TOTAL MUESTRAS: " + str(X.shape[0]))
 print("Dimension matriz entrada: " + str(X.shape))
 print("Dimension matriz salida: " + str(Y.shape))
@@ -48,7 +52,7 @@ Y_trues = y_pred[Y==1]
 '''
     Testing (y_true = Y ; y_pred = y_pred)
 '''
-
+print(y_pred)
 y_pred[y_pred>=cutoff] = 1
 y_pred[y_pred<cutoff] = 0
 
@@ -59,7 +63,7 @@ recall = (TP) / (TP+FN)
 especificity = (TN) / (TN+FP)
 missclassific_rate = (FP + FN) / (TP+TN+FP+FN)
 negative_precision = (TN) + (TN+FN)
-
+porcentaje_unos = (TP+FP) / (TP+TN+FP+FN)
 print("---------------")
 print("True Positives: {}".format(TP))
 print("True Negatives: {}".format(TN))
@@ -70,6 +74,7 @@ print("Missclassification Rate = {}".format(missclassific_rate))
 print("Negative Precision = {}".format(negative_precision))
 print("Precision = {}".format(precision))
 print("Especificity = {}".format(especificity))
+print("Porcentaje unos = {}".format(porcentaje_unos))
 print("Accuracy = {}".format(accuracy))
 print("Recall = {}".format(recall))
 
@@ -88,4 +93,4 @@ plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.title('Curva ROC (Receiver Operating Characteristic)')
 plt.legend(loc="lower right")
-plt.savefig("ROC_Val.png")
+plt.savefig("ROC_TrainVal.png")
