@@ -1,16 +1,18 @@
 from keras.models import Sequential
 from keras import metrics
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, Callback
 from keras.utils import to_categorical
 from keras.models import load_model
 from keras.layers import BatchNormalization, Conv2D, UpSampling2D, MaxPooling2D, Dropout, Flatten, Dense, Activation
 from keras.optimizers import Adam, SGD
 from keras import regularizers
 from keras.callbacks import LearningRateScheduler
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
 import numpy as np
 import os
 import sys
 import logging
+#Sacar los mensajes de debugging de tensorflow
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # FATAL
 logging.getLogger('tensorflow').setLevel(logging.FATAL)
 '''
@@ -36,7 +38,32 @@ cant_epocas = 60
 tam_batch = 48 # intentar que sea multiplo de la cantidad de muestras
 
 '''
-    Definicion del modelo y custom metric
+    Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
+'''
+class Metrics(Callback):
+    def on_train_begin(self, logs={}):
+        self.val_f1s = []
+        self.val_recalls = []
+        self.val_precisions = []
+
+    def on_epoch_end(self, epoch, logs={}):
+        val_predict = (np.asarray(self.model.predict(self.model.validation_data[0]))).round()
+        val_targ = self.model.validation_data[1]
+        _val_f1 = f1_score(val_targ, val_predict)
+        _val_recall = recall_score(val_targ, val_predict)
+        _val_precision = precision_score(val_targ, val_predict)
+        self.val_f1s.append(_val_f1)
+        self.val_recalls.append(_val_recall)
+        self.val_precisions.append(_val_precision)
+        print("| val_f1: {%f} | val_precision: {%f} | val_recall {%f}").format(_val_f1, _val_precision, _val_recall)
+        return
+
+metrics = Metrics()
+checkpoint = ModelCheckpoint(model_dir, monitor='val_loss', verbose=1, save_best_only=False)
+callbacks_list = [checkpoint, metrics]
+
+'''
+    Definicion del modelo
 '''
 
 def get_vgg16():
@@ -84,9 +111,9 @@ def get_vgg16():
     # FC layers
     model.add(Flatten())
     model.add(Dense(4096, activation='relu'))
-    model.add(Dropout(0.5))
+    #model.add(Dropout(0.5))
     model.add(Dense(4096, activation='relu'))
-    model.add(Dropout(0.5))
+    #model.add(Dropout(0.5))
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
@@ -109,8 +136,6 @@ y_train =  np.expand_dims(np.load(y_train_dir),axis=1)
 y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 
 '''
-    Checkpoints + Entrenamiento
+    Entrenamiento
 '''
-checkpoint = ModelCheckpoint(model_dir, monitor='val_loss', verbose=1, save_best_only=False)
-callbacks_list = [checkpoint]
 model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
