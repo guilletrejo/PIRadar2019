@@ -29,12 +29,12 @@ home = os.environ['HOME']
 muestras_train = 0
 muestras_val = 0
 shape = (68,54,3) # grilla de 96x144 con 3 canales
-x_train_dir = home + "/datos_modelo/24horas/X_Train.npy"
-x_val_dir = home + "/datos_modelo/24horas/X_Val.npy"
-y_train_dir = home + "/datos_lluvia/24horas/Y_Train.npy"
-y_val_dir = home + "/datos_lluvia/24horas/Y_Val.npy"
-model_dir = home + "/modelos/CerroObero/24horas/epoca{epoch:02d}.hdf5"
-cant_epocas = 60
+x_train_dir = home + "/datos_modelo/24horas/umbral0.3/X_Train.npy"
+x_val_dir = home + "/datos_modelo/24horas/umbral0.3/X_Val.npy"
+y_train_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Train.npy"
+y_val_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Val.npy"
+model_dir = home + "/modelos/CerroObero/24horas/umbral0.3/epoca{epoch:02d}.hdf5"
+cant_epocas = 30
 tam_batch = 48 # intentar que sea multiplo de la cantidad de muestras
 
 '''
