@@ -25,9 +25,11 @@ nombres = ["wrfout_d01_{}_{}","wrfout_A_d01_{}_{}","wrfout_B_d01_{}_{}","wrfout_
 index_horas = 1                  # Se empieza desde las 18hs del primer dia, para coordinar con las iteraciones siguientes
 altura = int(sys.argv[1])                #altura con la que se creara el archivo
 print ("Ejecutando con altura: "+str(altura))
-base = datetime.date(2017,10,31)  # Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
-                                 #                         A QUE SE EMPIEZA DESDE LAS 18hs. Y SE IGNORAN LAS PRIMERAS 6hs.)
-numdays = 544                      # Cant. total de dias del dataset
+#base = datetime.date(2017,10,31)
+base = datetime.date(2019,4,28)   # Primer dia del dataset (SIEMPRE LOS DATOS VAN A INICIAR DESDE EL DIA SIGUIENTE A ESTE DIA INICIAL, DEBIDO
+                                  #                         A QUE SE EMPIEZA DESDE LAS 18hs. Y SE IGNORAN LAS PRIMERAS 6hs.)
+numdays = 94                      # Cant. total de dias del dataset
+#numdays = 544
 date_list = [base + datetime.timedelta(days=x) for x in range(1, numdays)]  # Genera una lista de fechas con intervalo de un dia
 
 # Se arma otro arreglo para obtener la lista de fechas en el formato del nombre del archivo del modelo (aaaa-mm-dd)
@@ -37,7 +39,7 @@ for x in range (0,numdays-1):
 """
 Abrir el dataset como una matriz XARRAY, dando formato al nombre con la listas de fechas y las 2 posibles horas de inicio.
 """
-dataDIR = path_datos + "{}/wrfout_d01_{}_{}".format(base.strftime("%Y_%m"),base.strftime("%Y-%m-%d"),horas[index_horas])
+dataDIR = path_datos + "{}/wrfout_A_d01_{}_{}".format(base.strftime("%Y_%m"),base.strftime("%Y-%m-%d"),horas[index_horas])
 DS = xarray.open_dataset(dataDIR)
 index_horas ^= 1                 # Se swapea para abrir el proximo archivo del mismo dia con la otra hora (6hs)
 
@@ -52,27 +54,26 @@ Cada matriz de datos tiene dimension (86,135) (rectangulo formado por las estaci
     * Despues, se abre el segundo archivo (6hs del dia siguiente) y se ignoran las  primeras 6 (hasta las 11am).
       A partir de ahi se toman 12hs (desde 12pm hasta las 23pm) cubriendo la otra mitad del dia.
 
-    ** Esto se repite con todos los archivos, generando los datos (rectangulo de 86*135 con el dato 'z' en cada punto) para
-       todos los dias del dataset en CADA UNA de las 34 alturas posibles del modelo, por lo que las dimensiones de la matriz
-       final serian (cant_de_horas,86,135), y se genera UN ARCHIVO (.npy) por cada altura del modelo.
+    **  Esto se repite con todos los archivos, generando los datos (rectangulo de 86*135 con el dato 'z' en cada punto) para
+        todos los dias del dataset en CADA UNA de las 34 alturas posibles del modelo, por lo que las dimensiones de la matriz
+        final serian (cant_de_horas,86,135), y se genera UN ARCHIVO (.npy) por cada altura del modelo.
 La cantidad de horas obtenidas es (numdays*24horas)-12horas
 """
 
 # Inicializacion con el tiempo 0 (se toma el primer dato solamente)
-PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = altura ).values[65:161,69:213]    # Extrae el dato PH en la 1 hora
-PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = altura ).values[65:161,69:213]  # Extrae el dato PHB en la 1 hora
+PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = altura ).values[145:213,65:119]    # Extrae el dato PH en la 1 hora
+PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = altura ).values[145:213,65:119]  # Extrae el dato PHB en la 1 hora
 z = (PH_numpy + PHB_numpy) / 9.81                                      # Obtiene altura geopotencial (matriz 269x269)
 z_expanded = np.expand_dims(z, axis = 0)                                     # Agrega una dimension para agregar las otras horas
 
 # Completa con el resto de los tiempos
 for t in range(time_init+1,time_init+times):
-    PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = altura ).values[65:161,69:213]        # Extrae el dato PH en la hora t
-    PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = altura ).values[65:161,69:213]      # Extrae el dato PHB en la hora t
+    PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = altura ).values[145:213,65:119]        # Extrae el dato PH en la hora t
+    PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = altura ).values[145:213,65:119]      # Extrae el dato PHB en la hora t
     zaux = (PH_numpy + PHB_numpy) / 9.81                               # Obtiene altura geopotencial en la hora t
     zaux_ex = np.expand_dims(zaux, axis = 0)                           # Agrega una dimension asi se puede concatenar con z_ex (primer valor generado)
     z_expanded = np.concatenate((z_expanded, zaux_ex), axis=0)                     # Concatena las matrices y queda (12x269x269)
-#np.save('../datos_modelo/z_altura{}_{}.npy'.format(altura,dias[0]),z_ex)           # Guarda 1 archivo por cada altura, con las primeras 12 horas.
-    
+
 DS.close() # Se cierra el dataset abierto para ahorrar memoria
 
 for dia in pb.progressbar(dias):                                                           # Lee el resto de los dias del dataset
@@ -90,19 +91,19 @@ for dia in pb.progressbar(dias):                                                
                 print (e.filename)
 
         if(data_found == 0 or (dia=='2018-02-27')):
-            z_ex = np.zeros(shape=(12,96,144))
+            z_ex = np.zeros(shape=(12,68,54))
             z_ex.fill(np.nan)
         elif (data_found == 1):
             # Inicializacion con el tiempo 0
-            PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = altura  ).values[65:161,69:213]
-            PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = altura ).values[65:161,69:213]
+            PH_numpy = DS.PH.sel(Time = time_init, bottom_top_stag = altura  ).values[145:213,65:119]
+            PHB_numpy = DS.PHB.sel(Time = time_init, bottom_top_stag = altura ).values[145:213,65:119]
             z = (PH_numpy + PHB_numpy) / 9.81
             z_ex = np.expand_dims(z, axis = 0)
 
             # Completa con el resto de los tiempos
             for t in range(time_init+1,time_init+times):
-                PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = altura ).values[65:161,69:213]
-                PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = altura ).values[65:161,69:213]
+                PH_numpy = DS.PH.sel(Time = t, bottom_top_stag = altura ).values[145:213,65:119]
+                PHB_numpy = DS.PHB.sel(Time = t, bottom_top_stag = altura ).values[145:213,65:119]
                 zaux = (PH_numpy + PHB_numpy) / 9.81
                 zaux_ex = np.expand_dims(zaux, axis = 0)
                 z_ex = np.concatenate((z_ex, zaux_ex), axis=0)
@@ -113,4 +114,4 @@ for dia in pb.progressbar(dias):                                                
 #imp_mean = SimpleImputer(missing_values=np.nan, strategy='median', copy=False)
 #for i in range(96):
 #	imp_mean.fit_transform(z_expanded[:,i,:])
-np.save('/home/lac/datos_modelo/z_altura{}_{}_wnan.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
+np.save('/home/lac/datos_modelo/z_altura{}_{}_wnan_yx_acotada.npy'.format(altura,dias[0]),z_expanded)      # Guarda nuevamente el archivo .npy (se va sobreescribiendo el archivo con los nuevos valores)
