@@ -35,7 +35,7 @@ y_train_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Train.npy"
 y_val_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Val.npy"
 model_dir = home + "/modelos/CerroObero/24horas/umbral0.3/epoca{epoch:02d}.hdf5"
 cant_epocas = 30
-tam_batch = 48 # intentar que sea multiplo de la cantidad de muestras
+tam_batch = 24 # intentar que sea multiplo de la cantidad de muestras
 
 '''
     Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
@@ -131,7 +131,7 @@ def get_vgg16():
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
-    sgd = SGD(lr=0.01, decay=0, momentum=0, nesterov=False)
+    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=False)
     model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
     #print(model.summary())
     return model
@@ -152,4 +152,4 @@ y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 '''
     Entrenamiento
 '''
-model.fit(x_train[:25], y_train[:25], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val[:5], y_val[:5]))
+model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
