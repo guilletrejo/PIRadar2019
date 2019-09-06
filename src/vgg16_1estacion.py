@@ -36,13 +36,14 @@ x_val_dir = home + "/datos_modelo/24horas/umbral0.3/X_Val.npy"
 y_train_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Train.npy"
 y_val_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Val.npy"
 model_dir = home + "/modelos/CerroObero/24horas/umbral0.3/epoca{epoch:02d}.hdf5"
-cant_epocas = 5
-tam_batch = 5 # intentar que sea multiplo de la cantidad de muestras
+curve_dir = home + "/modelos/CerroObero/24horas/umbral0.3/graficos/prc{}.png"
+cant_epocas = 30
+tam_batch = 24 # intentar que sea multiplo de la cantidad de muestras
 
 '''
     Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
 '''
-def curve(precision, recall):
+def curve(precision, recall, epoch, average_precision):
     step_kwargs = ({'step': 'post'}
         if 'step' in signature(plt.fill_between).parameters
         else {})
@@ -53,7 +54,7 @@ def curve(precision, recall):
     plt.ylim([0.0, 1.05])
     plt.xlim([0.0, 1.0])
     plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(average_precision))
-    plt.savefig("prc{epoch:02d}.png")
+    plt.savefig(curve_dir.format(epoch))
 
 class Metrics(Callback):
     def on_train_begin(self, logs={}):
@@ -65,7 +66,7 @@ class Metrics(Callback):
         val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
         val_proba_predict = np.asarray(self.model.predict(self.validation_data[0]))
         val_targ = self.validation_data[1]
-        precision, recall, thresholds = precision_recall_curve(val_targ,val_proba_predict)
+        precision, recall, thresholds = precision_recall_curve(val_targ,val_predict)
         _val_f1 = f1_score(val_targ, val_predict)
         _val_recall = recall_score(val_targ, val_predict)
         _val_precision = precision_score(val_targ, val_predict)
@@ -74,7 +75,7 @@ class Metrics(Callback):
         _val_zero_one_loss = zero_one_loss(val_targ, val_predict)
         _val_hmf1acc = 2*(_val_f1*_val_acc)/(_val_f1+_val_acc)
         _val_average_precision = average_precision_score(val_targ, val_proba_predict)
-        curve(_val_precision, _val_recall)
+        curve(_val_precision, _val_recall, epoch, _val_average_precision)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
@@ -162,4 +163,4 @@ y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 '''
     Entrenamiento
 '''
-model.fit(x_train[:30], y_train[:30], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val[:10], y_val[:10]))
+model.fit(x_train[:1000], y_train[:1000], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
