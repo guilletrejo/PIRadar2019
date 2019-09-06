@@ -7,7 +7,9 @@ from keras.layers import BatchNormalization, Conv2D, UpSampling2D, MaxPooling2D,
 from keras.optimizers import Adam, SGD
 from keras import regularizers
 from keras.callbacks import LearningRateScheduler
-from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, precision_recall_curve
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, precision_recall_curve, accuracy_score, zero_one_loss, balanced_accuracy_score, average_precision_score
+from inspect import signature
+import matplotlib.pyplot as plt
 import numpy as np
 import os
 import sys
@@ -34,20 +36,30 @@ x_val_dir = home + "/datos_modelo/24horas/umbral0.3/X_Val.npy"
 y_train_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Train.npy"
 y_val_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Val.npy"
 model_dir = home + "/modelos/CerroObero/24horas/umbral0.3/epoca{epoch:02d}.hdf5"
-cant_epocas = 30
-tam_batch = 24 # intentar que sea multiplo de la cantidad de muestras
+cant_epocas = 5
+tam_batch = 5 # intentar que sea multiplo de la cantidad de muestras
 
 '''
     Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
 '''
+def curve(precision, recall):
+    step_kwargs = ({'step': 'post'}
+        if 'step' in signature(plt.fill_between).parameters
+        else {})
+    plt.step(recall, precision, color='b', alpha=0.2, where='post')
+    plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.ylim([0.0, 1.05])
+    plt.xlim([0.0, 1.0])
+    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(average_precision))
+    plt.savefig("prc{epoch:02d}.png")
+
 class Metrics(Callback):
     def on_train_begin(self, logs={}):
         self.val_f1s = []
         self.val_recalls = []
         self.val_precisions = []
-        self.val_prec = []
-        self.val_rec = []
-        self.val_thre = []
 
     def on_epoch_end(self, epoch, logs={}):
         val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
@@ -57,19 +69,17 @@ class Metrics(Callback):
         _val_f1 = f1_score(val_targ, val_predict)
         _val_recall = recall_score(val_targ, val_predict)
         _val_precision = precision_score(val_targ, val_predict)
+        _val_acc = accuracy_score(val_targ, val_predict)
+        _val_balanced_acc = balanced_accuracy_score(val_targ, val_predict)
+        _val_zero_one_loss = zero_one_loss(val_targ, val_predict)
+        _val_hmf1acc = 2*(_val_f1*_val_acc)/(_val_f1+_val_acc)
+        _val_average_precision = average_precision_score(val_targ, val_proba_predict)
+        curve(_val_precision, _val_recall)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
-        self.val_prec.append(precision)
-        self.val_rec.append(recall)
-        self.val_thre.append(thresholds)
-        print("| val_f1: {} | val_precision: {} | val_recall {}".format(_val_f1, _val_precision, _val_recall))
-        print("Precisions:")
-        print(precision)
-        print("Recalls:")
-        print(recall)
-        print("Thresholds:")
-        print(thresholds)
+        print("| val_f1: {} | val_precision: {} | val_recall {} | val_acc {} | val_balanced_acc {}".format(_val_f1, _val_precision, _val_recall, _val_acc, _val_balanced_acc))
+        print("| harmonic_mean val_f1 val_acc: {} | val_zero_one_loss {} ".format(_val_hmf1acc, _val_zero_one_loss))
         return
 
 metrics = Metrics()
@@ -152,4 +162,4 @@ y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 '''
     Entrenamiento
 '''
-model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
+model.fit(x_train[:30], y_train[:30], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val[:10], y_val[:10]))
