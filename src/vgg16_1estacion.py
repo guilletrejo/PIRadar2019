@@ -75,12 +75,12 @@ class Metrics(Callback):
         _val_zero_one_loss = zero_one_loss(val_targ, val_predict)
         _val_hmf1acc = 2*(_val_f1*_val_acc)/(_val_f1+_val_acc)
         _val_average_precision = average_precision_score(val_targ, val_proba_predict)
-        curve(_val_precision, _val_recall, epoch, _val_average_precision)
+        #curve(_val_precision, _val_recall, epoch, _val_average_precision)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
         print("| val_f1: {} | val_precision: {} | val_recall {} | val_acc {} | val_balanced_acc {}".format(_val_f1, _val_precision, _val_recall, _val_acc, _val_balanced_acc))
-        print("| harmonic_mean val_f1 val_acc: {} | val_zero_one_loss {} ".format(_val_hmf1acc, _val_zero_one_loss))
+        print("| harmonic_mean val_f1 val_acc: {} | val_zero_one_loss {} | val_aver_precision {}".format(_val_hmf1acc, _val_zero_one_loss, _val_average_precision))
         return
 
 metrics = Metrics()
@@ -142,7 +142,7 @@ def get_vgg16():
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
-    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=False)
+    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
     #print(model.summary())
     return model
@@ -163,4 +163,4 @@ y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 '''
     Entrenamiento
 '''
-model.fit(x_train[:1000], y_train[:1000], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
+model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
