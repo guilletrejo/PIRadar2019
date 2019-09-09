@@ -43,18 +43,6 @@ tam_batch = 24 # intentar que sea multiplo de la cantidad de muestras
 '''
     Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
 '''
-def curve(precision, recall, epoch, average_precision):
-    step_kwargs = ({'step': 'post'}
-        if 'step' in signature(plt.fill_between).parameters
-        else {})
-    plt.step(recall, precision, color='b', alpha=0.2, where='post')
-    plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
-    plt.xlabel('Recall')
-    plt.ylabel('Precision')
-    plt.ylim([0.0, 1.05])
-    plt.xlim([0.0, 1.0])
-    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(average_precision))
-    plt.savefig(curve_dir.format(epoch))
 
 class Metrics(Callback):
     def on_train_begin(self, logs={}):
@@ -75,7 +63,6 @@ class Metrics(Callback):
         _val_zero_one_loss = zero_one_loss(val_targ, val_predict)
         _val_hmf1acc = 2*(_val_f1*_val_acc)/(_val_f1+_val_acc)
         _val_average_precision = average_precision_score(val_targ, val_proba_predict)
-        #curve(_val_precision, _val_recall, epoch, _val_average_precision)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
