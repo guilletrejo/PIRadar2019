@@ -13,15 +13,15 @@ import progressbar as pb
     Parametros
 '''
 
-umbral_mm = 0.2
+umbral_mm = 0.3
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
 fecha_inicial = "2019-04-29 00:00"
 fecha_final = "2019-07-31 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Registro de Lluvia [mm]'
-precipitation_path = "../../datos_lluvia/"
-estacion = 61
+precipitation_path = "/home/lac/datos_lluvia/"
+estacion_cerro = 61
 
 '''
 Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
@@ -105,8 +105,8 @@ for estacion in lista_nombres:
         if (np.isnan(precip_p_estacion[i][lista_nombres.index(estacion)])):
             precip_p_estacion[i][lista_nombres.index(estacion)] = -1
 
-cantidad_unos = np.equal(precip_p_estacion[:,estacion],1).sum()
-cantitad_total = len(precip_p_estacion[:,estacion])
+cantidad_unos = np.equal(precip_p_estacion[:,estacion_cerro],1).sum()
+cantitad_total = len(precip_p_estacion[:,estacion_cerro])
 print(precip_p_estacion.shape)
 print("Para umbral "+ str(umbral_mm) + " existen " + str(cantidad_unos) + " unos sobre un total de " + str(cantitad_total) )
 np.save(precipitation_path+'precipitacion_umbral{}_test.npy'.format(umbral_mm), precip_p_estacion)

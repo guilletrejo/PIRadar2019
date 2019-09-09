@@ -13,7 +13,7 @@ import progressbar as pb
     Parametros
 '''
 
-umbral_mm = 0.2
+umbral_mm = 0.4
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
 fecha_inicial = "2017-11-01 00:00"
