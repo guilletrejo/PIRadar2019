@@ -126,8 +126,12 @@ if(datos == 0):
 '''
 	Contar cuantos 1 hay en total en la estacion.
 '''
-lluvias = np.where(Y==1)[0].size
-nolluvias = np.where(Y==0)[0].size
+if(datos == 0):
+	lluvias = np.where(y_test==1)[0].size
+	nolluvias = np.where(y_test==0)[0].size
+if(datos == 1 or datos == 2):
+	lluvias = np.where(Y==1)[0].size
+	nolluvias = np.where(Y==0)[0].size
 print("Horas de lluvia: " + str(lluvias))
 print("Horas de no lluvia: " + str(nolluvias))
 total_real = lluvias+nolluvias
