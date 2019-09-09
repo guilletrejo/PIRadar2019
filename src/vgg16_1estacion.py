@@ -7,7 +7,9 @@ from keras.layers import BatchNormalization, Conv2D, UpSampling2D, MaxPooling2D,
 from keras.optimizers import Adam, SGD
 from keras import regularizers
 from keras.callbacks import LearningRateScheduler
-from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score
+from sklearn.metrics import confusion_matrix, f1_score, precision_score, recall_score, precision_recall_curve, accuracy_score, zero_one_loss, balanced_accuracy_score, average_precision_score
+from inspect import signature
+import matplotlib.pyplot as plt
 import numpy as np
 import os
 import sys
@@ -29,17 +31,30 @@ home = os.environ['HOME']
 muestras_train = 0
 muestras_val = 0
 shape = (68,54,3) # grilla de 96x144 con 3 canales
-x_train_dir = home + "/datos_modelo/24horas/X_Train.npy"
-x_val_dir = home + "/datos_modelo/24horas/X_Val.npy"
-y_train_dir = home + "/datos_lluvia/24horas/Y_Train.npy"
-y_val_dir = home + "/datos_lluvia/24horas/Y_Val.npy"
-model_dir = home + "/modelos/CerroObero/24horas/epoca{epoch:02d}.hdf5"
-cant_epocas = 60
-tam_batch = 48 # intentar que sea multiplo de la cantidad de muestras
+x_train_dir = home + "/datos_modelo/24horas/umbral0.3/X_Train.npy"
+x_val_dir = home + "/datos_modelo/24horas/umbral0.3/X_Val.npy"
+y_train_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Train.npy"
+y_val_dir = home + "/datos_lluvia/24horas/umbral0.3/Y_Val.npy"
+model_dir = home + "/modelos/CerroObero/24horas/umbral0.3/epoca{epoch:02d}.hdf5"
+cant_epocas = 5
+tam_batch = 5 # intentar que sea multiplo de la cantidad de muestras
 
 '''
     Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
 '''
+def curve(precision, recall):
+    step_kwargs = ({'step': 'post'}
+        if 'step' in signature(plt.fill_between).parameters
+        else {})
+    plt.step(recall, precision, color='b', alpha=0.2, where='post')
+    plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.ylim([0.0, 1.05])
+    plt.xlim([0.0, 1.0])
+    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(average_precision))
+    plt.savefig("prc{epoch:02d}.png")
+
 class Metrics(Callback):
     def on_train_begin(self, logs={}):
         self.val_f1s = []
@@ -47,15 +62,24 @@ class Metrics(Callback):
         self.val_precisions = []
 
     def on_epoch_end(self, epoch, logs={}):
-        val_predict = (np.asarray(self.model.predict(self.model.validation_data[0]))).round()
-        val_targ = self.model.validation_data[1]
+        val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
+        val_proba_predict = np.asarray(self.model.predict(self.validation_data[0]))
+        val_targ = self.validation_data[1]
+        precision, recall, thresholds = precision_recall_curve(val_targ,val_proba_predict)
         _val_f1 = f1_score(val_targ, val_predict)
         _val_recall = recall_score(val_targ, val_predict)
         _val_precision = precision_score(val_targ, val_predict)
+        _val_acc = accuracy_score(val_targ, val_predict)
+        _val_balanced_acc = balanced_accuracy_score(val_targ, val_predict)
+        _val_zero_one_loss = zero_one_loss(val_targ, val_predict)
+        _val_hmf1acc = 2*(_val_f1*_val_acc)/(_val_f1+_val_acc)
+        _val_average_precision = average_precision_score(val_targ, val_proba_predict)
+        curve(_val_precision, _val_recall)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
-        print("| val_f1: {%f} | val_precision: {%f} | val_recall {%f}").format(_val_f1, _val_precision, _val_recall)
+        print("| val_f1: {} | val_precision: {} | val_recall {} | val_acc {} | val_balanced_acc {}".format(_val_f1, _val_precision, _val_recall, _val_acc, _val_balanced_acc))
+        print("| harmonic_mean val_f1 val_acc: {} | val_zero_one_loss {} ".format(_val_hmf1acc, _val_zero_one_loss))
         return
 
 metrics = Metrics()
@@ -117,8 +141,8 @@ def get_vgg16():
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
-    sgd = SGD(lr=0.01, decay=0, momentum=0, nesterov=False)
-    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=[metrics.binary_accuracy])
+    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=False)
+    model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
     #print(model.summary())
     return model
 
@@ -138,4 +162,4 @@ y_val = np.expand_dims(np.load(y_val_dir),axis=1)
 '''
     Entrenamiento
 '''
-model.fit(x_train, y_train, batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val, y_val))
+model.fit(x_train[:30], y_train[:30], batch_size=tam_batch, epochs=cant_epocas, verbose=1, callbacks=callbacks_list, validation_data=(x_val[:10], y_val[:10]))
