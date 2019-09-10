@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import urllib as url
 import calendar
+import os
 import datetime as dt
 import progressbar as pb
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
@@ -12,7 +13,7 @@ import progressbar as pb
 ''' 
     Parametros
 '''
-
+home = os.environ['HOME']
 umbral_mm = 0.2
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
@@ -20,7 +21,7 @@ fecha_inicial = "2017-11-01 00:00"
 fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
-precipitation_path = "/home/lac/datos_lluvia/"
+precipitation_path = home + "/datos_lluvia/"
 estacion_elegida = 53
 
 '''
@@ -143,19 +144,19 @@ rango_outlier = 6
 for i in range(Y_estacion.shape[0]):
     count = 0
     if(Y_estacion[i]==umbral_mm):
-        print("-----i = %i-----" % i)
+        #print("-----i = %i-----" % i)
         for h in range(1, rango_outlier+1):
-            print("i-h = %i" % (i-h))
-            print("i+h = %i" % (i+h))
+            #print("i-h = %i" % (i-h))
+            #print("i+h = %i" % (i+h))
             if(Y_estacion[i-h]>=umbral_mm):
                 count += 1
-                print("Y_estacion[%i] = 1" % (i-h))
+                #print("Y_estacion[%i] = 1" % (i-h))
             if(Y_estacion[i+h]>=umbral_mm):
                 count += 1
-                print("Y_estacion[%i] = 1" % (i+h))
+                #print("Y_estacion[%i] = 1" % (i+h))
         if(count<=1):
-            Y_estacion[i] == 0.0
-            print("Outlier en %i, poniendo a cero" % i)
+            precip_p_estacion[i,estacion_elegida] = 0.0
+            #print("Outlier en %i, poniendo a cero" % i)
             outcount += 1
 print("Cantidad de outliers removidos: %i" % outcount)
 

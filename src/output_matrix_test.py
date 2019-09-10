@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import urllib as url
 import calendar
+import os
 import datetime as dt
 import progressbar as pb
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
@@ -12,16 +13,16 @@ import progressbar as pb
 ''' 
     Parametros
 '''
-
-umbral_mm = 0.3
+home = os.environ['HOME']
+umbral_mm = 0.2
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
 fecha_inicial = "2019-04-29 00:00"
 fecha_final = "2019-07-31 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Registro de Lluvia [mm]'
-precipitation_path = "/home/lac/datos_lluvia/"
-estacion_cerro = 61
+precipitation_path = home + "/datos_lluvia/"
+estacion_elegida = 61 # El indice para Cerro Obero cambia en los datos nuevos
 
 '''
 Lee el archivo Excel de cada anio con las 131 estaciones, carga los nombres en una lista. 
@@ -95,6 +96,32 @@ for estacion in pb.progressbar(lista_nombres):
         precip_p_estacion[:,lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
 print("Cantidad de estaciones sin dato: " + str(no_data_count))
 
+'''
+Deteccion y eliminacion de outliers
+'''
+Y_estacion = precip_p_estacion[:,estacion_elegida]
+count = 0
+outcount = 0
+rango_outlier = 6
+for i in range(Y_estacion.shape[0]):
+    count = 0
+    if(Y_estacion[i]==umbral_mm):
+        #print("-----i = %i-----" % i)
+        for h in range(1, rango_outlier+1):
+            #print("i-h = %i" % (i-h))
+            #print("i+h = %i" % (i+h))
+            if(Y_estacion[i-h]>=umbral_mm):
+                count += 1
+                #print("Y_estacion[%i] = 1" % (i-h))
+            if(Y_estacion[i+h]>=umbral_mm):
+                count += 1
+                #print("Y_estacion[%i] = 1" % (i+h))
+        if(count<=1):
+            precip_p_estacion[i,estacion_elegida] = 0.0
+            #print("Outlier en %i, poniendo a cero" % i)
+            outcount += 1
+print("Cantidad de outliers removidos: %i" % outcount)
+
 # Convierte a 1 si llovio o 0 si no llovio
 for estacion in lista_nombres:
     for i in range(cant_horas):
@@ -105,8 +132,8 @@ for estacion in lista_nombres:
         if (np.isnan(precip_p_estacion[i][lista_nombres.index(estacion)])):
             precip_p_estacion[i][lista_nombres.index(estacion)] = -1
 
-cantidad_unos = np.equal(precip_p_estacion[:,estacion_cerro],1).sum()
-cantitad_total = len(precip_p_estacion[:,estacion_cerro])
+cantidad_unos = np.equal(precip_p_estacion[:,estacion_elegida],1).sum()
+cantitad_total = len(precip_p_estacion[:,estacion_elegida])
 print(precip_p_estacion.shape)
 print("Para umbral "+ str(umbral_mm) + " existen " + str(cantidad_unos) + " unos sobre un total de " + str(cantitad_total) )
 np.save(precipitation_path+'precipitacion_umbral{}_test.npy'.format(umbral_mm), precip_p_estacion)
