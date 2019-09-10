@@ -14,20 +14,20 @@ from sklearn.utils import shuffle
 '''
 datos = int(sys.argv[1])
 shape = [12592, 1505, 13044] # cant. horas eliminando nulos tanto de entrada como de salida, para cada caso.
-umbral = 0.3
+umbral = 0.2
 '''
 	Parametros
 '''
 home = os.environ['HOME']
 if(datos == 0 or datos == 2):
 	X_data_dir = home + "/datos_modelo/z_altura{}_2017-11-01_wnan_yx_acotada.npy"
-	Y_data_dir = home + "/datos_lluvia/precipitacion_umbral{}.npy".format(umbral)
+	Y_data_dir = home + "/datos_lluvia/precipitacion_umbral{}_notoutliers.npy".format(umbral)
 if(datos == 1):
 	X_data_dir = home + "/datos_modelo/z_altura{}_2019-04-29_wnan_yx_acotada.npy"
-	Y_data_dir = home + "/datos_lluvia/precipitacion_umbral{}_test.npy".format(umbral)
+	Y_data_dir = home + "/datos_lluvia/precipitacion_umbral{}_test_notoutliers.npy".format(umbral)
 
 '''
-Cerro Obero 44 nulos y 392 lluvias con umbral 0.3
+Cerro Obero 44 nulos y 658 lluvias con umbral 0.2 y outliers removidos
 '''
 if(datos == 0 or datos == 2):
 	estacion = 53
@@ -168,13 +168,13 @@ if(datos == 1 or datos == 2):
 	Guardado de datos
 '''
 if(datos == 0):
-	np.save(home + "/datos_modelo/24horas/umbral{}/X_Train.npy".format(umbral), x_train)
-	np.save(home + "/datos_lluvia/24horas/umbral{}/Y_Train.npy".format(umbral), y_train)
-	np.save(home + "/datos_modelo/24horas/umbral{}/X_Val.npy".format(umbral), x_test)
-	np.save(home + "/datos_lluvia/24horas/umbral{}/Y_Val.npy".format(umbral), y_test)
+	np.save(home + "/datos_modelo/24horas/not_outliers/X_Train.npy", x_train)
+	np.save(home + "/datos_lluvia/24horas/not_outliers/Y_Train.npy", y_train)
+	np.save(home + "/datos_modelo/24horas/not_outliers/X_Val.npy", x_test)
+	np.save(home + "/datos_lluvia/24horas/not_outliers/Y_Val.npy", y_test)
 if(datos == 1):
-	np.save(home + "/datos_modelo/comp_test/umbral{}/X_Test.npy".format(umbral), x)
-	np.save(home + "/datos_lluvia/comp_test/umbral{}/Y_Test.npy".format(umbral), Y)
+	np.save(home + "/datos_modelo/comp_test/not_outliers/X_Test.npy", x)
+	np.save(home + "/datos_lluvia/comp_test/not_outliers/Y_Test.npy", Y)
 if(datos == 2):
-	np.save(home + "/datos_modelo/comp_test/umbral{}/X_Comp.npy".format(umbral), x)
-	np.save(home + "/datos_lluvia/comp_test/umbral{}/Y_Comp.npy".format(umbral), Y)
+	np.save(home + "/datos_modelo/comp_test/not_outliers/X_Comp.npy", x)
+	np.save(home + "/datos_lluvia/comp_test/not_outliers/Y_Comp.npy", Y)

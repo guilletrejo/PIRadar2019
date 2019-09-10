@@ -143,19 +143,19 @@ rango_outlier = 6
 for i in range(Y_estacion.shape[0]):
     count = 0
     if(Y_estacion[i]==umbral_mm):
-        print("-----i = %i-----" % i)
+        #print("-----i = %i-----" % i)
         for h in range(1, rango_outlier+1):
-            print("i-h = %i" % (i-h))
-            print("i+h = %i" % (i+h))
+            #print("i-h = %i" % (i-h))
+            #print("i+h = %i" % (i+h))
             if(Y_estacion[i-h]>=umbral_mm):
                 count += 1
-                print("Y_estacion[%i] = 1" % (i-h))
+                #print("Y_estacion[%i] = 1" % (i-h))
             if(Y_estacion[i+h]>=umbral_mm):
                 count += 1
-                print("Y_estacion[%i] = 1" % (i+h))
+                #print("Y_estacion[%i] = 1" % (i+h))
         if(count<=1):
-            Y_estacion[i] == 0.0
-            print("Outlier en %i, poniendo a cero" % i)
+            precip_p_estacion[i,estacion_elegida] = 0.0
+            #print("Outlier en %i, poniendo a cero" % i)
             outcount += 1
 print("Cantidad de outliers removidos: %i" % outcount)
 
