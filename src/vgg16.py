@@ -54,20 +54,15 @@ class Metrics(Callback):
         val_predict = (np.asarray(self.model.predict(self.validation_data[0]))).round()
         val_proba_predict = np.asarray(self.model.predict(self.validation_data[0]))
         val_targ = self.validation_data[1]
-        precision, recall, thresholds = precision_recall_curve(val_targ,val_predict)
         _val_f1 = f1_score(val_targ, val_predict)
         _val_recall = recall_score(val_targ, val_predict)
         _val_precision = precision_score(val_targ, val_predict)
-        _val_acc = accuracy_score(val_targ, val_predict)
         _val_balanced_acc = balanced_accuracy_score(val_targ, val_predict)
         _val_zero_one_loss = zero_one_loss(val_targ, val_predict)
-        _val_hmf1acc = 2*(_val_f1*_val_acc)/(_val_f1+_val_acc)
-        _val_average_precision = average_precision_score(val_targ, val_proba_predict)
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
-        print("| val_f1: {} | val_precision: {} | val_recall {} | val_acc {} | val_balanced_acc {}".format(_val_f1, _val_precision, _val_recall, _val_acc, _val_balanced_acc))
-        print("| harmonic_mean val_f1 val_acc: {} | val_zero_one_loss {} | val_aver_precision {}".format(_val_hmf1acc, _val_zero_one_loss, _val_average_precision))
+        print("| val_zero_one_loss: {0:.3f} | val_f1: {0:.3f} | val_precision: {0:.3f} | val_recall: {0:.3f} | val_balanced_acc: {0:.3f}".format(_val_zero_one_loss, _val_f1, _val_precision, _val_recall, _val_balanced_acc))
         return
 
 metrics = Metrics()
