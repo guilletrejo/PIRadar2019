@@ -13,7 +13,7 @@ import progressbar as pb
     Parametros
 '''
 
-umbral_mm = 0.4
+umbral_mm = 0.2
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
 fecha_inicial = "2017-11-01 00:00"
@@ -21,7 +21,7 @@ fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
 precipitation_path = "/home/lac/datos_lluvia/"
-estacion_cerro = 53
+estacion_elegida = 53
 
 '''
     Leer los nombres y la ubicacion (x,y) de cada estacion y
@@ -133,6 +133,32 @@ for estacion in pb.progressbar(lista_nombres):
         precip_p_estacion[:,lista_nombres.index(estacion)] = precipitations_per_hour.values[:,0]
 print("Cantidad de estaciones sin dato: " + str(no_data_count))
 
+'''
+Deteccion y eliminacion de outliers
+'''
+Y_estacion = precip_p_estacion[:,estacion_elegida]
+count = 0
+outcount = 0
+rango_outlier = 6
+for i in range(Y_estacion.shape[0]):
+    count = 0
+    if(Y_estacion[i]==umbral_mm):
+        print("-----i = %i-----" % i)
+        for h in range(1, rango_outlier+1):
+            print("i-h = %i" % (i-h))
+            print("i+h = %i" % (i+h))
+            if(Y_estacion[i-h]>=umbral_mm):
+                count += 1
+                print("Y_estacion[%i] = 1" % (i-h))
+            if(Y_estacion[i+h]>=umbral_mm):
+                count += 1
+                print("Y_estacion[%i] = 1" % (i+h))
+        if(count<=1):
+            Y_estacion[i] == 0.0
+            print("Outlier en %i, poniendo a cero" % i)
+            outcount += 1
+print("Cantidad de outliers removidos: %i" % outcount)
+
 # Convierte a 1 si llovio o 0 si no llovio
 list_df = pd.DataFrame(lista_nombres)
 list_df.to_csv("/home/lac/lista_nombres.csv", index=False, header=False)
@@ -145,8 +171,8 @@ for estacion in lista_nombres:
         if (np.isnan(precip_p_estacion[i][lista_nombres.index(estacion)])):
             precip_p_estacion[i][lista_nombres.index(estacion)] = -1
 
-cantidad_unos = np.equal(precip_p_estacion[:,estacion_cerro],1).sum()
-cantitad_total = len(precip_p_estacion[:,estacion_cerro])
+cantidad_unos = np.equal(precip_p_estacion[:,estacion_elegida],1).sum()
+cantitad_total = len(precip_p_estacion[:,estacion_elegida])
 print(precip_p_estacion.shape)
 print("Para umbral "+ str(umbral_mm) + " existen " + str(cantidad_unos) + " unos sobre un total de " + str(cantitad_total) )
-np.save(precipitation_path+'precipitacion_umbral{}.npy'.format(umbral_mm), precip_p_estacion)
+np.save(precipitation_path+'precipitacion_umbral{}_notoutliers.npy'.format(umbral_mm), precip_p_estacion)
