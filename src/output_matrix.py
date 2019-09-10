@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import urllib as url
 import calendar
+import os
 import datetime as dt
 import progressbar as pb
 #np.set_printoptions(threshold=sys.maxsize) # Para que las matrices se impriman completas y no resumidas
@@ -12,7 +13,7 @@ import progressbar as pb
 ''' 
     Parametros
 '''
-
+home = os.environ['HOME']
 umbral_mm = 0.2
 intervalo_minutos = 10
 freq = str(intervalo_minutos)+"min"
@@ -20,7 +21,7 @@ fecha_inicial = "2017-11-01 00:00"
 fecha_final = "2019-04-28 11:50"
 nombre_columna_fecha = 'Fecha'
 nombre_columna_lluvia = 'Intensidad de Lluvia [mm]'
-precipitation_path = "/home/lac/datos_lluvia/"
+precipitation_path = home + "/datos_lluvia/"
 estacion_elegida = 53
 
 '''
