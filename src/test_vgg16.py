@@ -18,8 +18,8 @@ home = os.environ['HOME']
 file = sys.argv[1]
 shape = (68,54,3) # grilla de 96x144 con 3 canales
 cutoff = 0.5 # Si el modelo tiene buena separabilidad, 0.5 debería funcionar bien
-X_data_dir = home + "/datos_modelo/comp_test/umbral0.3/X_Test.npy"
-Y_data_dir = home + "/datos_lluvia/comp_test/umbral0.3/Y_Test.npy"
+X_data_dir = home + "/datos_modelo/comp_test/not_outliers/X_Comp.npy"
+Y_data_dir = home + "/datos_lluvia/comp_test/not_outliers/Y_Comp.npy"
 model_dir = "{}".format(file)
 '''
     Carga de datos y modelo

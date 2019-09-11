@@ -61,7 +61,7 @@ class Metrics(Callback):
         self.val_f1s.append(_val_f1)
         self.val_recalls.append(_val_recall)
         self.val_precisions.append(_val_precision)
-        print("| val_zero_one_loss: {0:.3f} | val_f1: {0:.3f} | val_precision: {0:.3f} | val_recall: {0:.3f} | val_balanced_acc: {0:.3f}".format(_val_zero_one_loss, _val_f1, _val_precision, _val_recall, _val_balanced_acc))
+        print("| val_zero_one_loss: {:.3f} | val_f1: {:.3f} | val_precision: {:.3f} | val_recall: {:.3f} | val_balanced_acc: {:.3f}".format(_val_zero_one_loss, _val_f1, _val_precision, _val_recall, _val_balanced_acc))
         return
 
 metrics = Metrics()
@@ -123,7 +123,7 @@ def get_vgg16():
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
-    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=False)
     model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
     #print(model.summary())
     return model
