@@ -37,8 +37,8 @@ x_val_dir = home + "/datos_modelo/24horas/not_outliers/X_Val.npy"
 y_train_dir = home + "/datos_lluvia/24horas/not_outliers/Y_Train.npy"
 y_val_dir = home + "/datos_lluvia/24horas/not_outliers/Y_Val.npy"
 model_dir = home + "/modelos/CerroObero/24horas/not_outliers" + "/epoca{epoch:02d}.hdf5"
-cant_epocas = 30
-tam_batch = 24 # intentar que sea multiplo de la cantidad de muestras
+cant_epocas = 25
+tam_batch = 48 # intentar que sea multiplo de la cantidad de muestras
 
 '''
     Definicion de metricas personalizadas para evaluar en cada epoca y Checkpoints.
@@ -123,7 +123,7 @@ def get_vgg16():
     model.add(Dense(1, activation='sigmoid'))
 
     #adam = Adam(lr=0.001)
-    sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=False)
+    sgd = SGD(lr=0.001, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
     #print(model.summary())
     return model
