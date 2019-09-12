@@ -1,3 +1,7 @@
+from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import average_precision_score
+import matplotlib.pyplot as plt
+from inspect import signature
 from keras.models import load_model
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_curve, auc
@@ -52,6 +56,8 @@ Y_trues = y_pred[Y==1]
 '''
     Testing (y_true = Y ; y_pred = y_pred)
 '''
+pr_curve(Y,y_pred) # Genera la curva Precision Recall
+roc_curve(Y,y_pred) # Genera la curva ROC
 print(y_pred)
 y_pred[y_pred>=cutoff] = 1
 y_pred[y_pred<cutoff] = 0
@@ -80,18 +86,37 @@ print("Recall = {}".format(recall))
 
 '''
     CURVA ROC
-
-fpr, tpr, thresholds = roc_curve(Y, y_pred)
-roc_auc = auc(fpr, tpr)
-
-plt.figure(figsize=(14,14))
-plt.plot(fpr, tpr, color='darkorange', lw=1, label='ROC curve (area = %0.2f)' % roc_auc)
-plt.plot([0, 1], [0, 1], color='navy', lw=1, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Curva ROC (Receiver Operating Characteristic)')
-plt.legend(loc="lower right")
-plt.savefig("ROC_TrainVal.png")
 '''
+def roc_curve(Y, y_pred):
+    fpr, tpr, thresholds = roc_curve(Y, y_pred)
+    roc_auc = auc(fpr, tpr)
+
+    plt.figure(figsize=(14,14))
+    plt.plot(fpr, tpr, color='darkorange', lw=1, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=1, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Curva ROC (Receiver Operating Characteristic)')
+    plt.legend(loc="lower right")
+    plt.savefig("ROC_TrainVal.png")
+
+'''
+    CURVA PRECISION-RECALL
+'''
+def pr_curve(Y, y_pred):
+    precision, recall, _ = precision_recall_curve(Y, y_pred)
+    average_precision = average_precision_score(Y, y_pred)
+
+    # In matplotlib < 1.5, plt.fill_between does not have a 'step' argument
+    step_kwargs = ({'step': 'post'} if 'step' in signature(plt.fill_between).parameters else {})
+    plt.step(recall, precision, color='b', alpha=0.2, where='post')
+    plt.fill_between(recall, precision, alpha=0.2, color='b', **step_kwargs)
+
+    plt.xlabel('Recall')
+    plt.ylabel('Precision')
+    plt.ylim([0.0, 1.05])
+    plt.xlim([0.0, 1.0])
+    plt.title('2-class Precision-Recall curve: AP={0:0.2f}'.format(average_precision))
+    plt.savefig("./PRCurve.png")
