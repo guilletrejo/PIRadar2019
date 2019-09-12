@@ -40,7 +40,7 @@ print("Dimension matriz salida: " + str(Y.shape))
 '''
     CURVA ROC
 '''
-def roc_curve(Y, y_pred):
+def roc(Y, y_pred):
     fpr, tpr, thresholds = roc_curve(Y, y_pred)
     roc_auc = auc(fpr, tpr)
 
@@ -58,7 +58,7 @@ def roc_curve(Y, y_pred):
 '''
     CURVA PRECISION-RECALL
 '''
-def pr_curve(Y, y_pred):
+def pr(Y, y_pred):
     precision, recall, _ = precision_recall_curve(Y, y_pred)
     average_precision = average_precision_score(Y, y_pred)
 
@@ -93,8 +93,8 @@ Y_trues = y_pred[Y==1]
 '''
     Testing (y_true = Y ; y_pred = y_pred)
 '''
-pr_curve(Y,y_pred) # Genera la curva Precision Recall
-roc_curve(Y,y_pred) # Genera la curva ROC
+pr(Y,y_pred) # Genera la curva Precision Recall
+roc(Y,y_pred) # Genera la curva ROC
 print(y_pred)
 y_pred[y_pred>=cutoff] = 1
 y_pred[y_pred<cutoff] = 0
